@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="placeholder">
+  <rect width="100%" height="100%" fill="#e6f2ff" />
+  <g fill="#1d87ee" opacity="0.9">
+    <circle cx="150" cy="150" r="80" />
+    <circle cx="1050" cy="650" r="100" />
+  </g>
+  <text x="50%" y="50%" text-anchor="middle" fill="#074ea6" font-family="Inter, Arial, sans-serif" font-size="48">k-taby</text>
+</svg>

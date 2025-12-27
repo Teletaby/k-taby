@@ -1,0 +1,88 @@
+{
+  "UNIS": [
+    {"member": "Hyeonju", "birthday": "2001-03-04"},
+    {"member": "Nana", "birthday": "2007-06-06"},
+    {"member": "Gehlee Dangca", "birthday": "2007-08-19"},
+    {"member": "Kotoko", "birthday": "2007-10-28"},
+    {"member": "Yunha", "birthday": "2009-03-07"},
+    {"member": "Elisia", "birthday": "2009-04-18"},
+    {"member": "Yoona", "birthday": "2009-10-07"},
+    {"member": "Seowon", "birthday": "2011-01-27"}
+  ],
+  "aespa": [
+    {"member": "Karina", "birthday": "2000-04-11"},
+    {"member": "Giselle", "birthday": "2000-10-30"},
+    {"member": "Winter", "birthday": "2001-01-01"},
+    {"member": "Ningning", "birthday": "2002-10-23"}
+  ],
+  "LE SSERAFIM": [
+    {"member": "Sakura", "birthday": "1998-03-19"},
+    {"member": "Kim Chaewon", "birthday": "2000-08-01"},
+    {"member": "Huh Yunjin", "birthday": "2001-10-08"},
+    {"member": "Kazuha", "birthday": "2003-08-09"},
+    {"member": "Hong Eunchae", "birthday": "2006-11-10"}
+  ],
+  "TWICE": [
+    {"member": "Nayeon", "birthday": "1995-09-22"},
+    {"member": "Jeongyeon", "birthday": "1996-11-01"},
+    {"member": "Momo", "birthday": "1996-11-09"},
+    {"member": "Sana", "birthday": "1996-12-29"},
+    {"member": "Jihyo", "birthday": "1997-02-01"},
+    {"member": "Mina", "birthday": "1997-03-24"},
+    {"member": "Dahyun", "birthday": "1998-05-28"},
+    {"member": "Chaeyoung", "birthday": "1999-04-23"},
+    {"member": "Tzuyu", "birthday": "1999-06-14"}
+  ],
+  "IVE": [
+    {"member": "Gaeul", "birthday": "2002-09-24"},
+    {"member": "An Yujin", "birthday": "2003-09-01"},
+    {"member": "Rei", "birthday": "2004-02-03"},
+    {"member": "Jang Wonyoung", "birthday": "2004-08-31"},
+    {"member": "Liz", "birthday": "2004-11-21"},
+    {"member": "Leeseo", "birthday": "2007-02-21"}
+  ],
+  "MEOVV": [
+    {"member": "Sooin", "birthday": "2005-04-12"},
+    {"member": "Gawon", "birthday": "2005-04-27"},
+    {"member": "Anna", "birthday": "2005-11-17"},
+    {"member": "Narin", "birthday": "2007-08-15"},
+    {"member": "Ella", "birthday": "2008-12-01"}
+  ],
+  "NMIXX": [
+    {"member": "Lily", "birthday": "2002-10-17"},
+    {"member": "Haewon", "birthday": "2003-02-25"},
+    {"member": "Sullyoon", "birthday": "2004-01-26"},
+    {"member": "Bae", "birthday": "2004-12-28"},
+    {"member": "Jiwoo", "birthday": "2005-04-13"},
+    {"member": "Kyujin", "birthday": "2006-05-26"}
+  ],
+  "ITZY": [
+    {"member": "Yeji", "birthday": "2000-05-26"},
+    {"member": "Lia", "birthday": "2000-07-21"},
+    {"member": "Ryujin", "birthday": "2001-04-17"},
+    {"member": "Chaeryeong", "birthday": "2001-06-05"},
+    {"member": "Yuna", "birthday": "2003-12-09"}
+  ],
+  "ILLIT": [
+    {"member": "Yunah", "birthday": "2004-01-15"},
+    {"member": "Minju", "birthday": "2004-05-11"},
+    {"member": "Moka", "birthday": "2004-10-08"},
+    {"member": "Wonhee", "birthday": "2007-06-26"},
+    {"member": "Iroha", "birthday": "2008-02-04"}
+  ],
+  "NewJeans": [
+    {"member": "Minji", "birthday": "2004-05-07"},
+    {"member": "Hanni", "birthday": "2004-10-06"},
+    {"member": "Danielle", "birthday": "2005-04-11"},
+    {"member": "Haerin", "birthday": "2006-05-15"},
+    {"member": "Hyein", "birthday": "2008-04-21"}
+  ],
+  "KATSEYE": [
+    {"member": "Manon", "birthday": "2002-06-26"},
+    {"member": "Sophia", "birthday": "2002-12-31"},
+    {"member": "Daniela", "birthday": "2004-07-01"},
+    {"member": "Lara", "birthday": "2005-11-03"},
+    {"member": "Megan", "birthday": "2006-02-10"},
+    {"member": "Yoonchae", "birthday": "2007-12-06"}
+  ]
+}
