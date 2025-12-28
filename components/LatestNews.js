@@ -29,24 +29,24 @@ export default function LatestNews({ initialItems = [], pollInterval = 180000 })
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <div className="text-sm text-gray-600">Updated {Math.round((Date.now() - lastUpdated) / 1000)}s ago</div>
+        <div className="text-sm text-cyan-600">Updated {Math.round((Date.now() - lastUpdated) / 1000)}s ago</div>
         <div className="flex items-center gap-2">
-          <button className="text-xs px-2 py-1 border rounded" onClick={() => fetchLatest(true)} disabled={loading}>{loading ? 'Refreshing…' : 'Refresh'}</button>
-          <button className="text-xs px-2 py-1 border rounded" onClick={() => fetchLatest(false)}>Fetch</button>
+          <button className="text-xs px-3 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200" onClick={() => fetchLatest(true)} disabled={loading}>{loading ? 'Refreshing…' : 'Refresh'}</button>
+          <button className="text-xs px-3 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200" onClick={() => fetchLatest(false)}>Fetch</button>
         </div>
       </div>
 
       <div className="space-y-4">
-        {items.length === 0 && <p className="text-gray-600">No recent news mentioning the tracked groups.</p>}
+        {items.length === 0 && <p className="text-cyan-600 bg-cyan-50/50 p-4 rounded-lg border border-cyan-100">No recent news mentioning the tracked groups.</p>}
         {items.map(item => (
-          <article key={item.link} className="p-4 border rounded bg-white shadow-sm">
-            <a href={item.link} target="_blank" rel="noreferrer" className="text-ktaby-500 font-semibold">{item.title}</a>
-            <p className="text-sm text-gray-600">{item.pubDate}</p>
-            <p className="text-gray-700 mt-2" dangerouslySetInnerHTML={{ __html: item.contentSnippet || item.content || '' }} />
+          <article key={item.link} className="p-6 border border-cyan-200/50 rounded-xl bg-gradient-to-r from-white to-cyan-50/30 shadow-lg hover:shadow-xl transition-all duration-300">
+            <a href={item.link} target="_blank" rel="noreferrer" className="text-cyan-600 hover:text-cyan-700 font-semibold text-lg hover:underline underline-offset-4 decoration-cyan-400 transition-colors duration-200">{item.title}</a>
+            <p className="text-sm text-cyan-500 mt-1">{item.pubDate}</p>
+            <p className="text-cyan-700 mt-3 leading-relaxed" dangerouslySetInnerHTML={{ __html: item.contentSnippet || item.content || '' }} />
             {item._mentions && item._mentions.length > 0 && (
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2">
                 {item._mentions.map(m => (
-                  <span key={m} className="text-xs bg-ktaby-100 text-ktaby-700 px-2 py-1 rounded-full">{m}</span>
+                  <span key={m} className="text-xs bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-700 px-3 py-1 rounded-full border border-cyan-200/50 font-medium">{m}</span>
                 ))}
               </div>
             )}

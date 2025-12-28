@@ -96,17 +96,226 @@ body {
 /* Spotify embed styling */
 .spotify-embed {
   width: 100%;
-  height: 80px;
+  max-width: 100%;
+  height: 120px;
   border-radius: 8px;
   overflow: hidden;
+  display: block; /* avoid inline spacing that can cause overflow */
+  min-width: 0; /* allow shrinking inside flex containers */
 }
 @media (min-width: 640px) {
-  .spotify-embed { height: 96px }
+  .spotify-embed { height: 152px }
 }
 @media (min-width: 1024px) {
-  .spotify-embed { height: 110px }
-  .spotify-embed.large { height: 140px }
+  .spotify-embed { height: 180px }
+  .spotify-embed.large { height: 200px }
 }
+
+/* helper to prevent horizontal scrolling inside modals */
+.modal-content-overflow {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* wrapper to constrain spotify embeds and allow responsive scaling on small screens */
+.spotify-embed-wrap { overflow: hidden; }
+
+/* Make iframe responsive but limit it to desktop/tablet so it never forces horizontal scroll on mobile.
+   On mobile we'll show a compact native mini-player instead of the iframe. */
+
+/* ensure iframes are responsive and don't force scroll */
+.spotify-embed { width: 100%; max-width: 100%; min-width: 0; display: block }
+
+/* mini player for mobile */
+.mini-spotify { display:flex; align-items:center; gap:0.75rem; padding:0.5rem; border-radius:0.5rem; background: #f8fafc; }
+.mini-spotify img { width:48px; height:48px; object-fit:cover; border-radius:6px }
+.mini-spotify .info { flex:1 }
+.mini-spotify .info .title { font-weight:600; font-size:0.95rem }
+.mini-spotify .info .meta { font-size:0.8rem; color:rgba(55,65,81,0.8) }
+
+/* spotify embed wrap: keep overflow hidden and center iframe on larger screens */
+.spotify-embed-wrap { overflow:hidden }
+
+/* Responsive iframe scaling to ensure full controls visible without horizontal scrolling */
+@media (max-width: 520px) {
+  .spotify-embed-wrap { height: 72px; }
+  .spotify-embed { transform-origin: left top; transform: scale(0.9); width: calc(100% / 0.9); height:80px; display:block }
+}
+@media (max-width: 420px) {
+  .spotify-embed-wrap { height: 64px; }
+  .spotify-embed { transform-origin: left top; transform: scale(0.8); width: calc(100% / 0.8); height:80px; display:block }
+}
+
+/* keep a smooth transform if necessary (used on very small screens only) */
+.spotify-embed { transition: transform 160ms ease-out }
+
+/* Album embed sizing: prefer a slightly taller album embed but keep it compact on small screens
+   so the full player is visible in the modal without requiring the user to scroll. */
+.spotify-embed.album-embed { height: 120px }
+@media (max-width: 640px) {
+  .spotify-embed.album-embed { transform: none; width: 100%; height: 84px }
+}
+@media (max-width: 420px) {
+  .spotify-embed.album-embed { height: 72px }
+}
+
+/* Modal sheet layout helpers */
+.modal-sheet { border-radius: 12px; }
+.modal-sheet .modal-handle { display: block }
+.modal-sheet .scroll-area { overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; flex: 1 1 auto; }
+
+/* Keep the header area visible and cap the scrollable track area so the album embed remains visible on mobile */
+@media (max-width: 640px) {
+  .modal-sheet .scroll-area { max-height: calc(92vh - 220px); }
+}
+@media (min-width: 640px) {
+  .modal-sheet .scroll-area { max-height: calc(72vh); }
+}
+
+/* For center-square modal on small screens, cap the scroll area using viewport width
+   so the header + embed remain visible and the rest scrolls inside the modal. */
+@media (max-width: 640px) {
+  .modal-sheet { width: 92vw; height: 92vw }
+  .modal-sheet .scroll-area { max-height: calc(92vw - 180px); }
+}
+
+/* Desktop/tablet: ensure the modal content scrolls if it exceeds viewport height */
+@media (min-width: 640px) {
+  .modal-sheet { max-height: 90vh }
+  .modal-sheet .album-modal-content { max-height: 90vh }
+  .modal-sheet .scroll-area { max-height: calc(90vh - 160px) }
+}
+
+/* Ensure album modal layout is a column and the scroll-area grows to fill available space
+   so its internal overflow-y can scroll on both desktop and mobile. */
+.modal-sheet .album-modal-content { display: flex; flex-direction: column; }
+.modal-sheet .scroll-area { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+/* Visible scrollbar for modal scroll area */
+.modal-sheet .scroll-area::-webkit-scrollbar { width: 10px }
+.modal-sheet .scroll-area::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 9999px }
+.modal-sheet .scroll-area::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 9999px }
+.modal-sheet .scroll-area { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.12) rgba(0,0,0,0.03) }
+
+
+
+
+/* Spotify button */
+.btn-spotify {
+  background: #1DB954; /* Spotify green */
+  color: white;
+  box-shadow: 0 8px 24px rgba(29,185,84,0.12);
+}
+.btn-spotify:hover { filter: brightness(0.95); transform: translateY(-2px) }
+.btn-spotify .spotify-icon { margin-right: 8px; display: inline-flex; align-items: center; }
+
+.btn-kpop-play {
+  background: linear-gradient(135deg, var(--kpop-pink), var(--kpop-candy));
+  color: white;
+  box-shadow: 0 4px 12px rgba(255,77,166,0.25);
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.2s ease;
+}
+.btn-kpop-play:hover {
+  background: linear-gradient(135deg, var(--kpop-candy), var(--kpop-pink));
+  box-shadow: 0 6px 16px rgba(255,77,166,0.35);
+  transform: translateY(-2px);
+}
+
+/* K-pop themed Spotify button */
+.btn-spotify-kpop {
+  background: linear-gradient(135deg, var(--kpop-pink), var(--kpop-purple));
+  color: white;
+  box-shadow: 0 8px 24px rgba(255,77,166,0.3);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.btn-spotify-kpop:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255,77,166,0.4);
+}
+
+/* K-pop themed scrollbar for album modal */
+.album-modal-scroll::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  display: block !important;
+}
+.album-modal-scroll::-webkit-scrollbar-track {
+  background: rgba(255,182,193,0.1);
+  border-radius: 10px;
+}
+.album-modal-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--kpop-pink), var(--kpop-purple));
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+.album-modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--kpop-candy), var(--kpop-cyan));
+}
+.album-modal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--kpop-pink) rgba(255,182,193,0.1);
+  overflow-y: scroll !important;
+}
+
+/* Modal opening and closing animations */
+@keyframes modal-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px) rotate(-2deg);
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02) translateY(-5px) rotate(0.5deg);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes modal-close {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px) rotate(1deg);
+    filter: blur(2px);
+  }
+}
+
+.animate-modal-open {
+  animation: modal-open 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-modal-close {
+  animation: modal-close 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Content fade-in animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+  opacity: 0;
+}
+
 
 /* Slight visual tweak for the larger embedded players in modals */
 .spotify-embed.large {
@@ -116,6 +325,15 @@ body {
 }
 
 /* Album modal tweaks */
+
+/* ModalPortal specific tweaks */
+.modal-portal .modal-header { position: sticky; top: 0; background: white; z-index: 20; box-shadow: 0 6px 18px rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.04); }
+.modal-portal #album-modal { outline: none }
+.modal-portal .modal-header .btn-close { position: absolute; top: 0.6rem; right: 0.6rem }
+.modal-portal .scroll-area { min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch }
+.modal-portal .album-modal-art img { border-radius: 6px }
+@media (min-width: 640px) { .modal-portal .modal-header { padding-right: 3rem } }
+
 .album-modal-art {
   border-radius: 8px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
@@ -138,6 +356,90 @@ body {
   animation: birthday-pulse 2.4s ease-in-out infinite;
 }
 
+/* Card entrance animation */
+@keyframes card-fade-up {
+  0% { opacity: 0; transform: translateY(8px) scale(0.995); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-card-in {
+  animation: card-fade-up 320ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+/* Subtle press ripple/scale when activated */
+.card-press:active { transform: translateY(1px) scale(0.995) }
+
+/* enhanced card styles */
+.card-surface {
+  border-radius: 0.75rem; /* rounded-xl */
+  background: linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,252,1));
+  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+.card-surface:hover { box-shadow: 0 16px 40px rgba(16,24,40,0.10); }
+.card-surface:focus { box-shadow: 0 10px 30px rgba(16,24,40,0.10); }
+
+/* image style helpers for album tiles */
+.album-art { transition: transform 300ms ease; }
+.album-art:hover { transform: scale(1.03); }
+
+/* button animation and polish */
+.btn-animated {
+  transition: transform 180ms cubic-bezier(.22,.9,.32,1), box-shadow 180ms ease, background-color 180ms ease;
+}
+.btn-animated:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 40px rgba(16,24,40,0.12); }
+.btn-animated:active { transform: translateY(0) scale(0.99); transition-duration: 120ms; }
+
+/* small inline button style */
+.btn-inline {
+  @apply inline-flex items-center gap-2 text-sm font-medium text-ktaby-500 hover:text-ktaby-600 underline;
+}
+
+/* pill small variant */
+.btn-pill.btn-sm {
+  @apply px-3 py-1 text-sm rounded-full;
+}
+
+/* Tabs: redesigned buttons and indicator */
+.tab-bar {
+  position: relative;
+  display: inline-flex;
+  background: rgba(255,255,255,0.04);
+  padding: 6px; /* slightly more padding so border surrounds neatly */
+  border-radius: 9999px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0,0,0,0.6); /* dark pill outline */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22); /* subtle depth to emphasize outline */
+}
+.tab-btn {
+  @apply px-4 py-2 rounded-full text-sm font-medium bg-transparent transition-colors duration-200 ease-out;
+  position: relative;
+  z-index: 10;
+}
+.tab-btn:hover { color: #0f62fe; }
+.tab-btn.active { color: white; }
+.tab-indicator {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: calc(50% - 12px);
+  height: calc(100% - 12px);
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--kpop-cyan), var(--kpop-purple));
+  box-shadow: 0 8px 30px rgba(122,92,255,0.16);
+  transition: transform 260ms cubic-bezier(.22,.9,.32,1), width 260ms ease;
+  transform: translateX(0%);
+}
+.tab-indicator.move-right { transform: translateX(100%); }
+
+/* Tab panel transition */
+.tab-panel { transition: transform 260ms cubic-bezier(.22,.9,.32,1), opacity 220ms ease; }
+.tab-panel.enter { opacity: 1; transform: translateY(0); }
+.tab-panel.leave { opacity: 0; transform: translateY(-8px); }
+
+
+
 .birthday-glow {
   box-shadow: 0 12px 40px rgba(122,92,255,0.08), 0 2px 6px rgba(0,0,0,0.06);
   border: 1px solid rgba(122,92,255,0.06);
@@ -145,23 +447,36 @@ body {
 
 /* Button utilities */
 .btn {
-  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-transform duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-ktaby-500/50;
+  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-transform duration-150 ease-out focus:outline-none;
   min-height: 40px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background-clip: padding-box; /* ensures border doesn't affect inner background */
+}
+.btn:focus-visible {
+  outline: 3px solid rgba(29,135,238,0.12);
+  outline-offset: 2px;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.06);
 }
 .btn-primary {
   @apply bg-ktaby-500 text-white shadow-sm hover:bg-ktaby-600 hover:scale-105;
+  border-color: rgba(0,0,0,0.06);
 }
 .btn-ktaby {
   @apply bg-ktaby-500 text-white shadow-sm hover:bg-ktaby-600 hover:scale-105;
+  border: 1px solid rgba(29,135,238,0.12);
 }
+.btn-ktaby:hover { border-color: rgba(29,135,238,0.22); }
 .btn-danger {
   @apply bg-red-600 text-white shadow-sm hover:bg-red-700 hover:scale-105;
+  border: 1px solid rgba(255,255,255,0.02);
 }
 .btn-muted {
   @apply bg-gray-100 text-gray-800 hover:bg-gray-200;
+  border: 1px solid rgba(0,0,0,0.04);
 }
 .btn-yt {
   @apply bg-red-600 text-white shadow-sm hover:bg-red-700 hover:scale-105;
+  border: 1px solid rgba(255,255,255,0.02);
 }
 .btn-sm {
   @apply px-2 py-0.5 text-xs rounded;
@@ -191,14 +506,14 @@ body {
 
 /* k-taby accent */
 .header-accent {
-  background: linear-gradient(90deg, #1d87ee 0%, #4aaaf8 100%);
+  background: linear-gradient(90deg, var(--kpop-cyan) 0%, #00b8e6 100%);
 }
 
 /* Scrollbar styling: WebKit + Firefox */
 /* Uses the ktaby theme colors (ktaby.500 / ktaby.600) */
 * {
   /* Firefox */
-  scrollbar-color: #1d87ee rgba(0,0,0,0.06);
+  scrollbar-color: var(--kpop-cyan) rgba(0,229,255,0.1);
   scrollbar-width: thin;
 }
 

@@ -136,7 +136,7 @@ export default function HeroCarousel({ interval = 4000, externalIndex, onIndexCh
               )
             })()}
 
-            <Link href={`/groups/${g.id}`} className="inline-block mt-4 bg-ktaby-500 text-white px-4 py-2 rounded">Learn more about {g.name}</Link>
+            <Link href={`/groups/${g.id}`} className="inline-block mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">Learn more about {g.name}</Link>
           </div>
 
           {/* bottom center controls (desktop & mobile) */}

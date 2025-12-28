@@ -88,7 +88,7 @@ function runConfettiBurst() {
   } catch (e) { console.warn('Confetti failed', e) }
 }
 
-export default function BirthdayBanner({ placement = 'top' }) {
+export default function BirthdayBanner({ placement = 'top', onOpenProfile }) {
   const [today, setToday] = useState(null)
   const [matches, setMatches] = useState([])
   const ranConfetti = useRef(false)
@@ -122,23 +122,17 @@ export default function BirthdayBanner({ placement = 'top' }) {
               member: m.member,
               groupName: g.name,
               groupId: g.id,
+              memberId: gm.id || encodeURIComponent(gm.name),
+              memberObject: gm,
               image: normalizeImage(gm.image || g.logo || g.image || null)
             }
           }
         }
       }
-      return { member: m.member, groupName: m.groupKey, groupId: null, image: null }
+      return { member: m.member, groupName: m.groupKey, groupId: null, memberId: null, memberObject: null, image: null }
     })
 
-    // filter out any dismissed banners for today
-    const final = enriched.filter(e => {
-      try {
-        const key = `birthdayDismissed_${e.member}_${iso}`
-        return !localStorage.getItem(key)
-      } catch (e) { return true }
-    })
-
-    setMatches(final)
+    setMatches(enriched)
   }, [])
 
   useEffect(() => {
@@ -149,21 +143,6 @@ export default function BirthdayBanner({ placement = 'top' }) {
   }, [matches])
 
   if (!today || matches.length === 0) return null
-
-  function dismiss(member) {
-    try {
-      const key = `birthdayDismissed_${member}_${today.iso}`
-      localStorage.setItem(key, '1')
-    } catch (e) {}
-    setMatches(prev => prev.filter(p => p.member !== member))
-  }
-
-  function dismissAll() {
-    try {
-      for (const m of matches) localStorage.setItem(`birthdayDismissed_${m.member}_${today.iso}`, '1')
-    } catch (e) {}
-    setMatches([])
-  }
 
   return (
     <div className={`container mx-auto px-4 mb-4 ${placement === 'top' ? 'mt-4' : ''}`}>
@@ -188,8 +167,9 @@ export default function BirthdayBanner({ placement = 'top' }) {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
-            {matches[0].groupId ? (<Link href={`/groups/${matches[0].groupId}`} className="btn btn-primary w-full sm:w-auto">Open profile</Link>) : null}
-            <button onClick={() => dismiss(matches[0].member)} className="btn btn-muted btn-sm w-full sm:w-auto">Dismiss</button>
+            {matches[0].memberObject ? (
+              <button onClick={() => onOpenProfile && onOpenProfile(matches[0].memberObject)} className="btn btn-primary w-full sm:w-auto">Open profile</button>
+            ) : null}
           </div>
         </div>
       )}
@@ -211,15 +191,15 @@ export default function BirthdayBanner({ placement = 'top' }) {
                   </div>
                 ))}
               </div>
-
-              <div className="flex items-center gap-2 ml-3">
-                <button onClick={() => dismissAll()} className="btn btn-muted w-full sm:w-auto">Dismiss all</button>
-              </div>
             </div>
           </div>
 
           <div className="mt-3 flex flex-wrap gap-2">
-            {matches.map(m => m.groupId ? (<Link key={m.member} href={`/groups/${m.groupId}`} className="px-3 py-1 rounded bg-ktaby-500 text-white text-sm">{m.member}</Link>) : null)}
+            {matches.map(m => m.memberObject ? (
+              <button key={m.member} onClick={() => onOpenProfile && onOpenProfile(m.memberObject)} className="px-3 py-1 rounded bg-ktaby-500 text-white text-sm hover:bg-ktaby-600 transition-colors">
+                {m.member}
+              </button>
+            ) : null)}
           </div>
         </div>
       )}

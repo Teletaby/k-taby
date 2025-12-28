@@ -1,0 +1,50 @@
+[
+  {
+    "timestamp": "2025-12-28T08:22:10.503Z",
+    "ip": "::1",
+    "browser": "Chrome",
+    "isMobile": false,
+    "page": "/admin",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2025-12-28T08:22:10.489Z",
+    "ip": "::1",
+    "browser": "Chrome",
+    "isMobile": false,
+    "page": "/admin",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2025-12-28T08:21:51.430Z",
+    "ip": "::1",
+    "browser": "Chrome",
+    "isMobile": false,
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2025-12-28T08:21:51.423Z",
+    "ip": "::1",
+    "browser": "Chrome",
+    "isMobile": false,
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2025-12-28T08:21:51.418Z",
+    "ip": "::1",
+    "browser": "Chrome",
+    "isMobile": false,
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2025-12-28T08:21:51.415Z",
+    "ip": "::1",
+    "browser": "Chrome",
+    "isMobile": false,
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  }
+]

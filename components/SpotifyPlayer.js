@@ -80,11 +80,40 @@ export default function SpotifyPlayer({ src, title }) {
 
   if (!src) return <div className="text-sm text-gray-400">Preview not available</div>
 
+  const pct = Math.min(1, progress / 30 || 0)
+
   return (
-    <div className="flex items-center gap-3 w-full">
-      <button onClick={toggle} className="btn btn-primary">{playing ? 'Pause' : 'Play'}</button>
-      <div className="text-sm truncate">{title}</div>
-      <div className="ml-auto text-xs text-gray-500">{Math.round(progress)}s</div>
+    <div className="w-full">
+      <div className="flex items-center gap-3 w-full">
+        <button onClick={toggle} className={
+          `btn btn-kpop-play btn-animated flex items-center justify-center gap-2 w-full sm:w-auto py-3 px-4 sm:py-2 rounded-full text-base sm:text-sm font-semibold transition-all duration-200 ${
+            playing 
+              ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-green-500/25' 
+              : 'bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-pink-500/25'
+          } text-white shadow-lg border-2 border-white/20`
+        } aria-label={playing ? `Pause ${title}` : `Play ${title}`}>
+          {playing ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="4" width="4" height="16" fill="currentColor" rx="2"/>
+              <rect x="14" y="4" width="4" height="16" fill="currentColor" rx="2"/>
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 3L19 12L5 21V3Z" fill="currentColor"/>
+            </svg>
+          )}
+          <span className="hidden sm:inline">{playing ? 'Pause' : 'Play'}</span>
+        </button>
+
+        <div className="ml-2 text-sm flex-1">
+          <div className="font-medium break-words text-gray-800">{title}</div>
+          <div className="text-xs text-gray-500 mt-0.5">{Math.round(progress)}s</div>
+        </div>
+      </div>
+
+      <div className="mt-2 h-2 rounded bg-gray-200 overflow-hidden">
+        <div className="h-full bg-ktaby-500" style={{ width: `${Math.round(pct*100)}%` }} />
+      </div>
     </div>
   )
 }

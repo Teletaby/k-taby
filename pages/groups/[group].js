@@ -20,6 +20,10 @@ export default function Group({ group, initialEnrichment = null }) {
   const [selectedMember, setSelectedMember] = useState(null)
   const [selectedAlbum, setSelectedAlbum] = useState(null)
   const [loadingRemote, setLoadingRemote] = useState(false)
+
+  useEffect(() => {
+    try { if (selectedAlbum) console.debug('Group page: selectedAlbum changed', selectedAlbum && (selectedAlbum.id || selectedAlbum.name || selectedAlbum.title)) } catch (e) {}
+  }, [selectedAlbum])
   const [isAdmin, setIsAdmin] = useState(false)
   const [liveGroup, setLiveGroup] = useState(null)
   const [albumDates, setAlbumDates] = useState({})
@@ -318,6 +322,14 @@ export default function Group({ group, initialEnrichment = null }) {
 
   const previewAlbumId = findSpotifyAlbumId()
 
+  const [tabVisible, setTabVisible] = useState(true)
+  useEffect(() => {
+    // trigger small entrance animation when tab changes
+    setTabVisible(false)
+    const t = setTimeout(() => setTabVisible(true), 24)
+    return () => clearTimeout(t)
+  }, [tab])
+
   if (!group) return <Layout><p>Group not found</p></Layout>
   return (
     <Layout title={`${group.name} - k-taby`}>
@@ -334,18 +346,31 @@ export default function Group({ group, initialEnrichment = null }) {
 
       <div className="max-w-5xl mx-auto px-4 pt-6 pb-8 relative">
         {/* Tabs (placed below hero) */}
-        <div className="flex gap-3 mb-6 relative z-40 p-2 rounded bg-white/6 backdrop-blur-sm items-center justify-between">
-          <div className="flex gap-3">
-            {['Albums','Members'].map(t => (
-              <button key={t} onClick={() => setTab(t)} className={`px-4 py-2 rounded ${tab === t ? 'bg-ktaby-500 text-white' : 'bg-gray-100 text-gray-700'}`}>{t}</button>
-            ))}
+        <div className="flex gap-3 mb-6 relative z-40 p-2 rounded items-center justify-between">
+          <div className="flex items-center">
+            <div className="tab-bar">
+              <div className={`tab-indicator ${tab === 'Members' ? 'move-right' : ''}`} />
+              <div className="relative z-10 flex">
+                {['Albums','Members'].map((t, i) => (
+                  <button
+                    key={t}
+                    onClick={() => setTab(t)}
+                    className={`tab-btn ${tab === t ? 'active' : ''}`}
+                    aria-pressed={tab === t}
+                    aria-label={`Show ${t}`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
 
 
         {tab === 'Albums' && (
-          <section>
+          <section className={`tab-panel ${tabVisible ? 'enter' : 'leave'}`}>
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold mb-2">Albums</h2>
               {isAdmin ? <AdminRefresh groupId={group.id} /> : null}
@@ -380,7 +405,7 @@ export default function Group({ group, initialEnrichment = null }) {
                   <AlbumGrid
                     albums={sorted}
                     spotifyAlbums={(liveGroup && liveGroup.spotify && liveGroup.spotify.albums) || (group.spotify && group.spotify.albums) || []}
-                    onOpenAlbum={(a)=>setSelectedAlbum(a)}
+                    onOpenAlbum={(a)=>{ try { console.debug('Group page: open album', a && (a.id || a.name || a.title)) } catch(e){}; setSelectedAlbum(a) }}
                   />
                 )
               })()
@@ -393,25 +418,26 @@ export default function Group({ group, initialEnrichment = null }) {
 
 
         {tab === 'Members' && (
-          <section>
+          <section className={`tab-panel ${tabVisible ? 'enter' : 'leave'}`}>
             <h2 className="text-xl font-semibold mb-4">Members</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {group.members.length === 0 && <p className="text-gray-600">No members added yet. Run the member fetch script to populate bios and photos.</p>}
               {group.members.map(m => (
-                <div key={m.id || m.name} className="p-4 border rounded">
-                  <div className="w-full relative rounded mb-2 overflow-hidden pb-[100%]">
-                    <Image src={(() => { try { const { normalizeImage } = require('../../lib/images'); return normalizeImage?(normalizeImage(m.image)||'/placeholder.svg'):'/placeholder.svg' } catch(e){ return '/placeholder.svg' } })()} alt={m.name} fill className="object-cover" />
-                  </div>
-                  <h4 className="font-semibold">{m.name}</h4>
+                <div key={m.id || m.name} className="card-surface p-3 transform-gpu transition-all duration-300 ease-out card-press cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-ktaby-500/30" role="button" tabIndex={0} onClick={() => setSelectedMember(m)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedMember(m) } }}>
+                  <a href={`/groups/${group.id}/${m.id || encodeURIComponent(m.name)}`} onClick={(e) => { e.preventDefault(); setSelectedMember(m) }} className="block w-full relative rounded mb-2 overflow-hidden pb-[100%] group cursor-pointer" aria-label={`Open profile for ${m.name}`}>
+                    <Image src={(() => { try { const { normalizeImage } = require('../../lib/images'); return normalizeImage?(normalizeImage(m.image)||'/placeholder.svg'):'/placeholder.svg' } catch(e){ return '/placeholder.svg' } })()} alt={m.name} fill className="object-cover object-top transition-transform duration-200 group-hover:scale-105" />
+                  </a>
+
+                  <h4 className="font-semibold mt-2">{m.name}</h4>
                   <p className="text-sm text-gray-600">{m.role || ''}</p>
-                  <a href={`/groups/${group.id}/${m.id || encodeURIComponent(m.name)}`} onClick={(e) => { e.preventDefault(); setSelectedMember(m) }} className="text-ktaby-500 mt-2 inline-block">Profile →</a>
+                  <button type="button" onClick={() => setSelectedMember(m)} className="btn btn-ktaby btn-sm btn-pill btn-animated mt-3 w-full sm:w-auto">Profile →</button>
                 </div>
               ))}
             </div>
           </section>
         )}
       </div>
-      {selectedMember && <MemberModal member={selectedMember} onClose={() => setSelectedMember(null)} />}
+      {selectedMember && <MemberModal member={selectedMember} groupId={group.id} onClose={() => setSelectedMember(null)} />}
       {selectedAlbum && <AlbumModal album={selectedAlbum} spotifyAlbums={(liveGroup && liveGroup.spotify && liveGroup.spotify.albums) || (group.spotify && group.spotify.albums) || []} onClose={() => setSelectedAlbum(null)} />}
     </Layout>
   )

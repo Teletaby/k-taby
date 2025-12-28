@@ -5,22 +5,22 @@ import { fetchFeed } from '../lib/rss'
 import { fetchNewsForGroups } from '../lib/news'
 const HeroCarousel = dynamic(() => import('../components/HeroCarousel'), { ssr: false })
 const LatestNews = dynamic(() => import('../components/LatestNews'), { ssr: false })
+const BirthdayBanner = dynamic(() => import('../components/BirthdayBanner'), { ssr: false })
+const MemberModal = dynamic(() => import('../components/MemberModal'), { ssr: false })
 
 import { useState, useEffect } from 'react'
 const groups = require('../data/groups.json')
-const BirthdayBanner = dynamic(() => import('../components/BirthdayBanner'), { ssr: false })
 
 export default function Home({ items = [], mentionedGroupNames = [], siteSocial = undefined }) {
   const mentionedLabel = mentionedGroupNames.length > 0 ? `${mentionedGroupNames.length} groups mentioned` : null
   const [carouselIndex, setCarouselIndex] = useState(0)
   const [carouselPaused, setCarouselPaused] = useState(false)
+  const [selectedMember, setSelectedMember] = useState(null)
 
   return (
     <Layout>
       <HeroCarousel externalIndex={carouselIndex} onIndexChange={setCarouselIndex} externalPaused={carouselPaused} onPause={setCarouselPaused} />
-
-      {/* Birthday banner */}
-      <BirthdayBanner placement="top" />
+      <BirthdayBanner onOpenProfile={setSelectedMember} />
 
       {/* Group quick-jump buttons */}
       <section className="mb-4">
@@ -31,11 +31,11 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
                 key={g.id}
                 onClick={() => { setCarouselIndex(idx); setCarouselPaused(true) }}
                 aria-pressed={carouselIndex === idx}
-                className={`group min-w-[84px] flex items-center gap-3 bg-white/12 hover:bg-white/20 transition-transform duration-300 ease-out transform-gpu hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg py-3 px-3 sm:py-2.5 sm:px-3 rounded-xl shadow-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-white/50 ${carouselIndex === idx ? 'ring-2 ring-ktaby-500 scale-105' : ''}`}
+                className={`group min-w-[84px] flex items-center gap-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 hover:from-cyan-500/20 hover:to-blue-500/20 backdrop-blur-sm border border-cyan-200/30 transition-all duration-300 ease-out transform-gpu hover:scale-105 hover:-translate-y-0.5 hover:shadow-xl py-3 px-3 sm:py-2.5 sm:px-3 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/50 ${carouselIndex === idx ? 'ring-2 ring-cyan-400 scale-105 bg-gradient-to-r from-cyan-500/20 to-blue-500/20' : ''}`}
                 title={g.name}
               >
-                <img src={(g.logo || g.image) || '/placeholder.svg'} alt={g.name} className="w-8 h-8 rounded-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                <span className="text-sm sm:text-base text-white font-semibold bg-black/90 px-3 py-1 rounded-md shadow-lg drop-shadow-md group-hover:underline underline-offset-4 decoration-ktaby-500 block truncate text-center max-w-[120px] sm:max-w-[160px]">{g.name}</span>
+                <img src={(g.logo || g.image) || '/placeholder.svg'} alt={g.name} className="w-8 h-8 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 border border-cyan-200/50" />
+                <span className="text-sm sm:text-base text-cyan-800 font-semibold bg-white/90 px-3 py-1 rounded-md shadow-lg drop-shadow-md group-hover:underline underline-offset-4 decoration-cyan-400 block truncate text-center max-w-[120px] sm:max-w-[160px]">{g.name}</span>
               </button>
             ))}
           </div>
@@ -43,8 +43,8 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
       </section>
 
       <section className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 kpop-font">Welcome to k-taby</h1>
-        <p className="text-gray-700 kpop-font">K-pop news, group & member profiles, and songs from the groups.</p>
+        <h1 className="text-3xl font-bold mb-2 kpop-font bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Welcome to k-taby</h1>
+        <p className="text-cyan-700 kpop-font text-lg">K-pop news, group & member profiles, and songs from the groups.</p>
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -88,6 +88,7 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
           <LatestNews initialItems={items} />
         </div>
       </section>
+      {selectedMember && <MemberModal member={selectedMember} onClose={() => setSelectedMember(null)} />}
     </Layout>
   )
 }

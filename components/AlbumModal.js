@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import SpotifyPlayer from './SpotifyPlayer'
 import SpotifyAlbum from './SpotifyAlbum'
+import ModalPortal from './ModalPortal'
 
 export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
   const [details, setDetails] = useState(album)
@@ -16,14 +17,10 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
 
   // animation / visibility state
   const [visible, setVisible] = useState(false)
-  const modalRef = (typeof window !== 'undefined') ? (window.__albumModalRef = null) : null
+  const elRef = useRef(null)
 
-  // Lock body scroll while modal is open so the modal handles scrolling internally
-  useEffect(() => {
-    const prev = document.body.style.overflow || ''
-    document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = prev }
-  }, [])
+  // ModalPortal now handles body scroll lock and ensures a single modal root; no local duplicate removal required
+  useEffect(() => { return () => {} }, [])
 
   useEffect(() => {
     // start show animation
@@ -43,8 +40,8 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
     setVisible(false)
     // pause any playing preview
     try { const mod = require('./SpotifyPlayer'); if (mod && mod.pausePreview) mod.pausePreview() } catch (e) {}
-    // wait for animation to finish then call parent onClose
-    setTimeout(() => { if (onClose) onClose() }, 220)
+    // wait for animation to finish then call parent onClose (matches transition duration)
+    setTimeout(() => { if (onClose) onClose() }, 200)
   }
 
   function getSpotifyId() {
@@ -99,15 +96,19 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
 
   function renderTrack(t) {
     if (!t) return null
-    if (t.preview_url) return <SpotifyPlayer src={t.preview_url} title={t.name} />
+    // prefer iframe player when we have a spotify id
     if (t.id) return (
-      <div className="w-full">
+      <div className="spotify-embed-wrap">
         <iframe className="spotify-embed" src={'https://open.spotify.com/embed/track/' + t.id} frameBorder="0" allow="encrypted-media; autoplay; clipboard-write" />
         <div className="mt-2 text-right">
           <a href={'https://open.spotify.com/track/' + t.id} target="_blank" rel="noreferrer" className="text-sm text-ktaby-500 underline">Open in Spotify</a>
         </div>
       </div>
     )
+
+    // fallback to preview_url player when no spotify id available
+    if (t.preview_url) return <SpotifyPlayer src={t.preview_url} title={t.name} />
+
     return <div className="text-sm text-gray-400">Preview not available</div>
   }
 
@@ -116,72 +117,152 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
   const spotifyId = getSpotifyId()
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-label={'Album details for ' + (album.name || album.title)}>
-      <div className={'absolute inset-0 bg-black transition-opacity duration-200 ' + (visible ? 'opacity-50' : 'opacity-0')} onClick={handleClose} />
+    <ModalPortal id="album-modal-root" onClose={handleClose}>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={'Album details for ' + (album.name || album.title)}>
+        <div className={'absolute inset-0 bg-black transition-opacity duration-200 ease-out ' + (visible ? 'opacity-50' : 'opacity-0')} onClick={handleClose} />
 
-      <div id="album-modal" ref={(el)=>{ if (el && visible) { el.focus() } }} tabIndex={-1} className={
-        'relative bg-white text-gray-900 z-10 w-[90%] max-w-md max-h-[90vh] overflow-auto transform transition-all duration-200 shadow-2xl ' +
-        (visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-3') +
-        ' sm:max-w-2xl rounded-lg p-4 sm:p-6'
-      }>
+        <div id="album-modal" ref={(el)=>{ elRef.current = el; if (el && visible) { el.focus() } }} tabIndex={-1} className={
+          'relative bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 text-gray-900 z-10 transform-gpu ' +
+          'border-2 border-pink-200 rounded-2xl overflow-y-auto album-modal-scroll ' +
+          (visible 
+            ? 'opacity-100 scale-100 translate-y-0 animate-modal-open' 
+            : 'opacity-0 scale-95 translate-y-8 animate-modal-close'
+          ) +
+          ' w-[95vw] max-w-sm h-[80vh] sm:w-[85vw] sm:max-w-2xl sm:h-[85vh] md:max-w-4xl transition-all duration-300 ease-out'
+        }>
 
-        <div className="album-modal-content relative bg-white p-4 sm:p-6 rounded-lg shadow-lg overflow-hidden">
-          <div className="modal-handle hidden" />
-
-          <div className="flex flex-col sm:flex-row items-start gap-6">
-            <div className="w-full sm:w-40 album-modal-art">
-              <img src={(details && details.images && details.images[0] && details.images[0].url) || '/placeholder.svg'} alt={album.name || album.title} className="w-full h-40 object-cover rounded-lg" />
+          {/* K-pop themed header with gradient background */}
+          <div className="relative bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 p-4 sm:p-6 text-white animate-fade-in-up" style={{ minHeight: '160px', flexShrink: 0, animationDelay: '0.1s' }}>
+            {/* Decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-full opacity-20">
+              <div className="absolute top-4 left-4 w-8 h-8 bg-white rounded-full animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}></div>
+              <div className="absolute top-8 right-8 w-6 h-6 bg-white rounded-full animate-bounce" style={{animationDelay: '0.5s', animationDuration: '3.5s'}}></div>
+              <div className="absolute bottom-4 left-1/4 w-4 h-4 bg-white rounded-full animate-bounce" style={{animationDelay: '1s', animationDuration: '4s'}}></div>
+              <div className="absolute bottom-8 right-1/3 w-5 h-5 bg-white rounded-full animate-bounce" style={{animationDelay: '1.5s', animationDuration: '3.2s'}}></div>
             </div>
 
-            <div className="flex-1">
-              <h3 className="text-xl md:text-2xl font-bold truncate">{album.name || album.title}</h3>
-              <div className="text-sm text-gray-600 mt-1 truncate">{(details && details.artists && details.artists.map(a=>a.name).join(', ')) || (album.artistName || '')}</div>
-              {details && details.release_date ? <div className="text-xs text-gray-500 mt-2">Released: {details.release_date}</div> : null}
+            <div className="relative z-10 flex flex-col items-center sm:flex-row sm:items-start gap-4 text-center sm:text-left">
+              {/* Album art with K-pop styling */}
+              <div className="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0 album-modal-art transform hover:scale-105 transition-transform duration-300">
+                <img
+                  src={(details && details.images && details.images[0] && details.images[0].url) || '/placeholder.svg'}
+                  alt={album.name || album.title}
+                  className="w-full h-full object-cover rounded-xl shadow-lg border-2 border-white/30"
+                />
+                {/* K-pop sparkle effect */}
+                <div className="absolute -top-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-300 rounded-full flex items-center justify-center text-xs">✨</div>
+              </div>
 
-              <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
-                {spotifyId ? (<a href={`https://open.spotify.com/album/${spotifyId}`} target="_blank" rel="noreferrer" className="btn btn-ktaby w-full sm:w-auto">Open in Spotify</a>) : null}
-                <button onClick={handleClose} className="btn btn-muted w-full sm:w-auto">Close</button>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg sm:text-2xl font-bold break-words leading-tight mb-2 kpop-font">
+                  {album.name || album.title}
+                </h3>
+                <div className="text-pink-100 text-sm sm:text-base break-words mb-2">
+                  {(details && details.artists && details.artists.map(a=>a.name).join(', ')) || (album.artistName || '')}
+                </div>
+                {details && details.release_date ? (
+                  <div className="text-xs text-cyan-100 bg-white/20 px-2 py-1 rounded-full inline-block mb-3">
+                    Released: {details.release_date}
+                  </div>
+                ) : null}
+                <div className="flex justify-center sm:justify-start">
+                  {spotifyId ? (
+                    <a
+                      href={`https://open.spotify.com/album/${spotifyId}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn-spotify-kpop btn-animated inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-bold text-white shadow-xl border-2 border-white/30 hover:scale-105 transition-all duration-200"
+                      aria-label={`Open ${album.name} in Spotify`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.6-.12-.421.18-.78.6-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.241 1.081zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56z"/>
+                      </svg>
+                      <span>Listen on Spotify</span>
+                    </a>
+                  ) : null}
+                </div>
               </div>
             </div>
+
+            {/* Close button with K-pop styling */}
+            <button
+              onClick={handleClose}
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-red-500 hover:bg-red-600 text-white text-xl sm:text-2xl leading-none z-30 transition-all duration-200 hover:scale-110 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center shadow-lg border-2 border-white/30"
+              aria-label="Close"
+            >
+              ×
+            </button>
           </div>
 
-          <div className="mt-6 border-t pt-4">
-            {spotifyId ? (
-              <SpotifyAlbum albumId={spotifyId} noImage />
-            ) : (
-              <div className="flex flex-col gap-4">
-                <div className="text-sm text-gray-600">{(details && details.artists && details.artists.map(a=>a.name).join(', ')) || (album.artistName || '')}</div>
+          {/* Main content area with K-pop theming */}
+          <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            {/* Track list with K-pop styling */}
+            <div className="space-y-3">
+              <h4 className="text-lg font-bold text-gray-800 flex items-center gap-2 mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-500">
+                  <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15M9 5C9 6.10457 9.89543 7 11 7H13C14.1046 7 15 6.10457 15 5M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Track List
+              </h4>
 
-                {loading && <p className="mt-4 text-gray-600">Loading tracks…</p>}
-                {err && <p className="mt-4 text-red-500">{err}</p>}
-
-                {!loading && details && details.tracks && details.tracks.length > 0 && (
-                  <div className="mt-2 divide-y divide-gray-100 rounded-md overflow-hidden">
-                    {details.tracks.map(t => (
-                      <div key={t.id || String(t.track_number)} className="album-track-row p-3 flex items-center gap-4">
-                        <div className="w-8 text-sm text-gray-500">{t.track_number}</div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium truncate">{t.name}</div>
-                          {t.duration_ms ? <div className="text-xs text-gray-400 mt-1">{Math.floor(t.duration_ms/1000/60)}:{String(Math.floor((t.duration_ms/1000)%60)).padStart(2,'0')}</div> : null}
-                        </div>
-                        <div className="w-40 md:w-56">
-                          {renderTrack(t)}
-                        </div>
-                      </div>
-                    ))}
+                {loading && (
+                  <div className="text-center py-8">
+                    <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
+                    <p className="mt-2 text-gray-600">Loading tracks…</p>
                   </div>
                 )}
 
-                {!loading && (!details || !details.tracks || details.tracks.length === 0) && (
-                  <p className="mt-4 text-gray-600">No track preview available.</p>
+                {err && (
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+                    {err}
+                  </div>
                 )}
 
-              </div>
-            )}
-          </div>
+                {!loading && details && details.tracks && details.tracks.length > 0 && (
+                  <div className="space-y-2">
+                    {details.tracks.map((t, idx) => {
+                      const trackNumber = (t.track_number && Number(t.track_number)) || (idx + 1)
+                      return (
+                        <div
+                          key={t.id || String(trackNumber)}
+                          className="album-track-row group bg-gradient-to-r from-white to-pink-50/30 p-3 sm:p-4 rounded-lg border border-pink-100 hover:border-purple-200 hover:shadow-md transition-all duration-200"
+                        >
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg flex-shrink-0 border-2 border-white/30">
+                                {trackNumber}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="text-sm font-semibold text-gray-800 break-words group-hover:text-purple-700 transition-colors">
+                                  {t.name}
+                                </div>
+                                {t.duration_ms ? (
+                                  <div className="text-xs text-gray-500 mt-1">
+                                    {Math.floor(t.duration_ms/1000/60)}:{String(Math.floor((t.duration_ms/1000)%60)).padStart(2,'0')}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                            <div className="w-full">
+                              {renderTrack(t)}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
 
+              {!loading && (!details || !details.tracks || details.tracks.length === 0) && (
+                <div className="text-center py-8 text-gray-500">
+                  <span className="text-2xl mb-2 block">🎧</span>
+                  <p>No track preview available</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </ModalPortal>
   )
 }

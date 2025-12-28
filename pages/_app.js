@@ -1,7 +1,28 @@
 import '../styles/globals.css'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Log visitor on page load
+    const logVisit = async () => {
+      try {
+        await fetch('/api/admin/visitors', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ page: window.location.pathname })
+        })
+      } catch (e) {
+        // Silently fail - don't show errors to users
+      }
+    }
+
+    logVisit()
+  }, [router.pathname])
+
   return (
     <>
       <Head>
