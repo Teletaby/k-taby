@@ -24,7 +24,9 @@ const nextConfig = {
       'static.wikia.nocookie.net',
       'kprofiles.com',
       'i.namu.wiki',
-      'uploads.disquscdn.com'
+      'uploads.disquscdn.com',
+      'pbs.twimg.com',
+      'kenh14cdn.com'
     ],
     // allow CDN/Supabase hosts via remotePatterns for flexible matching
     remotePatterns: [

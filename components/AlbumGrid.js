@@ -128,23 +128,23 @@ export default function AlbumGrid({ albums = [], spotifyAlbums = [], onOpenAlbum
         const placeholder = img === '/placeholder.svg'
 
         return (
-          <div key={a.id || name} className="bg-gradient-to-br from-white to-cyan-50/30 p-4 rounded-xl shadow-lg hover:shadow-xl transform-gpu transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 border border-cyan-200/30" role="button" tabIndex={0}
+          <div key={a.id || name} className="bg-gradient-to-br from-white to-cyan-50/30 dark:from-slate-800 dark:to-slate-700/30 p-4 rounded-xl shadow-lg hover:shadow-xl dark:shadow-slate-900/50 transform-gpu transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 dark:focus-visible:ring-slate-400/50 border border-cyan-200/30 dark:border-slate-600/30" role="button" tabIndex={0}
             onClick={() => handleOpenAlbum(a)}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleOpenAlbum(a) } }} aria-label={`Open album ${name}`}>
             <div className="flex flex-col">
               <div className="relative w-full rounded-xl overflow-hidden shadow-md">
-                <img src={img} alt={name} className="w-full h-48 md:h-56 object-cover album-art" />
+                <img src={img} alt={name} className="w-full aspect-square md:aspect-auto md:h-56 object-cover album-art" />
 
                 {/* badges */}
-                {isNew && <span className="absolute top-3 left-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">NEW</span>}
-                {placeholder && <span className="absolute top-3 left-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg">No art</span>}
-                {total ? <span className="absolute top-3 right-3 bg-white/90 text-cyan-700 px-3 py-1 rounded-full text-xs font-medium shadow-md border border-cyan-200/50">{total} tracks</span> : null}
+                {isNew && <span className="absolute top-3 left-3 bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-slate-600 dark:to-slate-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">NEW</span>}
+                {placeholder && <span className="absolute top-3 left-3 bg-gradient-to-r from-gray-500 to-gray-600 dark:from-gray-600 dark:to-gray-700 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg">No art</span>}
+                {total ? <span className="absolute top-3 right-3 bg-white/90 dark:bg-slate-800/90 text-cyan-700 dark:text-slate-300 px-3 py-1 rounded-full text-xs font-medium shadow-md border border-cyan-200/50 dark:border-slate-600/50">{total} tracks</span> : null}
               </div>
 
               <div className="mt-4 flex items-start gap-3">
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold truncate whitespace-nowrap text-sm md:text-base text-cyan-800">{name}</div>
-                  {a.artistName ? <div className="text-xs text-cyan-600 mt-1 truncate font-medium">{a.artistName}</div> : null}
+                  <div className="font-semibold truncate whitespace-nowrap text-sm md:text-base text-cyan-800 dark:text-slate-200">{name}</div>
+                  {a.artistName ? <div className="text-xs text-cyan-600 dark:text-slate-400 mt-1 truncate font-medium">{a.artistName}</div> : null}
                 </div>
               </div>
 

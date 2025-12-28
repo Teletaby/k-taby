@@ -68,7 +68,7 @@ export default function MemberModal({ member, onClose, groupId }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true" aria-label={`Profile of ${member.name}`}>
       <div className={'absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ease-out ' + (visible ? 'opacity-100' : 'opacity-0')} onClick={handleClose} />
       <div
-        className={'relative bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 rounded-2xl shadow-2xl max-w-sm sm:max-w-xl md:max-w-4xl w-full mx-4 p-4 sm:p-6 md:p-8 z-10 transform-gpu transition-all duration-300 ease-out border border-cyan-200/50 ' + (visible ? 'opacity-100 scale-100 translate-y-0 animate-modal-open' : 'opacity-0 scale-95 translate-y-3') + ' max-h-[90vh] overflow-hidden'}
+        className={'relative bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 dark:from-slate-800 dark:via-slate-700 dark:to-slate-600 rounded-2xl shadow-2xl max-w-sm sm:max-w-xl md:max-w-4xl w-full mx-4 p-4 sm:p-6 md:p-8 z-10 transform-gpu transition-all duration-300 ease-out border border-cyan-200/50 dark:border-slate-600/50 ' + (visible ? 'opacity-100 scale-100 translate-y-0 animate-modal-open' : 'opacity-0 scale-95 translate-y-3') + ' max-h-[90vh] overflow-hidden'}
         role="dialog"
         aria-modal="true"
         aria-label={`Profile of ${member.name}`}
@@ -117,42 +117,42 @@ export default function MemberModal({ member, onClose, groupId }) {
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">{member.name}</h2>
-                  <p className="text-cyan-600 font-medium text-sm sm:text-base lg:text-lg">{member.role}</p>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">{member.name}</h2>
+                  <p className="text-cyan-600 dark:text-cyan-400 font-medium text-sm sm:text-base lg:text-lg">{member.role}</p>
                 </div>
               </div>
 
               <div className="prose prose-cyan max-w-none">
-                <div className="bg-white/50 rounded-lg p-4 border border-cyan-100/50">
-                  <h3 className="text-lg font-semibold text-cyan-700 mb-2 flex items-center gap-2">
+                <div className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 border border-cyan-100/50 dark:border-slate-600/50">
+                  <h3 className="text-lg font-semibold text-cyan-700 dark:text-cyan-300 mb-2 flex items-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     About
                   </h3>
-                  <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: member.bio || 'No bio available.' }} />
+                  <div className="text-gray-700 dark:text-slate-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: member.bio || 'No bio available.' }} />
                 </div>
               </div>
 
               {/* Birthday Celebration */}
               {isBirthday && (
-                <div className="mt-4 sm:mt-6 bg-gradient-to-r from-rose-50 via-pink-50 to-purple-50 rounded-xl p-4 sm:p-6 border-2 border-rose-200/50 shadow-lg animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+                <div className="mt-4 sm:mt-6 bg-gradient-to-r from-rose-50 via-pink-50 to-purple-50 dark:from-rose-900/20 dark:via-pink-900/20 dark:to-purple-900/20 rounded-xl p-4 sm:p-6 border-2 border-rose-200/50 dark:border-rose-700/50 shadow-lg animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                       <div className="text-2xl sm:text-3xl md:text-4xl animate-bounce">🎉</div>
                       <div className="text-xl sm:text-2xl md:text-3xl animate-bounce" style={{ animationDelay: '0.1s' }}>🎂</div>
                       <div className="text-2xl sm:text-3xl md:text-4xl animate-bounce" style={{ animationDelay: '0.2s' }}>🎉</div>
                     </div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent mb-2">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 dark:from-rose-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
                       Happy Birthday, {member.name}! 🎈
                     </h3>
-                    <p className="text-rose-700 font-medium text-sm sm:text-base">
+                    <p className="text-rose-700 dark:text-rose-300 font-medium text-sm sm:text-base">
                       Wishing you an amazing day filled with love, success, and all your favorite K-pop moments! 💖
                     </p>
                     <div className="flex justify-center gap-2 mt-3 sm:mt-4">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-rose-400 rounded-full animate-pulse"></div>
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-pink-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-rose-400 dark:bg-rose-500 rounded-full animate-pulse"></div>
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-pink-400 dark:bg-pink-500 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-purple-400 dark:bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
                     </div>
                   </div>
                 </div>

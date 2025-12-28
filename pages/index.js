@@ -31,11 +31,11 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
                 key={g.id}
                 onClick={() => { setCarouselIndex(idx); setCarouselPaused(true) }}
                 aria-pressed={carouselIndex === idx}
-                className={`group min-w-[84px] flex items-center gap-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 hover:from-cyan-500/20 hover:to-blue-500/20 backdrop-blur-sm border border-cyan-200/30 transition-all duration-300 ease-out transform-gpu hover:scale-105 hover:-translate-y-0.5 hover:shadow-xl py-3 px-3 sm:py-2.5 sm:px-3 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/50 ${carouselIndex === idx ? 'ring-2 ring-cyan-400 scale-105 bg-gradient-to-r from-cyan-500/20 to-blue-500/20' : ''}`}
+                className={`group min-w-[84px] flex items-center gap-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 dark:from-slate-700/20 dark:to-slate-600/20 hover:from-cyan-500/20 hover:to-blue-500/20 dark:hover:from-slate-600/30 dark:hover:to-slate-500/30 backdrop-blur-sm border border-cyan-200/30 dark:border-slate-600/30 transition-all duration-300 ease-out transform-gpu hover:scale-105 hover:-translate-y-0.5 hover:shadow-xl dark:hover:shadow-slate-900/50 py-3 px-3 sm:py-2.5 sm:px-3 rounded-xl shadow-lg dark:shadow-slate-900/30 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-slate-400/50 ${carouselIndex === idx ? 'ring-2 ring-cyan-400 dark:ring-slate-400 scale-105 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 dark:from-slate-600/30 dark:to-slate-500/30' : ''}`}
                 title={g.name}
               >
-                <img src={(g.logo || g.image) || '/placeholder.svg'} alt={g.name} className="w-8 h-8 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 border border-cyan-200/50" />
-                <span className="text-sm sm:text-base text-cyan-800 font-semibold bg-white/90 px-3 py-1 rounded-md shadow-lg drop-shadow-md group-hover:underline underline-offset-4 decoration-cyan-400 block truncate text-center max-w-[120px] sm:max-w-[160px]">{g.name}</span>
+                <img src={(g.logo || g.image) || '/placeholder.svg'} alt={g.name} className="w-8 h-8 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 border border-cyan-200/50 dark:border-slate-600/50" />
+                <span className="text-sm sm:text-base text-cyan-800 dark:text-slate-200 font-semibold bg-white/90 dark:bg-slate-700/90 px-3 py-1 rounded-md shadow-lg drop-shadow-md group-hover:underline underline-offset-4 decoration-cyan-400 dark:decoration-cyan-300 block truncate text-center max-w-[120px] sm:max-w-[160px]">{g.name}</span>
               </button>
             ))}
           </div>
@@ -43,31 +43,31 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
       </section>
 
       <section className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 kpop-font bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Welcome to k-taby</h1>
-        <p className="text-cyan-700 kpop-font text-lg">K-pop news, group & member profiles, and songs from the groups.</p>
+        <h1 className="text-3xl font-bold mb-2 kpop-font bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">Welcome to k-taby</h1>
+        <p className="text-cyan-700 dark:text-slate-300 kpop-font text-lg">K-pop news, group & member profiles, and songs from the groups.</p>
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-6 border rounded flex items-center gap-4 bg-white">
-          <div className="w-16 h-16 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center">
+        <div className="p-6 border rounded flex items-center gap-4 bg-white dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden flex items-center justify-center">
             <img src={(typeof siteSocial !== 'undefined' && siteSocial.youtube && siteSocial.youtube.image) ? siteSocial.youtube.image : '/placeholder.svg'} alt="@taby_edits YouTube" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-semibold">Visit @taby_edits on YouTube</h2>
-            <p className="text-sm text-gray-600">Click below to open my YouTube channel.</p>
+            <h2 className="text-xl font-semibold dark:text-white">Visit @taby_edits on YouTube</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Click below to open my YouTube channel.</p>
             <div className="mt-3">
               <a href={(typeof siteSocial !== 'undefined' && siteSocial.youtube && siteSocial.youtube.url) ? siteSocial.youtube.url : 'https://www.youtube.com/@taby_edits'} target="_blank" rel="noreferrer" className="btn btn-yt md:w-auto">Open on YouTube →</a>
             </div>
           </div>
         </div>
 
-        <div className="p-6 border rounded flex items-center gap-4 bg-white">
-          <div className="w-16 h-16 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center">
+        <div className="p-6 border rounded flex items-center gap-4 bg-white dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden flex items-center justify-center">
             <img src={(typeof siteSocial !== 'undefined' && siteSocial.tiktok && siteSocial.tiktok.image) ? siteSocial.tiktok.image : '/placeholder.svg'} alt="@tabby_edits logo" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-semibold">Visit @tabby_edits</h2>
-            <p className="text-sm text-gray-600">All my TikTok edits in one place.</p>
+            <h2 className="text-xl font-semibold dark:text-white">Visit @tabby_edits</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">All my TikTok edits in one place.</p>
             <div className="mt-3">
               <a href={(typeof siteSocial !== 'undefined' && siteSocial.tiktok && siteSocial.tiktok.url) ? siteSocial.tiktok.url : 'https://www.tiktok.com/@tabby_edits'} target="_blank" rel="noreferrer" className="btn btn-ktaby md:w-auto">Open on TikTok →</a>
             </div>

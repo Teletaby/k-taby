@@ -147,7 +147,7 @@ export default function BirthdayBanner({ placement = 'top', onOpenProfile }) {
   return (
     <div className={`container mx-auto px-4 mb-4 ${placement === 'top' ? 'mt-4' : ''}`}>
       {matches.length === 1 && (
-        <div className="relative flex flex-col sm:flex-row items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-rose-50 to-rose-100 border shadow-lg birthday-glow">
+        <div className="relative flex flex-col sm:flex-row items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-rose-50 to-rose-100 dark:from-rose-900/20 dark:to-rose-800/20 border shadow-lg dark:shadow-rose-900/30 birthday-glow">
           {matches[0].image ? (
             <div className="w-16 h-16 sm:w-20 sm:h-20 relative rounded-full overflow-hidden flex-shrink-0 border-2 border-white/60 shadow-md">
               <Image src={matches[0].image} alt={matches[0].member} fill className="object-cover" />
@@ -158,12 +158,12 @@ export default function BirthdayBanner({ placement = 'top', onOpenProfile }) {
 
           <div className="flex-1 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-3">
-              <div className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/70 shadow animate-bounce text-lg">🎉</div>
-              <div className="text-rose-700 kpop-font text-base md:text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-ktaby-500 animate-birthday-pulse">Happy birthday!</div>
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/70 dark:bg-slate-700/70 shadow animate-bounce text-lg">🎉</div>
+              <div className="text-rose-700 dark:text-rose-300 kpop-font text-base md:text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-ktaby-500 dark:from-rose-400 dark:to-cyan-400 animate-birthday-pulse">Happy birthday!</div>
             </div>
 
-            <div className="text-2xl md:text-4xl font-extrabold mt-1 truncate">{matches[0].member}{matches[0].groupName ? ` — ${matches[0].groupName}` : ''}</div>
-            <div className="text-sm text-gray-600 mt-2">Share some love or explore their profile.</div>
+            <div className="text-2xl md:text-4xl font-extrabold mt-1 truncate text-gray-900 dark:text-slate-100">{matches[0].member}{matches[0].groupName ? ` — ${matches[0].groupName}` : ''}</div>
+            <div className="text-sm text-gray-600 dark:text-slate-400 mt-2">Share some love or explore their profile.</div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
@@ -175,12 +175,12 @@ export default function BirthdayBanner({ placement = 'top', onOpenProfile }) {
       )}
 
       {matches.length > 1 && (
-        <div className="p-4 rounded-lg bg-gradient-to-r from-yellow-50 to-rose-50 border shadow-lg birthday-glow">
+        <div className="p-4 rounded-lg bg-gradient-to-r from-yellow-50 to-rose-50 dark:from-yellow-900/20 dark:to-rose-900/20 border shadow-lg dark:shadow-yellow-900/30 birthday-glow">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
             <div className="mb-3 sm:mb-0">
-              <div className="text-sm text-amber-700 font-medium kpop-font animate-birthday-pulse">Multiple birthdays today! 🎉</div>
-              <div className="text-lg md:text-xl font-bold mt-1">Happy birthday to {matches.map((m,i)=> (i===matches.length-1 && matches.length>1) ? `and ${m.member}` : (i===0 ? m.member : `, ${m.member}`)).join('')}</div>
-              <div className="text-sm text-gray-600 mt-1">Click a profile to celebrate.</div>
+              <div className="text-sm text-amber-700 dark:text-amber-300 font-medium kpop-font animate-birthday-pulse">Multiple birthdays today! 🎉</div>
+              <div className="text-lg md:text-xl font-bold mt-1 text-gray-900 dark:text-slate-100">Happy birthday to {matches.map((m,i)=> (i===matches.length-1 && matches.length>1) ? `and ${m.member}` : (i===0 ? m.member : `, ${m.member}`)).join('')}</div>
+              <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">Click a profile to celebrate.</div>
             </div>
 
             <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -196,7 +196,7 @@ export default function BirthdayBanner({ placement = 'top', onOpenProfile }) {
 
           <div className="mt-3 flex flex-wrap gap-2">
             {matches.map(m => m.memberObject ? (
-              <button key={m.member} onClick={() => onOpenProfile && onOpenProfile(m.memberObject)} className="px-3 py-1 rounded bg-ktaby-500 text-white text-sm hover:bg-ktaby-600 transition-colors">
+              <button key={m.member} onClick={() => onOpenProfile && onOpenProfile(m.memberObject)} className="px-3 py-1 rounded bg-ktaby-500 hover:bg-ktaby-600 dark:bg-slate-600 dark:hover:bg-slate-500 text-white text-sm transition-colors">
                 {m.member}
               </button>
             ) : null)}

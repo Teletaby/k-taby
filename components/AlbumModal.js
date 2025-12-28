@@ -122,8 +122,8 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
         <div className={'absolute inset-0 bg-black transition-opacity duration-200 ease-out ' + (visible ? 'opacity-50' : 'opacity-0')} onClick={handleClose} />
 
         <div id="album-modal" ref={(el)=>{ elRef.current = el; if (el && visible) { el.focus() } }} tabIndex={-1} className={
-          'relative bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 text-gray-900 z-10 transform-gpu ' +
-          'border-2 border-pink-200 rounded-2xl overflow-y-auto album-modal-scroll ' +
+          'relative bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 text-gray-900 dark:text-white z-10 transform-gpu ' +
+          'border-2 border-pink-200 dark:border-gray-600 rounded-2xl overflow-y-auto album-modal-scroll ' +
           (visible 
             ? 'opacity-100 scale-100 translate-y-0 animate-modal-open' 
             : 'opacity-0 scale-95 translate-y-8 animate-modal-close'
@@ -132,7 +132,7 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
         }>
 
           {/* K-pop themed header with gradient background */}
-          <div className="relative bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 p-4 sm:p-6 text-white animate-fade-in-up" style={{ minHeight: '160px', flexShrink: 0, animationDelay: '0.1s' }}>
+          <div className="relative bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 dark:from-gray-700 dark:via-gray-800 dark:to-gray-700 p-4 sm:p-6 text-white animate-fade-in-up" style={{ minHeight: '160px', flexShrink: 0, animationDelay: '0.1s' }}>
             {/* Decorative elements */}
             <div className="absolute top-0 left-0 w-full h-full opacity-20">
               <div className="absolute top-4 left-4 w-8 h-8 bg-white rounded-full animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}></div>
@@ -195,10 +195,10 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
           </div>
 
           {/* Main content area with K-pop theming */}
-          <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm p-4 sm:p-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             {/* Track list with K-pop styling */}
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-gray-800 flex items-center gap-2 mb-4">
+              <h4 className="text-lg font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2 mb-4">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-500">
                   <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15M9 5C9 6.10457 9.89543 7 11 7H13C14.1046 7 15 6.10457 15 5M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -208,12 +208,12 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
                 {loading && (
                   <div className="text-center py-8">
                     <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500"></div>
-                    <p className="mt-2 text-gray-600">Loading tracks…</p>
+                    <p className="mt-2 text-gray-600 dark:text-gray-400">Loading tracks…</p>
                   </div>
                 )}
 
                 {err && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-700 dark:text-red-400">
                     {err}
                   </div>
                 )}
@@ -225,7 +225,7 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
                       return (
                         <div
                           key={t.id || String(trackNumber)}
-                          className="album-track-row group bg-gradient-to-r from-white to-pink-50/30 p-3 sm:p-4 rounded-lg border border-pink-100 hover:border-purple-200 hover:shadow-md transition-all duration-200"
+                          className="album-track-row group bg-gradient-to-r from-white to-pink-50/30 dark:from-gray-700 dark:to-gray-600/30 p-3 sm:p-4 rounded-lg border border-pink-100 dark:border-gray-600 hover:border-purple-200 dark:hover:border-purple-600 hover:shadow-md transition-all duration-200"
                         >
                           <div className="flex flex-col gap-3">
                             <div className="flex items-center gap-3">
@@ -233,11 +233,11 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
                                 {trackNumber}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="text-sm font-semibold text-gray-800 break-words group-hover:text-purple-700 transition-colors">
+                                <div className="text-sm font-semibold text-gray-800 dark:text-gray-200 break-words group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
                                   {t.name}
                                 </div>
                                 {t.duration_ms ? (
-                                  <div className="text-xs text-gray-500 mt-1">
+                                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                     {Math.floor(t.duration_ms/1000/60)}:{String(Math.floor((t.duration_ms/1000)%60)).padStart(2,'0')}
                                   </div>
                                 ) : null}
@@ -254,7 +254,7 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
                 )}
 
               {!loading && (!details || !details.tracks || details.tracks.length === 0) && (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                   <span className="text-2xl mb-2 block">🎧</span>
                   <p>No track preview available</p>
                 </div>

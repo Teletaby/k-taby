@@ -126,17 +126,17 @@ export default function HeroCarousel({ interval = 4000, externalIndex, onIndexCh
       <div className="absolute inset-0 z-20 flex items-center">
         <div className="max-w-5xl mx-auto px-4 w-full flex items-center justify-between">
           <div>
-            <h2 className="text-white text-2xl md:text-4xl font-bold drop-shadow">{g.name}</h2>
+            <h2 className="text-white dark:text-slate-100 text-2xl md:text-4xl font-bold drop-shadow">{g.name}</h2>
             {/* Show the "merged"/live description when available so the carousel matches group pages. Clamp to 3 lines. */}
             {(() => {
               const live = liveGroups[g.id] || null
               const descHtml = (live && live.description) || g.description || ''
               return (
-                <p className="mt-2 text-white/90 max-w-xl" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }} dangerouslySetInnerHTML={{ __html: descHtml }} />
+                <p className="mt-2 text-white/90 dark:text-slate-200/90 max-w-xl" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }} dangerouslySetInnerHTML={{ __html: descHtml }} />
               )
             })()}
 
-            <Link href={`/groups/${g.id}`} className="inline-block mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">Learn more about {g.name}</Link>
+            <Link href={`/groups/${g.id}`} className="inline-block mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 dark:from-slate-700 dark:to-slate-800 dark:hover:from-slate-600 dark:hover:to-slate-700 text-white px-6 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">Learn more about {g.name}</Link>
           </div>
 
           {/* bottom center controls (desktop & mobile) */}

@@ -376,6 +376,15 @@ export default function Group({ group, initialEnrichment = null }) {
               {isAdmin ? <AdminRefresh groupId={group.id} /> : null}
             </div>
 
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Song search coming soon..."
+                disabled
+                className="w-full p-2 border border-gray-300 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 cursor-not-allowed"
+              />
+            </div>
+
             {merged.albums && merged.albums.length > 0 ? (
               (() => {
                 // filter out albums with no track listing
@@ -423,13 +432,13 @@ export default function Group({ group, initialEnrichment = null }) {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {group.members.length === 0 && <p className="text-gray-600">No members added yet. Run the member fetch script to populate bios and photos.</p>}
               {group.members.map(m => (
-                <div key={m.id || m.name} className="card-surface p-3 transform-gpu transition-all duration-300 ease-out card-press cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-ktaby-500/30" role="button" tabIndex={0} onClick={() => setSelectedMember(m)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedMember(m) } }}>
+                <div key={m.id || m.name} className="card-surface p-3 transform-gpu transition-all duration-300 ease-out card-press cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-ktaby-500/30 dark:bg-gray-800 dark:border-gray-700" role="button" tabIndex={0} onClick={() => setSelectedMember(m)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedMember(m) } }}>
                   <a href={`/groups/${group.id}/${m.id || encodeURIComponent(m.name)}`} onClick={(e) => { e.preventDefault(); setSelectedMember(m) }} className="block w-full relative rounded mb-2 overflow-hidden pb-[100%] group cursor-pointer" aria-label={`Open profile for ${m.name}`}>
                     <Image src={(() => { try { const { normalizeImage } = require('../../lib/images'); return normalizeImage?(normalizeImage(m.image)||'/placeholder.svg'):'/placeholder.svg' } catch(e){ return '/placeholder.svg' } })()} alt={m.name} fill className="object-cover object-top transition-transform duration-200 group-hover:scale-105" />
                   </a>
 
-                  <h4 className="font-semibold mt-2">{m.name}</h4>
-                  <p className="text-sm text-gray-600">{m.role || ''}</p>
+                  <h4 className="font-semibold mt-2 dark:text-white">{m.name}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{m.role || ''}</p>
                   <button type="button" onClick={() => setSelectedMember(m)} className="btn btn-ktaby btn-sm btn-pill btn-animated mt-3 w-full sm:w-auto">Profile →</button>
                 </div>
               ))}
