@@ -318,6 +318,7 @@ export default function AdminPage() {
                     <th className="text-left py-2 px-3 text-cyan-800 font-medium">Browser</th>
                     <th className="text-left py-2 px-3 text-cyan-800 font-medium">Device</th>
                     <th className="text-left py-2 px-3 text-cyan-800 font-medium">Page</th>
+                    <th className="text-left py-2 px-3 text-cyan-800 font-medium">User Agent</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -334,6 +335,7 @@ export default function AdminPage() {
                         </span>
                       </td>
                       <td className="py-2 px-3 text-cyan-700 truncate max-w-xs">{visitor.page}</td>
+                      <td className="py-2 px-3 text-cyan-700 truncate max-w-sm text-xs font-mono">{visitor.userAgent}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -129,6 +129,13 @@ export default async function handler(req, res) {
     return res.status(200).json({ visitors })
   }
 
+  if (req.method === 'POST') {
+    // Log a visitor (no admin check needed for logging)
+    const { page = '/' } = req.body || {}
+    logVisitor(req, page)
+    return res.status(200).json({ ok: true })
+  }
+
   if (req.method === 'DELETE') {
     if (!isAdmin(req)) {
       return res.status(401).json({ error: 'Unauthorized' })
@@ -143,4 +150,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Failed to clear visitor logs' })
     }
   }
+
+  return res.status(405).json({ error: 'Method not allowed' })
 }

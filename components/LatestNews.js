@@ -9,9 +9,14 @@ export default function LatestNews({ initialItems = [], pollInterval = 180000 })
     try {
       setLoading(true)
       const url = `/api/news${force ? '?force=1' : ''}`
+      console.log('Fetching news:', url)
       const r = await fetch(url)
-      if (!r.ok) return
+      if (!r.ok) {
+        console.error('Fetch failed:', r.status)
+        return
+      }
       const j = await r.json()
+      console.log('Fetched items:', j.items?.length)
       if (j && j.items) setItems(j.items)
       setLastUpdated(Date.now())
     } catch (e) {

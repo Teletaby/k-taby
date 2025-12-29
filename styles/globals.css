@@ -436,17 +436,24 @@ body {
   box-shadow: 0 6px 18px rgba(0,0,0,0.22); /* subtle depth to emphasize outline */
 }
 .tab-btn {
-  @apply px-4 py-2 rounded-full text-sm font-medium bg-transparent transition-colors duration-200 ease-out;
+  @apply px-4 py-2 rounded-full text-sm font-medium bg-transparent transition-all duration-300 ease-out;
   position: relative;
   z-index: 10;
 }
-.tab-btn:hover { color: #0f62fe; }
-.tab-btn.active { color: white; }
+.tab-btn:hover { 
+  color: #0f62fe; 
+  transform: scale(1.05);
+}
+.tab-btn.active { 
+  color: white; 
+  transform: scale(1.02);
+  text-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
 .tab-indicator {
   position: absolute;
   top: 6px;
   left: 6px;
-  width: calc(50% - 12px);
+  width: calc(50% - 6px);
   height: calc(100% - 12px);
   border-radius: 9999px;
   background: linear-gradient(90deg, var(--kpop-cyan), var(--kpop-purple));
@@ -455,6 +462,7 @@ body {
   transform: translateX(0%);
 }
 .tab-indicator.move-right { transform: translateX(100%); }
+.tab-indicator.move-far-right { transform: translateX(200%); }
 
 /* Tab panel transition */
 .tab-panel { transition: transform 260ms cubic-bezier(.22,.9,.32,1), opacity 220ms ease; }

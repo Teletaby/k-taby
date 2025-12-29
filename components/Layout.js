@@ -65,11 +65,11 @@ export default function Layout({ children, title = 'k-taby' }) {
               return (
                 <>
                   <a href={yt} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline" aria-label="YouTube">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 text-white" fill="currentColor"><path d="M10 15l5-3-5-3v6z"/><path d="M21.6 7.2s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1-2-.2-5-.2-5-.2s-3 .0-5 .2c-.4.1-1.3.1-2.1 1-.6.7-.8 2.3-.8 2.3S4 8.9 4 10.6v2.8c0 1.7.2 3.4.2 3.4s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.7.1 7 .2 7 .2s3.1 0 5-.2c.4-.1 1.4-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-1.7.2-3.4V10.6c0-1.7-.2-3.4-.2-3.4z"/></svg>
+                    <img src={(siteSocial.youtube && siteSocial.youtube.image) || '/placeholder.svg'} alt="YouTube" className="h-5 w-5 rounded-full" />
                     <span className="hidden sm:inline">YouTube</span>
                   </a>
                   <a href={tt} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline" aria-label="TikTok">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 text-white" fill="currentColor"><path d="M17 3v10.5A4.5 4.5 0 0 1 12.5 18 4.5 4.5 0 1 1 14 11V7h3V3h0z"/></svg>
+                    <img src={(siteSocial.tiktok && siteSocial.tiktok.image) || '/placeholder.svg'} alt="TikTok" className="h-5 w-5 rounded-full" />
                     <span className="hidden sm:inline">TikTok</span>
                   </a>
                 </>

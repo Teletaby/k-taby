@@ -95,15 +95,15 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
 
 export async function getServerSideProps(context) {
   const { res } = context
-  // short caching at CDN level, but always fresh on the server
-  try { res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300') } catch (e) {}
+  // Don't cache at CDN level to ensure fresh news on reload
+  try { res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=0') } catch (e) {}
 
   const groups = require('../data/groups.json')
   const itemsRaw = await fetchNewsForGroups(groups, { ttlMs: 1000 * 60 * 30 })
 
-  // balance articles across groups (max 2 per group, total 6)
+  // balance articles across groups (max 2 per group, total 10)
   const { balanceArticles } = require('../lib/news')
-  const balanced = balanceArticles(itemsRaw, groups, { perGroup: 2, total: 6 })
+  const balanced = balanceArticles(itemsRaw, groups, { perGroup: 2, total: 10 })
 
   // collect distinct group names mentioned in the balanced set
   const mentionedSet = new Set()
