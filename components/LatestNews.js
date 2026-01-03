@@ -4,13 +4,48 @@ export default function LatestNews({ initialItems = [], pollInterval = 180000 })
   const [items, setItems] = useState(initialItems)
   const [loading, setLoading] = useState(false)
   const [lastUpdated, setLastUpdated] = useState(Date.now())
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    async function checkAdmin() {
+      try {
+        const r = await fetch('/api/admin/status')
+        const j = await r.json()
+        setIsAdmin(!!j.admin)
+      } catch (e) {}
+    }
+    checkAdmin()
+  }, [])
 
   async function fetchLatest(force = false) {
     try {
       setLoading(true)
+      
+      if (force) {
+        // When force refreshing, call the POST refresh endpoint first
+        console.log('Force refreshing news...')
+        const refreshRes = await fetch('/api/news/refresh', { 
+          method: 'POST',
+          headers: { 'Cache-Control': 'no-cache' }
+        })
+        if (!refreshRes.ok) {
+          console.error('Refresh failed:', refreshRes.status)
+          return
+        }
+        const refreshData = await refreshRes.json()
+        console.log('News refreshed, got items:', refreshData.items?.length)
+        if (refreshData && refreshData.items) {
+          setItems(refreshData.items)
+          setLastUpdated(Date.now())
+          return
+        }
+      }
+      
       const url = `/api/news${force ? '?force=1' : ''}`
       console.log('Fetching news:', url)
-      const r = await fetch(url)
+      const r = await fetch(url, {
+        headers: { 'Cache-Control': 'no-cache' }
+      })
       if (!r.ok) {
         console.error('Fetch failed:', r.status)
         return
@@ -34,11 +69,13 @@ export default function LatestNews({ initialItems = [], pollInterval = 180000 })
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <div className="text-sm text-cyan-600 dark:text-slate-400">Updated {Math.round((Date.now() - lastUpdated) / 1000)}s ago</div>
-        <div className="flex items-center gap-2">
-          <button className="text-xs px-3 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 dark:from-slate-700 dark:to-slate-800 dark:hover:from-slate-600 dark:hover:to-slate-700 text-white rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200" onClick={() => fetchLatest(true)} disabled={loading}>{loading ? 'Refreshing…' : 'Refresh'}</button>
-          <button className="text-xs px-3 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 dark:from-slate-600 dark:to-slate-700 dark:hover:from-slate-500 dark:hover:to-slate-600 text-white rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200" onClick={() => fetchLatest(false)}>Fetch</button>
-        </div>
+        {isAdmin && <div className="text-sm text-cyan-600 dark:text-slate-400">Updated {Math.round((Date.now() - lastUpdated) / 1000)}s ago</div>}
+        {isAdmin && (
+          <div className="flex items-center gap-2">
+            <button className="text-xs px-3 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 dark:from-slate-700 dark:to-slate-800 dark:hover:from-slate-600 dark:hover:to-slate-700 text-white rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200" onClick={() => fetchLatest(true)} disabled={loading}>{loading ? 'Refreshing…' : 'Refresh'}</button>
+            <button className="text-xs px-3 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 dark:from-slate-600 dark:to-slate-700 dark:hover:from-slate-500 dark:hover:to-slate-600 text-white rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200" onClick={() => fetchLatest(false)}>Fetch</button>
+          </div>
+        )}
       </div>
 
       <div className="space-y-4">

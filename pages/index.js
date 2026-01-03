@@ -99,11 +99,41 @@ export async function getServerSideProps(context) {
   try { res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=0') } catch (e) {}
 
   const groups = require('../data/groups.json')
-  const itemsRaw = await fetchNewsForGroups(groups, { ttlMs: 1000 * 60 * 30 })
-
-  // balance articles across groups (max 2 per group, total 10)
-  const { balanceArticles } = require('../lib/news')
-  const balanced = balanceArticles(itemsRaw, groups, { perGroup: 2, total: 10 })
+  
+  let balanced = []
+  
+  // Fetch news directly from MongoDB (always fresh)
+  try {
+    const { getDatabase } = await import('../lib/mongodb.js')
+    const db = await getDatabase()
+    const newsCollection = db.collection('news')
+    const rawItems = await newsCollection.find({}).sort({ pubDate: -1 }).toArray()
+    
+    // Remove MongoDB metadata fields
+    const itemsRaw = rawItems.map(item => {
+      const { _id, fetchedAt, ...rest } = item
+      return rest
+    })
+    
+    console.log('✅ getServerSideProps: Retrieved', itemsRaw.length, 'news items from MongoDB')
+    
+    // balance articles across groups (max 2 per group, total 10)
+    const { balanceArticles } = require('../lib/news')
+    balanced = balanceArticles(itemsRaw, groups, { perGroup: 2, total: 10 })
+    
+    // Sort by pubDate descending
+    balanced.sort((a, b) => {
+      const dateA = new Date(a.pubDate || 0).getTime()
+      const dateB = new Date(b.pubDate || 0).getTime()
+      return dateB - dateA
+    })
+  } catch (e) {
+    console.error('❌ Error fetching from MongoDB, falling back to RSS:', e)
+    // Fallback: fetch from sources if MongoDB is unavailable
+    const itemsRaw = await fetchNewsForGroups(groups, { ttlMs: 0 })
+    const { balanceArticles } = require('../lib/news')
+    balanced = balanceArticles(itemsRaw, groups, { perGroup: 2, total: 10 })
+  }
 
   // collect distinct group names mentioned in the balanced set
   const mentionedSet = new Set()

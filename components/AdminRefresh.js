@@ -1,8 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function AdminRefresh({ groupId }) {
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState(null)
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    async function checkAdmin() {
+      try {
+        const r = await fetch('/api/admin/status')
+        const j = await r.json()
+        setIsAdmin(!!j.admin)
+      } catch (e) {}
+    }
+    checkAdmin()
+  }, [])
 
   async function refresh() {
     setLoading(true); setMsg(null)
@@ -19,9 +31,13 @@ export default function AdminRefresh({ groupId }) {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <button onClick={refresh} disabled={loading} className="btn btn-muted">Refresh Spotify</button>
-      {msg && <div className="text-sm text-gray-600">{msg}</div>}
-    </div>
+    <>
+      {isAdmin && (
+        <div className="flex items-center gap-2">
+          <button onClick={refresh} disabled={loading} className="btn btn-muted">Refresh Spotify</button>
+          {msg && <div className="text-sm text-gray-600">{msg}</div>}
+        </div>
+      )}
+    </>
   )
 }

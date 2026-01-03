@@ -21,9 +21,26 @@ export default function SongGame({ albums = [], groupName = '', isAdmin = false 
   const [authUsername, setAuthUsername] = useState('')
   const [authPassword, setAuthPassword] = useState('')
   const [currentUser, setCurrentUser] = useState(null)
+  const [maintenanceMessage, setMaintenanceMessage] = useState(null)
   const audioRef = useRef(null)
   const timerRef = useRef(null)
   const youtubePlayerRef = useRef(null)
+
+  // Check for Song Game maintenance on mount
+  useEffect(() => {
+    async function checkMaintenance() {
+      try {
+        const r = await fetch('/api/admin/song-game-maintenance')
+        const j = await r.json()
+        if (j.maintenance && j.maintenance.enabled) {
+          setMaintenanceMessage(j.maintenance.message || 'Song Game is under maintenance')
+        }
+      } catch (e) {
+        console.error('Error checking maintenance:', e)
+      }
+    }
+    checkMaintenance()
+  }, [])
 
   // Load YouTube IFrame API
   useEffect(() => {
@@ -681,6 +698,35 @@ export default function SongGame({ albums = [], groupName = '', isAdmin = false 
         <p className="text-gray-600 dark:text-gray-400">
           Not enough songs available for this group.
         </p>
+      </div>
+    )
+  }
+
+  // If maintenance is active, show maintenance page instead of game
+  if (maintenanceMessage) {
+    return (
+      <div className="h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800 p-4">
+        <style>{`
+          @keyframes spinFloat {
+            0%, 100% { transform: rotate(0deg) translateY(0px); }
+            50% { transform: rotate(360deg) translateY(-10px); }
+          }
+          .k-pop-loader {
+            animation: spinFloat 3s ease-in-out infinite;
+          }
+        `}</style>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-8 border border-cyan-200 dark:border-gray-700">
+          <div className="flex justify-center mb-4">
+            <div className="w-20 h-20 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg k-pop-loader">
+              <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
+              </svg>
+            </div>
+          </div>
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-4">Under Maintenance</h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-6">{maintenanceMessage}</p>
+          <p className="text-center text-sm text-gray-500 dark:text-gray-400">Please check back soon!</p>
+        </div>
       </div>
     )
   }

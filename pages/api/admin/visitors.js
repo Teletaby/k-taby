@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { getDatabase } from '../../../lib/mongodb'
 
 const VISITOR_LOG_FILE = path.resolve(process.cwd(), 'data', 'visitor_log.json')
 
@@ -59,36 +60,68 @@ function getBrowserInfo(userAgent) {
   return 'Other'
 }
 
-// Load visitor log
-function loadVisitorLog() {
+// Load visitor log from MongoDB
+async function loadVisitorLog() {
   try {
-    if (fs.existsSync(VISITOR_LOG_FILE)) {
-      const data = fs.readFileSync(VISITOR_LOG_FILE, 'utf8')
-      return JSON.parse(data)
-    }
+    const db = await getDatabase()
+    const visitorsCollection = db.collection('visitors')
+    const logs = await visitorsCollection.find({}).sort({ timestamp: -1 }).limit(1000).toArray()
+    // Remove MongoDB _id field
+    return logs.map(log => {
+      const { _id, ...rest } = log
+      return rest
+    })
   } catch (e) {
-    console.error('Error loading visitor log:', e)
+    console.error('Error loading visitor log from MongoDB:', e)
+    // Fallback to file
+    try {
+      if (fs.existsSync(VISITOR_LOG_FILE)) {
+        const data = fs.readFileSync(VISITOR_LOG_FILE, 'utf8')
+        return JSON.parse(data)
+      }
+    } catch (fileError) {
+      console.error('Error loading visitor log from file:', fileError)
+    }
   }
   return []
 }
 
-// Save visitor log
-function saveVisitorLog(log) {
+// Save visitor log to MongoDB
+async function saveVisitorLog(log) {
   try {
-    // Ensure data directory exists
-    const dataDir = path.dirname(VISITOR_LOG_FILE)
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true })
+    const db = await getDatabase()
+    const visitorsCollection = db.collection('visitors')
+    
+    // Clear old collection first
+    await visitorsCollection.deleteMany({})
+    
+    // Insert new logs without _id to avoid duplicates
+    if (log.length > 0) {
+      const logsToInsert = log.map(entry => {
+        const { _id, ...rest } = entry
+        return rest
+      })
+      await visitorsCollection.insertMany(logsToInsert)
     }
-
-    fs.writeFileSync(VISITOR_LOG_FILE, JSON.stringify(log, null, 2))
+    
+    console.log('✅ Visitor log saved to MongoDB')
   } catch (e) {
-    console.error('Error saving visitor log:', e)
+    console.error('Error saving visitor log to MongoDB:', e)
+    // Fallback to file
+    try {
+      const dataDir = path.dirname(VISITOR_LOG_FILE)
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true })
+      }
+      fs.writeFileSync(VISITOR_LOG_FILE, JSON.stringify(log, null, 2))
+    } catch (fileError) {
+      console.error('Error saving visitor log to file:', fileError)
+    }
   }
 }
 
 // Middleware function to log visitors (call this from _app.js or middleware)
-export function logVisitor(req, page = '/') {
+export async function logVisitor(req, page = '/') {
   try {
     const ip = getClientIP(req)
     const userAgent = req.headers['user-agent'] || ''
@@ -104,15 +137,15 @@ export function logVisitor(req, page = '/') {
       userAgent: userAgent.substring(0, 200) // Truncate for storage
     }
 
-    const log = loadVisitorLog()
+    const log = await loadVisitorLog()
     log.unshift(visitorEntry) // Add to beginning
 
-    // Keep only last 1000 entries to prevent file from growing too large
+    // Keep only last 1000 entries to prevent storage from growing too large
     if (log.length > 1000) {
       log.splice(1000)
     }
 
-    saveVisitorLog(log)
+    await saveVisitorLog(log)
   } catch (e) {
     // Don't throw errors in logging middleware
     console.error('Error logging visitor:', e)
@@ -125,14 +158,14 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Unauthorized' })
     }
 
-    const visitors = loadVisitorLog()
+    const visitors = await loadVisitorLog()
     return res.status(200).json({ visitors })
   }
 
   if (req.method === 'POST') {
     // Log a visitor (no admin check needed for logging)
     const { page = '/' } = req.body || {}
-    logVisitor(req, page)
+    await logVisitor(req, page)
     return res.status(200).json({ ok: true })
   }
 
@@ -143,7 +176,7 @@ export default async function handler(req, res) {
 
     try {
       // Clear the visitor log by saving an empty array
-      saveVisitorLog([])
+      await saveVisitorLog([])
       return res.status(200).json({ message: 'Visitor logs cleared successfully' })
     } catch (e) {
       console.error('Error clearing visitor logs:', e)

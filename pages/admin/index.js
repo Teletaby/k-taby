@@ -6,6 +6,8 @@ export default function AdminPage() {
   const [admin, setAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
   const [maintenance, setMaintenance] = useState({ enabled: false, message: '' })
+  const [songGameMaintenance, setSongGameMaintenance] = useState({ enabled: false, message: '' })
+  const [songGameMessage, setSongGameMessage] = useState('')
   const [refreshResults, setRefreshResults] = useState(null)
   const [visitors, setVisitors] = useState([])
   const [groups, setGroups] = useState([])
@@ -15,6 +17,7 @@ export default function AdminPage() {
   useEffect(() => {
     checkAdminStatus()
     fetchMaintenance()
+    fetchSongGameMaintenance()
     fetchVisitors()
     fetchGroups()
   }, [])
@@ -33,6 +36,17 @@ export default function AdminPage() {
       const r = await fetch('/api/admin/maintenance')
       const j = await r.json()
       if (j.maintenance) setMaintenance(j.maintenance)
+    } catch (e) {}
+  }
+
+  async function fetchSongGameMaintenance() {
+    try {
+      const r = await fetch('/api/admin/song-game-maintenance')
+      const j = await r.json()
+      if (j.maintenance) {
+        setSongGameMaintenance(j.maintenance)
+        setSongGameMessage(j.maintenance.message || '')
+      }
     } catch (e) {}
   }
 
@@ -104,6 +118,23 @@ export default function AdminPage() {
       })
       if (r.ok) {
         setMaintenance({ enabled, message })
+      }
+    } catch (e) {}
+  }
+
+  async function toggleSongGameMaintenance() {
+    const enabled = !songGameMaintenance.enabled
+    const message = enabled ? songGameMessage || 'Song Game is under maintenance — tune back soon!' : ''
+    try {
+      const pwd = prompt('Admin password:')
+      if (!pwd) return
+      const r = await fetch('/api/admin/song-game-maintenance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pwd, enabled, message })
+      })
+      if (r.ok) {
+        setSongGameMaintenance({ enabled, message })
       }
     } catch (e) {}
   }
@@ -218,7 +249,7 @@ export default function AdminPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-white/50 rounded-lg border border-cyan-100/50">
                 <div>
-                  <div className="font-medium text-cyan-800">Maintenance Mode</div>
+                  <div className="font-medium text-cyan-800">Site Maintenance Mode</div>
                   <div className="text-sm text-cyan-600">{maintenance.enabled ? 'Site is under maintenance' : 'Site is live'}</div>
                 </div>
                 <button
@@ -231,6 +262,32 @@ export default function AdminPage() {
                 >
                   {maintenance.enabled ? 'Disable' : 'Enable'}
                 </button>
+              </div>
+
+              <div className="p-4 bg-white/50 rounded-lg border border-cyan-100/50">
+                <div className="font-medium text-cyan-800 mb-3">Song Game Maintenance</div>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm text-cyan-700 mb-2">Maintenance Message</label>
+                    <input
+                      type="text"
+                      value={songGameMessage}
+                      onChange={(e) => setSongGameMessage(e.target.value)}
+                      placeholder="e.g., Song Game is under maintenance — tune back soon!"
+                      className="w-full px-3 py-2 border border-cyan-200 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent bg-white/70 text-cyan-900 text-sm"
+                    />
+                  </div>
+                  <button
+                    onClick={toggleSongGameMaintenance}
+                    className={`w-full px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+                      songGameMaintenance.enabled
+                        ? 'bg-red-500 hover:bg-red-600 text-white'
+                        : 'bg-green-500 hover:bg-green-600 text-white'
+                    }`}
+                  >
+                    {songGameMaintenance.enabled ? 'Disable Song Game Maintenance' : 'Enable Song Game Maintenance'}
+                  </button>
+                </div>
               </div>
 
               <div className="p-4 bg-white/50 rounded-lg border border-cyan-100/50">
