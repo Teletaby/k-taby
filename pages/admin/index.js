@@ -11,6 +11,7 @@ export default function AdminPage() {
   const [refreshResults, setRefreshResults] = useState(null)
   const [visitors, setVisitors] = useState([])
   const [groups, setGroups] = useState([])
+  const [messages, setMessages] = useState([])
   const [password, setPassword] = useState('')
   const [authLoading, setAuthLoading] = useState(false)
 
@@ -20,6 +21,11 @@ export default function AdminPage() {
     fetchSongGameMaintenance()
     fetchVisitors()
     fetchGroups()
+    fetchMessages()
+
+    // Auto-refresh messages every 10 seconds
+    const messageInterval = setInterval(fetchMessages, 10000)
+    return () => clearInterval(messageInterval)
   }, [])
 
   async function checkAdminStatus() {
@@ -84,6 +90,55 @@ export default function AdminPage() {
       const j = await r.json()
       if (j.groups) setGroups(j.groups)
     } catch (e) {}
+  }
+
+  async function fetchMessages() {
+    try {
+      const r = await fetch('/api/admin/messages')
+      const j = await r.json()
+      if (j.messages) {
+        setMessages(j.messages)
+        console.log('Messages fetched:', j.messages)
+      }
+    } catch (e) {
+      console.error('Error fetching messages:', e)
+    }
+  }
+
+  async function markMessagesAsRead(ids) {
+    console.log('Mark as read called with IDs:', ids)
+    try {
+      const r = await fetch('/api/admin/messages', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids })
+      })
+      console.log('Mark as read response:', r.status, r.ok)
+      if (r.ok) {
+        setMessages(messages.map(msg =>
+          ids.includes(msg._id) ? { ...msg, read: true } : msg
+        ))
+      }
+    } catch (e) {
+      console.error('Error marking as read:', e)
+    }
+  }
+
+  async function deleteMessages(ids) {
+    console.log('Delete messages called with IDs:', ids)
+    try {
+      const r = await fetch('/api/admin/messages', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids })
+      })
+      console.log('Delete response:', r.status, r.ok)
+      if (r.ok) {
+        setMessages(messages.filter(msg => !ids.includes(msg._id)))
+      }
+    } catch (e) {
+      console.error('Error deleting messages:', e)
+    }
   }
 
   async function login(e) {
@@ -342,6 +397,83 @@ export default function AdminPage() {
                   </button>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Visitor Log */}
+          <div className="lg:col-span-2 bg-gradient-to-br from-slate-50 via-cyan-50 to-blue-50 rounded-2xl shadow-xl p-6 border border-cyan-200/50">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-cyan-800 flex items-center gap-2">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Messages ({messages.filter(m => !m.read).length} unread)
+              </h2>
+              {messages.length > 0 && (
+                <button
+                  onClick={() => deleteMessages(messages.map(m => m._id))}
+                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                  Clear All
+                </button>
+              )}
+            </div>
+
+            <div className="space-y-2 max-h-96 overflow-y-auto">
+              {messages.length === 0 ? (
+                <div className="text-center py-8 text-cyan-600">
+                  No messages yet.
+                </div>
+              ) : (
+                messages.map(msg => (
+                  <div
+                    key={msg._id}
+                    className={`p-4 rounded-lg border transition-all duration-200 ${
+                      msg.read
+                        ? 'bg-gray-50/50 border-gray-200/50'
+                        : 'bg-emerald-50/50 border-emerald-200/50'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="text-sm font-medium text-cyan-700">{msg.name}</p>
+                          {!msg.read && (
+                            <span className="px-2 py-1 bg-emerald-500 text-white text-xs rounded-full font-medium">
+                              New
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-gray-500 mb-2">
+                          {new Date(msg.timestamp).toLocaleString()}
+                        </p>
+                        <p className="text-cyan-800 break-words">{msg.text}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        {!msg.read && (
+                          <button
+                            onClick={() => markMessagesAsRead([msg._id])}
+                            className="px-3 py-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded text-sm font-medium transition-colors"
+                            title="Mark as read"
+                          >
+                            ✓
+                          </button>
+                        )}
+                        <button
+                          onClick={() => deleteMessages([msg._id])}
+                          className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-sm font-medium transition-colors"
+                          title="Delete message"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
 

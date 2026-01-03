@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 // Generic modal portal. Ensures a single named container and handles escape key and body scroll lock.
-export default function ModalPortal({ children, onClose, id = 'modal-root' }) {
+export default function ModalPortal({ children, onClose, isOpen = true, id = 'modal-root' }) {
   const containerRef = useRef(null)
-  const [wrapper, setWrapper] = useState(null)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    if (typeof document === 'undefined') return
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (typeof document === 'undefined' || !isOpen || !mounted) return
 
     // create (or get) root container
     let root = document.getElementById(id)
@@ -30,7 +34,6 @@ export default function ModalPortal({ children, onClose, id = 'modal-root' }) {
     }
 
     root.appendChild(w)
-    setWrapper(w)
 
     const prevOverflow = document.body.style.overflow || ''
     document.body.style.overflow = 'hidden'
@@ -44,10 +47,9 @@ export default function ModalPortal({ children, onClose, id = 'modal-root' }) {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prevOverflow
       if (w.parentNode) w.parentNode.removeChild(w)
-      setWrapper(null)
     }
-  }, [id, onClose])
+  }, [id, onClose, isOpen, mounted])
 
-  if (!wrapper) return null
-  return createPortal(children, wrapper)
+  if (!containerRef.current || !isOpen) return null
+  return createPortal(children, containerRef.current)
 }
