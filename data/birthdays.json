@@ -1,10 +1,10 @@
 {
   "UNIS": [
-    {"member": "Hyeonju", "birthday": "2001-03-04"},
+    {"member": "Hyeonju", "birthday": "2001-11-03"},
     {"member": "Nana", "birthday": "2007-06-06"},
     {"member": "Gehlee Dangca", "birthday": "2007-08-19"},
     {"member": "Kotoko", "birthday": "2007-10-28"},
-    {"member": "Yunha", "birthday": "2009-03-07"},
+    {"member": "Yunha", "birthday": "2009-02-28"},
     {"member": "Elisia", "birthday": "2009-04-18"},
     {"member": "Yoona", "birthday": "2009-10-07"},
     {"member": "Seowon", "birthday": "2011-01-27"}
@@ -84,5 +84,30 @@
     {"member": "Lara", "birthday": "2005-11-03"},
     {"member": "Megan", "birthday": "2006-02-10"},
     {"member": "Yoonchae", "birthday": "2007-12-06"}
+  ],
+  "BLACKPINK": [
+    {"member": "Jisoo", "birthday": "1995-01-03"},
+    {"member": "Jennie", "birthday": "1996-01-16"},
+    {"member": "Rosé", "birthday": "1997-02-11"},
+    {"member": "Lisa", "birthday": "1997-03-27"}
+  ],
+  "BADVILLAIN": [
+    {"member": "Emma", "birthday": "2000-04-26"},
+    {"member": "Chloe Young", "birthday": "2001-10-31"},
+    {"member": "HU'E", "birthday": "2003-11-20"},
+    {"member": "Ina", "birthday": "2004-06-08"},
+    {"member": "YunSeo", "birthday": "2004-07-03"},
+    {"member": "Vin", "birthday": "2004-11-27"},
+    {"member": "Kelly", "birthday": "2006-06-16"}
+  ],
+  "Hearts2Hearts": [
+    {"member": "Carmen", "birthday": "2006-03-28"},
+    {"member": "Jiwoo", "birthday": "2006-09-07"},
+    {"member": "Yuha", "birthday": "2007-04-12"},
+    {"member": "Stella", "birthday": "2007-06-18"},
+    {"member": "Juun", "birthday": "2008-12-03"},
+    {"member": "A-na", "birthday": "2008-12-20"},
+    {"member": "Ian", "birthday": "2009-10-09"},
+    {"member": "Ye-on", "birthday": "2010-04-19"}
   ]
 }

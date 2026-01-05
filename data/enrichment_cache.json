@@ -1,94 +1,7 @@
 {
   "enrich:aespa": {
     "payload": {
-      "mbid": "b51c672b-85e0-48fe-8648-470a2422229f",
-      "name": "aespa",
-      "disambiguation": null,
-      "country": "KR",
       "albums": [
-        {
-          "title": "Armageddon",
-          "id": "3f5eba8d-4dc1-4599-a936-21f501787f8e",
-          "first_release_date": "2024-05-27",
-          "songs": [
-            "Supernova",
-            "Armageddon",
-            "Set the Tone",
-            "Mine",
-            "Licorice",
-            "BAHAMA",
-            "Long Chat (#♥︎)",
-            "Prologue",
-            "Live My Life",
-            "Melody"
-          ]
-        },
-        {
-          "title": "K‐POP ScreaM 2",
-          "id": "e071e30d-de8b-4d27-a756-2dc0694232b3",
-          "first_release_date": "2025-04-11",
-          "songs": []
-        },
-        {
-          "title": "Savage",
-          "id": "d35ed94d-8134-40b3-989a-6d1c5af9657b",
-          "first_release_date": "2021-10-05",
-          "songs": []
-        },
-        {
-          "title": "Girls",
-          "id": "13307860-652b-446a-82b7-326f7f31c9be",
-          "first_release_date": "2022-07-08",
-          "songs": []
-        },
-        {
-          "title": "MY WORLD",
-          "id": "36f4c763-a09f-4527-9bb3-ae425f8ee0aa",
-          "first_release_date": "2023-05-08",
-          "songs": []
-        },
-        {
-          "title": "Drama",
-          "id": "c4a4e428-e0f8-46d1-85c8-6ff5d7233781",
-          "first_release_date": "2023-11-10",
-          "songs": []
-        },
-        {
-          "title": "Whiplash",
-          "id": "2608483d-0c8e-48a7-a42f-139944fbfd8f",
-          "first_release_date": "2024-10-21",
-          "songs": []
-        },
-        {
-          "title": "Rich Man",
-          "id": "f014b273-c609-4f05-9c72-f3ff93a4c25b",
-          "first_release_date": "2025-09-05",
-          "songs": [
-            "Rich Man",
-            "Drift",
-            "Bubble",
-            "Count on Me",
-            "Angel #48",
-            "To the Girls"
-          ]
-        },
-        {
-          "title": "포켓몬스터 (2023)",
-          "id": "852e4f9b-d9eb-4e43-b657-3409b7612352",
-          "first_release_date": "2023-08-23",
-          "songs": [
-            "We Go",
-            "너와 함께라면",
-            "We Go (inst.)",
-            "너와 함께라면 (inst.)"
-          ]
-        },
-        {
-          "title": "Track by Track Commentary: aespa on Rich Man",
-          "id": "6b46612f-02a6-47de-8952-d263e2bca080",
-          "first_release_date": "2025-09-12",
-          "songs": []
-        },
         {
           "title": "Whiplash",
           "id": null,
@@ -102,168 +15,20 @@
           "songs": []
         }
       ],
-      "songs": [
-        "Supernova",
-        "Armageddon",
-        "Set the Tone",
-        "Mine",
-        "Licorice",
-        "BAHAMA",
-        "Long Chat (#♥︎)",
-        "Prologue",
-        "Live My Life",
-        "Melody",
-        "Rich Man",
-        "Drift",
-        "Bubble",
-        "Count on Me",
-        "Angel #48",
-        "To the Girls",
-        "We Go",
-        "너와 함께라면",
-        "We Go (inst.)",
-        "너와 함께라면 (inst.)"
-      ],
-      "urls": [
-        "https://www.allmusic.com/artist/mn0003996763",
-        "https://www.bandsintown.com/a/15514763",
-        "https://www.discogs.com/artist/8724412",
-        "https://open.spotify.com/artist/6YVMFz59CuY7ngCxTxjpxE",
-        "https://vk.com/artist/aespa",
-        "https://www.deezer.com/artist/113547672",
-        "https://i.scdn.co/image/ab6761610000e5ebf7a1090ad3a35a34fc0ecb57",
-        "https://www.last.fm/music/aespa",
-        "https://genius.com/artists/Aespa",
-        "https://j-lyric.net/artist/a0658fc/",
-        "https://utaten.com/artist/40974",
-        "https://www.joysound.com/web/search/artist/421111",
-        "https://www.musixmatch.com/artist/aespa",
-        "https://www.uta-net.com/artist/35152/",
-        "https://imvdb.com/n/aespa",
-        "https://rateyourmusic.com/artist/aespa",
-        "https://www.generasia.com/wiki/aespa",
-        "https://www.whosampled.com/Aespa/",
-        "https://itunes.apple.com/us/artist/id1540251304",
-        "https://mora.jp/artist/1326284/",
-        "https://music.bugs.co.kr/artist/80347326",
-        "https://ototoy.jp/_/default/a/827310",
-        "https://pc.dwango.jp/portals/artist/311701/music",
-        "https://recochoku.jp/artist/2001380745/",
-        "https://vibe.naver.com/artist/3980296",
-        "https://www.genie.co.kr/detail/artistInfo?xxnm=80957377",
-        "https://www.melon.com/artist/detail.htm?artistId=2899555",
-        "https://tower.jp/artist/4591652",
-        "https://www.hmv.co.jp/artist_aespa_000000000880369/",
-        "https://www.setlist.fm/setlists/wd-13f431f9.html",
-        "https://twitter.com/aespa_Official",
-        "https://www.facebook.com/aespa.official",
-        "https://www.instagram.com/aespa_official/",
-        "https://www.tiktok.com/@aespa_official",
-        "https://www.weibo.com/aespa",
-        "https://www.songkick.com/artists/10157778",
-        "https://music.amazon.com/artists/B08NJFPZGY",
-        "https://music.apple.com/us/artist/1540251304",
-        "https://music.line.me/artist/mi000000001d2ef052",
-        "https://music.line.me/webapp/artist/mi000000001d2ef052",
-        "https://music.rakuten.co.jp/link/artist/8999408",
-        "https://s.awa.fm/artist/32aec82fce20638caa11",
-        "https://tidal.com/artist/22211784",
-        "https://www.kkbox.com/tw/en/artist/9-icI58ApgvpPEhWSV",
-        "https://www.music-flo.com/detail/artist/404372458/album",
-        "http://viaf.org/viaf/13163874337345722384",
-        "https://www.wikidata.org/wiki/Q100877982",
-        "https://www.youtube.com/channel/UC9GtSLeksfK4yuJ_g1lgQbg",
-        "1"
-      ],
-      "wikipedia": null,
+      "songs": [],
       "description": "Aespa is a South Korean girl group formed by SM Entertainment. The group consists of Karina, Giselle, Winter and Ningning. The group debuted on November 17, 2020 with the release of their debut single, \"Black Mamba\".\nThe group's name, Aespa, combines the English initials of \"avatar\" and \"experience\" (Avatar X Experience) with the English word \"aspect\", meaning \"two sides\", to symbolize the idea of \"meeting another self and experiencing the new world\"",
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/nc6m8s1634232193.jpg",
-      "source": "musicbrainz+theaudiodb",
-      "lastUpdated": 1767465235910
+      "urls": [
+        "1"
+      ],
+      "source": "theaudiodb",
+      "lastUpdated": 1767548839062
     },
-    "lastUpdated": 1767465235910
+    "lastUpdated": 1767548839062
   },
   "enrich:mbid:ddea2b8e-f772-4c39-ab90-e1983b74a149": {
-    "payload": {
-      "mbid": "ddea2b8e-f772-4c39-ab90-e1983b74a149",
-      "name": "UNIS",
-      "disambiguation": "South Korean girl group",
-      "country": "KR",
-      "albums": [
-        {
-          "title": "WE UNIS",
-          "id": "4a0d860d-f2ac-41e0-bf0d-7ea7eecc0341",
-          "first_release_date": "2024-03-27",
-          "songs": [
-            "SUPERWOMAN",
-            "Butterfly’s Dream",
-            "Whatchu Need",
-            "Dopamine",
-            "꿈의 소녀 (Dream of girls)"
-          ]
-        },
-        {
-          "title": "SWICY",
-          "id": "a3898809-d9b0-46b8-b307-7977a7df4f8b",
-          "first_release_date": "2025-04-15",
-          "songs": [
-            "'뭐해?'라는 씨앗에서",
-            "SWICY",
-            "땡! (DDANG!)",
-            "Good Feeling",
-            "봄비"
-          ]
-        }
-      ],
-      "songs": [
-        "SUPERWOMAN",
-        "Butterfly’s Dream",
-        "Whatchu Need",
-        "Dopamine",
-        "꿈의 소녀 (Dream of girls)",
-        "'뭐해?'라는 씨앗에서",
-        "SWICY",
-        "땡! (DDANG!)",
-        "Good Feeling",
-        "봄비"
-      ],
-      "urls": [
-        "https://open.spotify.com/artist/48xyu8QHo1IhsQZGlgNGYZ",
-        "https://www.deezer.com/artist/9277654",
-        "https://fnfent.com/sub/artist/artist_view.html?artist_idx=29",
-        "https://www.unv-jp.com/home",
-        "https://weverse.io/unis/artistpedia",
-        "https://weverse.io/unis/feed",
-        "https://mora.jp/artist/2224499/",
-        "https://music.bugs.co.kr/artist/80392922",
-        "https://vibe.naver.com/artist/8469125",
-        "https://www.genie.co.kr/detail/artistInfo?xxnm=82394935",
-        "https://www.melon.com/artist/detail.htm?artistId=3746557",
-        "https://www.music-flo.com/detail/artist/409233677/",
-        "https://twitter.com/UNIS_offcl",
-        "https://twitter.com/UNIS_offcl_JP",
-        "https://www.facebook.com/official.UNIS",
-        "https://www.instagram.com/unis_offcl/",
-        "https://www.threads.com/@unis_offcl",
-        "https://www.tiktok.com/@unis_offcl",
-        "https://music.amazon.com/artists/B01BZJZML6",
-        "https://music.apple.com/us/artist/1736907509",
-        "https://music.bugs.co.kr/artist/80392922",
-        "https://tidal.com/artist/7622051",
-        "https://vibe.naver.com/artist/8469125",
-        "https://www.genie.co.kr/detail/artistInfo?xxnm=82394935",
-        "https://www.melon.com/artist/detail.htm?artistId=3746557",
-        "https://www.wikidata.org/wiki/Q124362218",
-        "https://www.youtube.com/channel/UCspnElmzSLPhrZJDG9v7JWw",
-        "https://music.youtube.com/channel/UCJ7caYuiMMtiI1BSklrsqlQ"
-      ],
-      "wikipedia": null,
-      "description": "South Korean girl group",
-      "image": null,
-      "source": "musicbrainz",
-      "lastUpdated": 1767462895983
-    },
-    "lastUpdated": 1767462895983
+    "payload": null,
+    "lastUpdated": 1767548832755
   },
   "enrich:itzy": {
     "payload": {
@@ -290,9 +55,9 @@
         "1"
       ],
       "source": "theaudiodb",
-      "lastUpdated": 1767465228333
+      "lastUpdated": 1767548869403
     },
-    "lastUpdated": 1767465228333
+    "lastUpdated": 1767548869403
   },
   "enrich:mbid:4b3b8c5a-7b8d-4a5e-9c0d-7e9b8a5d4c3b": {
     "payload": {
@@ -315,9 +80,9 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/a4cofm1700478265.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767465231526
+      "lastUpdated": 1767548876711
     },
-    "lastUpdated": 1767465231526
+    "lastUpdated": 1767548876711
   },
   "enrich:mbid:f8e7d5c3-b9a2-4a6d-8c1e-3d2f1a7b6c5d": {
     "payload": {
@@ -340,51 +105,21 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/j497n71752508562.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767465232263
+      "lastUpdated": 1767548878783
     },
-    "lastUpdated": 1767465232263
+    "lastUpdated": 1767548878783
   },
   "enrich:meovv": {
     "payload": {
-      "mbid": "f2435d8b-8a29-453d-9d7e-03c61c4b6fc4",
-      "name": "MEOVV",
-      "disambiguation": null,
-      "country": "KR",
-      "albums": [
-        {
-          "title": "MY EYES OPEN VVIDE",
-          "id": "5ad72bb4-353d-4cfe-8cc8-9cd17973d21a",
-          "first_release_date": "2025-05-12",
-          "songs": []
-        }
-      ],
+      "albums": [],
       "songs": [],
-      "urls": [
-        "https://open.spotify.com/artist/08hHTBHlv0WRXWlyrsb6Kv",
-        "https://www.deezer.com/artist/280528471",
-        "https://www.last.fm/music/MEOVV",
-        "https://music.bugs.co.kr/artist/80398939",
-        "https://vibe.naver.com/artist/8876957",
-        "https://www.genie.co.kr/detail/artistInfo?xxnm=82619556",
-        "https://www.melon.com/artist/detail.htm?artistId=3893541",
-        "https://twitter.com/OFFICIAL_MEOVV",
-        "https://www.facebook.com/MEOVV.OFFICIAL",
-        "https://www.instagram.com/meovv_official_/",
-        "https://www.threads.com/@meovv_official_",
-        "https://www.tiktok.com/@meovv_official",
-        "https://www.weibo.com/u/7941496139",
-        "https://music.apple.com/us/artist/1765256889",
-        "https://www.music-flo.com/detail/artist/410249321/album",
-        "https://www.wikidata.org/wiki/Q130084175",
-        "https://www.youtube.com/channel/UCowiwt93gqGlNG4k5VDxO-w"
-      ],
-      "wikipedia": null,
       "description": "MEOVV (pronunced as \"meow\") is a five-member South Korean girl group under The Black Label.\n\nFirst announced on February 6, 2024, MEOVV, then known as \"The Black Label New Girl Group\", gained a lot of interest among netizens for being the first ever group of the agency, as well as previous photos of potential trainees spread online, including some already known faces in the industry.\n\nThough it was announced by The Black Label that the group would debut in the first half of 2024, news about them only started coming on August 16 with the opening of differents SNS accounts, revealing the group name to be MEOVV.\n\nMEOVV announced the members one by one from August 21 to August 29, 2024, starting with Ella on August 21, followed by Gawon on August 23, Sooin on August 25, Anna on August 27, and lastly Narin on August 29.\n\nPrior to their debut, Ella was already known for being a child model and actress, and Gawon and Anna for being models.\n\nOn August 28, 2024, it was announced that MEOVV signed an exclusive contract with Capitol Records for global activities.\n\nA day before their debut, on September 5, 2024, The Black Label launched a new app called \"Churrrr\", exclusively for the group. It was described as an official fan platform, which would allow the girls and fans to interact.\n\nMEOVV finally made their awaited debut on September 6, 2024, with the single \"MEOW\".",
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/m2wf001728197681.jpg",
-      "source": "musicbrainz+theaudiodb",
-      "lastUpdated": 1767465223558
+      "urls": [],
+      "source": "theaudiodb",
+      "lastUpdated": 1767548859461
     },
-    "lastUpdated": 1767465223558
+    "lastUpdated": 1767548859461
   },
   "enrich:illit": {
     "payload": {
@@ -394,9 +129,9 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/kf0ln21714206858.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767465230675
+      "lastUpdated": 1767548874606
     },
-    "lastUpdated": 1767465230675
+    "lastUpdated": 1767548874606
   },
   "enrich:nmixx": {
     "payload": {
@@ -419,77 +154,13 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/cn3aht1730000168.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767465225954
+      "lastUpdated": 1767548864435
     },
-    "lastUpdated": 1767465225954
+    "lastUpdated": 1767548864435
   },
   "enrich:le sserafim": {
     "payload": {
-      "mbid": "1ee37742-1e3d-4e61-84d2-bc85f4c1459a",
-      "name": "LE SSERAFIM",
-      "disambiguation": null,
-      "country": "KR",
       "albums": [
-        {
-          "title": "UNFORGIVEN",
-          "id": "be1d9f08-297f-4832-99cc-015003e051ae",
-          "first_release_date": "2023-05-01",
-          "songs": []
-        },
-        {
-          "title": "EASY CRAZY HOT",
-          "id": "50f5c625-0add-4fa6-86e5-bfe05f1ca661",
-          "first_release_date": "2025-09-05",
-          "songs": []
-        },
-        {
-          "title": "2023 LE SSERAFIM TOUR ‘FLAME RISES’ IN SEOUL",
-          "id": "f0a6f260-bad4-4b19-b981-207b3b3ff777",
-          "first_release_date": "2024-06-28",
-          "songs": []
-        },
-        {
-          "title": "2023 LE SSERAFIM TOUR ‘FLAME RISES’ IN JAPAN",
-          "id": "44748232-fa6a-439b-beef-d2257b701fe5",
-          "first_release_date": "2024-09-25",
-          "songs": []
-        },
-        {
-          "title": "FEARLESS",
-          "id": "fb426d76-525d-4b25-90d1-fa4d1b3140c9",
-          "first_release_date": "2022-05-02",
-          "songs": []
-        },
-        {
-          "title": "ANTIFRAGILE",
-          "id": "cfc67890-7a0a-465a-b817-d506f57b9058",
-          "first_release_date": "2022-10-17",
-          "songs": []
-        },
-        {
-          "title": "EASY",
-          "id": "73403a9a-ef08-4747-8e5a-4a59eb65506c",
-          "first_release_date": "2024-02-19",
-          "songs": []
-        },
-        {
-          "title": "CRAZY",
-          "id": "f4ccbdf3-1d77-4f56-b77f-5d0f3888271c",
-          "first_release_date": "2024-08-30",
-          "songs": [
-            "Chasing Lightning",
-            "CRAZY",
-            "Pierrot",
-            "1‐800‐hot‐n‐fun",
-            "미치지 못하는 이유"
-          ]
-        },
-        {
-          "title": "HOT",
-          "id": "50bcea80-692f-4e36-a7a5-825a3233cb13",
-          "first_release_date": "2025-03-14",
-          "songs": []
-        },
         {
           "title": "EASY",
           "id": null,
@@ -503,118 +174,18 @@
           "songs": []
         }
       ],
-      "songs": [
-        "Chasing Lightning",
-        "CRAZY",
-        "Pierrot",
-        "1‐800‐hot‐n‐fun",
-        "미치지 못하는 이유"
-      ],
-      "urls": [
-        "https://www.allmusic.com/artist/mn0004220933",
-        "https://www.discogs.com/artist/11171795",
-        "https://open.spotify.com/artist/4SpbR6yFEvexJuaBpgAU5p",
-        "https://www.deezer.com/artist/168158797",
-        "https://www.last.fm/music/LE+SSERAFIM",
-        "https://genius.com/artists/Le-sserafim",
-        "https://le-sserafim.com/",
-        "https://itunes.apple.com/us/artist/id1616740364",
-        "https://mora.jp/artist/1575352/",
-        "https://music.bugs.co.kr/artist/20158908",
-        "https://vibe.naver.com/artist/5438597",
-        "https://www.genie.co.kr/detail/artistInfo?xxnm=81397289",
-        "https://www.melon.com/artist/detail.htm?artistId=3092950",
-        "https://open.spotify.com/user/31va4yzm2nbcxtjvcwb7n44png3i",
-        "https://twitter.com/le_sserafim",
-        "https://twitter.com/le_sserafim_jp",
-        "https://www.facebook.com/official.lesserafim",
-        "https://www.instagram.com/le_sserafim/",
-        "https://www.tiktok.com/@le_sserafim",
-        "https://www.weibo.com/LESSERAFIM",
-        "https://soundcloud.com/le-sserafim",
-        "https://music.apple.com/kr/artist/1616740364",
-        "https://tidal.com/artist/31893532",
-        "https://www.music-flo.com/detail/artist/405425770/album",
-        "https://www.vlive.tv/channel/818FB5",
-        "https://www.wikidata.org/wiki/Q111381707",
-        "https://www.youtube.com/channel/UCs-QBT4qkj_YiQw1ZntDO3g"
-      ],
-      "wikipedia": null,
+      "songs": [],
       "description": null,
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/8do6fc1728197599.jpg",
-      "source": "musicbrainz+theaudiodb",
-      "lastUpdated": 1767465234659
+      "urls": [],
+      "source": "theaudiodb",
+      "lastUpdated": 1767548844400
     },
-    "lastUpdated": 1767465234659
+    "lastUpdated": 1767548844400
   },
   "enrich:ive": {
     "payload": {
-      "mbid": "b2f2216a-d7a9-4ce0-8b8f-f494d9a8c196",
-      "name": "IVE",
-      "disambiguation": "South Korean girl group",
-      "country": "KR",
       "albums": [
-        {
-          "title": "I’ve IVE",
-          "id": "4b721f14-89f3-42b1-a1cc-9662a601914e",
-          "first_release_date": "2023-04-10",
-          "songs": []
-        },
-        {
-          "title": "WAVE",
-          "id": "3bc66267-5938-458a-871e-c9b0946c1e33",
-          "first_release_date": "2023-05-31",
-          "songs": []
-        },
-        {
-          "title": "I’VE MINE",
-          "id": "8fcb93c3-e39c-45fa-87f2-b00e13bf0d24",
-          "first_release_date": "2023-10-13",
-          "songs": []
-        },
-        {
-          "title": "IVE SWITCH",
-          "id": "fb62df2d-56bb-44c1-accc-c725123286f6",
-          "first_release_date": "2024-04-29",
-          "songs": []
-        },
-        {
-          "title": "ALIVE",
-          "id": "66a96064-6d1e-4521-9010-b32d28575879",
-          "first_release_date": "2024-08-28",
-          "songs": []
-        },
-        {
-          "title": "IVE EMPATHY",
-          "id": "41acc8d9-e4de-4191-a989-7c89faf93758",
-          "first_release_date": "2025-02-03",
-          "songs": []
-        },
-        {
-          "title": "Be Alright",
-          "id": "0708670e-6748-4316-85dc-184cf31d6e2d",
-          "first_release_date": "2025-07-30",
-          "songs": []
-        },
-        {
-          "title": "IVE SECRET",
-          "id": "70c49314-31c5-440e-bdbe-b28319ebc546",
-          "first_release_date": "2025-08-25",
-          "songs": [
-            "XOXZ",
-            "Wild Bird",
-            "Dear, My Feelings",
-            "GOTCHA (Baddest Eros)",
-            "삐빅 (♥beats)",
-            "Midnight Kiss"
-          ]
-        },
-        {
-          "title": "Track by Track Commentary: IVE on IVE EMPATHY",
-          "id": "a3952d1d-53e7-4f78-8308-a7112493a2c1",
-          "first_release_date": "2025-02-07",
-          "songs": []
-        },
         {
           "title": "REBEL HEART",
           "id": null,
@@ -628,529 +199,61 @@
           "songs": []
         }
       ],
-      "songs": [
-        "XOXZ",
-        "Wild Bird",
-        "Dear, My Feelings",
-        "GOTCHA (Baddest Eros)",
-        "삐빅 (♥beats)",
-        "Midnight Kiss"
-      ],
-      "urls": [
-        "https://www.allmusic.com/artist/mn0004210490",
-        "https://www.discogs.com/artist/7122521",
-        "https://open.spotify.com/artist/6RHTUrRF63xao58xh9FXYJ",
-        "https://www.deezer.com/artist/153042292",
-        "https://www.last.fm/music/%EC%95%84%EC%9D%B4%EB%B8%8C",
-        "https://www.last.fm/music/IVE",
-        "https://genius.com/artists/Ive",
-        "https://cafe.daum.net/IVEstarship",
-        "https://itunes.apple.com/us/artist/id1594159996",
-        "https://mora.jp/artist/1518755/",
-        "https://music.bugs.co.kr/artist/20148657",
-        "https://vibe.naver.com/artist/4935586",
-        "https://www.genie.co.kr/detail/artistInfo?xxnm=81271496",
-        "https://www.melon.com/artist/detail.htm?artistId=3055146",
-        "https://twitter.com/IVEstarship",
-        "https://twitter.com/IVEstarship_JP",
-        "https://twitter.com/IVE_twt",
-        "https://www.facebook.com/IVEstarship",
-        "https://www.instagram.com/IVEstarship/",
-        "https://www.weibo.com/ivestarship",
-        "https://music.apple.com/us/artist/1594159996",
-        "https://tidal.com/artist/31695881",
-        "https://www.music-flo.com/detail/artist/405070974/album",
-        "https://www.wikidata.org/wiki/Q109375061",
-        "https://www.youtube.com/channel/UC-Fnix71vRP64WXeo0ikd0Q"
-      ],
-      "wikipedia": null,
-      "description": "South Korean girl group",
+      "songs": [],
+      "description": "Ive (Korean: 아이브; RR: Aibeu; stylized in all caps) is a South Korean girl group formed by Starship Entertainment. The group is composed of six members: Gaeul, Yujin, Rei, Wonyoung, Liz, and Leeseo. Ive is acknowledged for their catchy songs and exploration of themes of self-love in their music.\n\nIve made their debut on December 1, 2021, with the single album, Eleven. It was followed shortly with the single album, Love Dive, whose lead single became their first number-one song on the Circle Digital Chart. It was the best-performing single of the year and was awarded Song of the Year at the Asia Artist Awards, Golden Disc Awards, MAMA Awards, and Melon Music Awards. It was also the group's first song to reach the top ten on the Billboard Global Excl. US chart. Ive achieved their second number-one song with the lead single of their third single album, After Like. In 2023, the group released their first studio album, I've Ive to commercial success. It won Album of the Year at the Melon Music Awards and was accompanied by the number-one singles \"Kitsch\" and \"I Am\". The release was followed by their first extended play I've Mine, featuring their fifth number-one single \"Baddie\".",
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/8w23691683951412.jpg",
-      "source": "musicbrainz+theaudiodb",
-      "lastUpdated": 1767465234880
+      "urls": [],
+      "source": "theaudiodb",
+      "lastUpdated": 1767548854493
     },
-    "lastUpdated": 1767465234880
+    "lastUpdated": 1767548854493
   },
   "enrich:twice": {
+    "payload": null,
+    "lastUpdated": 1767548849485
+  },
+  "enrich:mbid:6d9e030e-1f8d-4f24-9b2e-0a0e9c3c0a4e": {
+    "payload": null,
+    "lastUpdated": 1767548880844
+  },
+  "enrich:mbid:29437494-0130-4e53-a550-930f14d93021": {
     "payload": {
-      "mbid": "8da127cc-c432-418f-b356-ef36210d82ac",
-      "name": "TWICE",
-      "disambiguation": "South Korean girl group",
-      "country": "KR",
       "albums": [
         {
-          "title": "twicetagram",
-          "id": "23f9bb2e-c6a9-40ec-9202-922220e5015e",
-          "first_release_date": "2017-10-30",
-          "songs": []
-        },
-        {
-          "title": "BDZ",
-          "id": "349be2ad-047e-4462-8f4d-6f4c01121775",
-          "first_release_date": "2018-09-12",
-          "songs": []
-        },
-        {
-          "title": "&TWICE",
-          "id": "4ce5807d-498d-45d6-8fe6-8ac9fa0541d0",
-          "first_release_date": "2019-11-20",
-          "songs": []
-        },
-        {
-          "title": "Eyes wide open",
-          "id": "aa05ff10-8589-4c9c-a0d4-6b024f4e4556",
-          "first_release_date": "2020-10-26",
-          "songs": []
-        },
-        {
-          "title": "Perfect World",
-          "id": "e05788f5-3528-4c20-a5bd-9fd19597d4f0",
-          "first_release_date": "2021-07-28",
-          "songs": []
-        },
-        {
-          "title": "Formula of Love: O+T=<3",
-          "id": "378fe5ec-3270-48d1-a91c-2cb58ba656c4",
-          "first_release_date": "2021-11-12",
-          "songs": []
-        },
-        {
-          "title": "Celebrate",
-          "id": "bfedab35-92b7-449b-adf0-875439ec9a85",
-          "first_release_date": "2022-07-27",
-          "songs": []
-        },
-        {
-          "title": "DIVE",
-          "id": "793597f3-a3bd-4ede-8115-10ffcac388d3",
-          "first_release_date": "2024-07-17",
-          "songs": [
-            "Beyond the Horizon",
-            "DIVE",
-            "Ocean Deep",
-            "LOVE WARNING",
-            "Here I am",
-            "Inside of me",
-            "Peach Soda",
-            "Echoes of heart",
-            "Dance Again",
-            "Hare Hare"
-          ]
-        },
-        {
-          "title": "THIS IS FOR",
-          "id": "507591c7-276e-4e07-8af7-1e4c4d0b8a5a",
-          "first_release_date": "2025-07-11",
-          "songs": [
-            "Four",
-            "This Is For",
-            "Options",
-            "Mars",
-            "Right Hand Girl",
-            "Peach Gelato",
-            "Hi Hello",
-            "Battitude",
-            "Dat Ahh Dat Ooh",
-            "Let Love Go",
-            "G.O.A.T.",
-            "Talk",
-            "Seesaw",
-            "Heartbreak Avenue"
-          ]
-        },
-        {
-          "title": "ENEMY",
-          "id": "5d486273-27db-4b5e-926b-fed3dc7df907",
-          "first_release_date": "2025-08-26",
-          "songs": []
-        },
-        {
-          "title": "TEN: The Story Goes On",
-          "id": "3670fec6-643a-4a88-a623-900ff5fdd43b",
-          "first_release_date": "2025-10-10",
-          "songs": []
-        },
-        {
-          "title": "#TWICE",
-          "id": "9517f797-9f15-4e55-b26a-7e9eb549713c",
-          "first_release_date": "2017-06-28",
-          "songs": []
-        },
-        {
-          "title": "#TWICE2",
-          "id": "bebc6c5b-aabd-4253-ac76-3f2bee3f662d",
-          "first_release_date": "2019-03-06",
-          "songs": []
-        },
-        {
-          "title": "#TWICE3",
-          "id": "f51049cf-214f-48ef-927b-56ecc20596e1",
-          "first_release_date": "2020-09-16",
-          "songs": []
-        },
-        {
-          "title": "#TWICE4",
-          "id": "61968f03-67a4-47bb-9a74-aaae1684bfc6",
-          "first_release_date": "2022-03-16",
-          "songs": [
-            "I CAN’T STOP ME -Japanese ver.-",
-            "CRY FOR ME -Japanese ver.-",
-            "Alcohol‐Free -Japanese ver.-",
-            "SCIENTIST -Japanese ver.-",
-            "I CAN’T STOP ME",
-            "CRY FOR ME",
-            "Alcohol‐Free",
-            "SCIENTIST"
-          ]
-        },
-        {
-          "title": "#TWICE5",
-          "id": "285f568e-46a2-49bb-a215-3537dd5b1c6a",
-          "first_release_date": "2025-05-14",
-          "songs": [
-            "Talk That Talk -Japanese ver.-",
-            "SET ME FREE -Japanese ver.-",
-            "ONE SPARK -Japanese ver.-",
-            "Talk That Talk",
-            "SET ME FREE",
-            "I GOT YOU",
-            "ONE SPARK",
-            "Strategy"
-          ]
-        },
-        {
-          "title": "TWICE DEBUT SHOWCASE “Touchdown in JAPAN”",
-          "id": "865afbab-97a0-40d7-a607-10a7b7e7055c",
-          "first_release_date": "2017-12-20",
-          "songs": [
-            "Touchdown",
-            "Like OOH‐AHH -Japanese ver.-",
-            "CHEER UP -Japanese ver.-",
-            "JELLY JELLY",
-            "KNOCK KNOCK -Japanese ver.-",
-            "ONE IN A MILLION",
-            "SIGNAL -Japanese ver.-",
-            "TT -Japanese ver.-",
-            "Medley (Like OOH‐AHH〜CHEER UP〜TT〜KNOCK KNOCK〜SIGNAL)"
-          ]
-        },
-        {
-          "title": "TWICELAND – THE OPENING",
-          "id": "436ac1ba-0feb-4cbf-ba3a-45123b4ab779",
-          "first_release_date": "2017-12-28",
-          "songs": [
-            "Touchdown",
-            "I’m gonna be a star",
-            "CHEER UP",
-            "미쳤나봐",
-            "Truth",
-            "OOH‐AHH하게",
-            "1 TO 10",
-            "툭하면 톡",
-            "Headphone 써",
-            "PONYTAIL",
-            "Candy Boy",
-            "PIT‐A‐PAT",
-            "NEXT PAGE",
-            "Woohoo",
-            "다시 해줘",
-            "소중한 사랑",
-            "JELLY JELLY",
-            "TT"
-          ]
-        },
-        {
-          "title": "TWICELAND - THE OPENING [ENCORE]",
-          "id": "676db320-8905-4b54-9139-dbfa996bbea5",
-          "first_release_date": "2018-06-26",
-          "songs": [
-            "INTRO + Touchdown",
-            "I’m gonna be a star",
-            "CHEER UP",
-            "미쳤나봐",
-            "ONLY 너",
-            "OOH‐AHH하게",
-            "1 TO 10",
-            "툭하면 톡",
-            "Headphone 써",
-            "PONYTAIL",
-            "JELLY JELLY",
-            "KNOCK KNOCK",
-            "NEXT PAGE",
-            "EYE EYE EYES",
-            "다시 해줘",
-            "SOMEONE LIKE ME",
-            "녹아요",
-            "소중한 사랑",
-            "TT",
-            "SIGNAL"
-          ]
-        },
-        {
-          "title": "TWICELAND ZONE 2 : Fantasy Park",
-          "id": "308eca78-599a-4e79-9fe9-9ca96e05cf46",
-          "first_release_date": "2019-07-24",
-          "songs": [
-            "널 내게 담아",
-            "PARADE + OOH‐AHH하게",
-            "PONYTAIL",
-            "CHEER UP",
-            "HOLD ME TIGHT",
-            "LIKEY",
-            "날 바라바라봐",
-            "SOMEONE LIKE ME",
-            "거북이",
-            "STUCK",
-            "Touchdown",
-            "SIGNAL",
-            "KNOCK KNOCK",
-            "SWEET TALKER",
-            "What is Love?",
-            "MISSING U",
-            "ONLY 너"
-          ]
-        },
-        {
-          "title": "TWICE DOME TOUR 2019 “#Dreamday” in TOKYO DOME",
-          "id": "5cb4a391-e362-4e64-8b2f-09d2775aa190",
-          "first_release_date": "2020-03-04",
-          "songs": [
-            "One More Time",
-            "LUV ME",
-            "Like OOH‐AHH -Japanese ver.-",
-            "BRAND NEW GIRL",
-            "SIGNAL -Japanese ver.-",
-            "Candy Pop",
-            "TT -Japanese ver.-",
-            "Wake Me Up",
-            "CHEER UP -Japanese ver.-",
-            "Pink Lemonade",
-            "I WANT YOU BACK",
-            "What is Love? -Japanese ver.-",
-            "BDZ",
-            "L.O.V.E",
-            "Sweet Talker",
-            "Say it again",
-            "The Best Thing I Ever Did",
-            "ONLY YOU",
-            "STAY BY MY SIDE",
-            "Heart Shaker -Japanese ver.-",
-            "KNOCK KNOCK -Japanese ver.-",
-            "LIKEY -Japanese ver.-",
-            "Dance the Night Away -Japanese ver.-"
-          ]
-        },
-        {
-          "title": "THE REMIXES",
-          "id": "f96d58eb-8f96-489d-bfc6-0e7824c312fa",
-          "first_release_date": "2023-11-22",
-          "songs": [
-            "MOONLIGHT SUNRISE (Jonas Blue remix)",
-            "The Feels (Ian Asher remix)",
-            "SET ME FREE (Carneyval remix)",
-            "Alcohol‐Free (English ver.)",
-            "CRY FOR ME (English ver.)",
-            "I CAN’T STOP ME",
-            "MORE & MORE (LEE HAE SOL sped up remix)"
-          ]
-        },
-        {
-          "title": "THE STORY BEGINS",
-          "id": "09dd52d2-3220-4f67-965b-89f17928822f",
-          "first_release_date": "2015-10-20",
-          "songs": [
-            "OOH‐AHH하게",
-            "다시 해줘",
-            "미쳤나봐",
-            "Truth",
-            "Candy Boy",
-            "Like a Fool"
-          ]
-        },
-        {
-          "title": "PAGE TWO",
-          "id": "2c61e519-0df6-4921-89d9-03031cfbe0dc",
-          "first_release_date": "2016-04-25",
-          "songs": [
-            "CHEER UP",
-            "소중한 사랑",
-            "Touchdown",
-            "툭하면 톡",
-            "Woohoo",
-            "Headphone 써"
-          ]
-        },
-        {
-          "title": "ENEMY",
+          "title": "BORN PINK",
           "id": null,
-          "first_release_date": "2025",
+          "first_release_date": "2022",
           "songs": []
         },
         {
-          "title": "THIS IS FOR",
+          "title": "How You Like That",
           "id": null,
-          "first_release_date": "2025",
+          "first_release_date": "2020",
           "songs": []
         }
       ],
-      "songs": [
-        "Beyond the Horizon",
-        "DIVE",
-        "Ocean Deep",
-        "LOVE WARNING",
-        "Here I am",
-        "Inside of me",
-        "Peach Soda",
-        "Echoes of heart",
-        "Dance Again",
-        "Hare Hare",
-        "Four",
-        "This Is For",
-        "Options",
-        "Mars",
-        "Right Hand Girl",
-        "Peach Gelato",
-        "Hi Hello",
-        "Battitude",
-        "Dat Ahh Dat Ooh",
-        "Let Love Go",
-        "G.O.A.T.",
-        "Talk",
-        "Seesaw",
-        "Heartbreak Avenue",
-        "I CAN’T STOP ME -Japanese ver.-",
-        "CRY FOR ME -Japanese ver.-",
-        "Alcohol‐Free -Japanese ver.-",
-        "SCIENTIST -Japanese ver.-",
-        "I CAN’T STOP ME",
-        "CRY FOR ME",
-        "Alcohol‐Free",
-        "SCIENTIST",
-        "Talk That Talk -Japanese ver.-",
-        "SET ME FREE -Japanese ver.-",
-        "ONE SPARK -Japanese ver.-",
-        "Talk That Talk",
-        "SET ME FREE",
-        "I GOT YOU",
-        "ONE SPARK",
-        "Strategy",
-        "Touchdown",
-        "Like OOH‐AHH -Japanese ver.-",
-        "CHEER UP -Japanese ver.-",
-        "JELLY JELLY",
-        "KNOCK KNOCK -Japanese ver.-",
-        "ONE IN A MILLION",
-        "SIGNAL -Japanese ver.-",
-        "TT -Japanese ver.-",
-        "Medley (Like OOH‐AHH〜CHEER UP〜TT〜KNOCK KNOCK〜SIGNAL)",
-        "I’m gonna be a star",
-        "CHEER UP",
-        "미쳤나봐",
-        "Truth",
-        "OOH‐AHH하게",
-        "1 TO 10",
-        "툭하면 톡",
-        "Headphone 써",
-        "PONYTAIL",
-        "Candy Boy",
-        "PIT‐A‐PAT",
-        "NEXT PAGE",
-        "Woohoo",
-        "다시 해줘",
-        "소중한 사랑",
-        "TT",
-        "INTRO + Touchdown",
-        "ONLY 너",
-        "KNOCK KNOCK",
-        "EYE EYE EYES",
-        "SOMEONE LIKE ME",
-        "녹아요",
-        "SIGNAL",
-        "널 내게 담아",
-        "PARADE + OOH‐AHH하게",
-        "HOLD ME TIGHT",
-        "LIKEY",
-        "날 바라바라봐",
-        "거북이",
-        "STUCK",
-        "SWEET TALKER",
-        "What is Love?",
-        "MISSING U",
-        "One More Time",
-        "LUV ME",
-        "BRAND NEW GIRL",
-        "Candy Pop",
-        "Wake Me Up",
-        "Pink Lemonade",
-        "I WANT YOU BACK",
-        "What is Love? -Japanese ver.-",
-        "BDZ",
-        "L.O.V.E",
-        "Sweet Talker",
-        "Say it again",
-        "The Best Thing I Ever Did",
-        "ONLY YOU",
-        "STAY BY MY SIDE",
-        "Heart Shaker -Japanese ver.-",
-        "LIKEY -Japanese ver.-",
-        "Dance the Night Away -Japanese ver.-",
-        "MOONLIGHT SUNRISE (Jonas Blue remix)",
-        "The Feels (Ian Asher remix)",
-        "SET ME FREE (Carneyval remix)",
-        "Alcohol‐Free (English ver.)",
-        "CRY FOR ME (English ver.)",
-        "MORE & MORE (LEE HAE SOL sped up remix)",
-        "Like a Fool"
-      ],
+      "songs": [],
+      "description": "Black Pink (Hangul: 블랙핑크), stylized as BLACKPINK or BLΛƆKPIИK, is a South Korean girl group formed in 2016 by YG Entertainment. The group consists of four members who hail from South Korea, New Zealand, Australia and Thailand. They debuted with two singles, \"Boombayah\" and \"Whistle\", from their single album Square One on August 8, 2016.\n\nAfter four years of teaser videos and appearances by possible members, YG Entertainment revealed the final line-up and name of the group on June 29. Black Pink, which consists of four members, is the first girl group to debut under YG Entertainment in seven years.\n\nBlack Pink released their single album Square One on August 8, 2016. The group held a debut showcase on August 8, which was broadcast live on Naver's V app. \"Boombayah\" was produced by Teddy Park, who also co-wrote the single with Bekuh BOOM. Its music video was directed by Seo Hyun-seung, who previously directed \"I Am the Best\" by 2NE1 and \"Fantastic Baby\" by Big Bang. The second title track was the \"minimal hip hop track\" \"Whistle\", which was produced by Teddy Park and Future Bounce, with lyrics by Teddy Park and Bekuh BOOM.\n\nIt was reported that Black Pink would not have a leader, as the members were all close friends. The group's first music show performance was aired on August 14, 2016 on SBS's Inkigayo.\n\nMembers:\n\nJisoo: Kim Ji-soo (Hangul: 김지수) was born in 1995 in South Korea. Prior to her debut in Black Pink, she appeared in numerous commercial films including one for Samsonite RED with actor Lee Min-ho, and advertisements for Smart Uniform and LG Stylus 2 with YG Entertainment's boy group iKon. She also appeared in a number of music videos from other artists under YG Entertainment, such as Epik High's \"Spoiler + Happen Ending\" and Hi Suhyun's \"I'm Different\". In 2015, she made her first drama appearance in KBS's The Producers, together with label-mates Sandara Park and Kang Seung-yoon.\n\nJennie: Jennie Kim (Hangul: 김제니) was born in 1996 in South Korea, and studied abroad in New Zealand. Before debuting with Black Pink, she appeared in the music video for G-Dragon's \"That XX\", from his album One of a Kind. She had a featuring in label-mate Lee Hi's song \"Special\", Seungri's \"GG Be\", and G-Dragon's \"Black\".\n\nRosé: Roseanne Park or Park Chae-young (Hangul: 박채영), also known as Rosé, was born in 1997 in Australia. She placed first at YG auditions in Australia and joined the agency in 2012. Before debuting with Black Pink, she was featured on G-Dragon's song \"Without You\", for which she was credited as \"? of YG New Girl Group\".\n\nLisa: Lalisa Manoban (Thai: ลลิษา มโนบาล), also known as Lisa, was born in 1997 in Thailand. She started dancing at a young age and was part of a dance crew. She was the only person accepted into YG Entertainment during the company's audition in Thailand in 2010, and is YG's first non-Korean artist.",
+      "image": "https://r2.theaudiodb.com/images/media/artist/thumb/txuxsy1476547962.jpg",
       "urls": [
-        "https://www.allmusic.com/artist/mn0003456026",
-        "https://www.discogs.com/artist/4786543",
-        "http://fans.jype.com/twice",
-        "https://open.spotify.com/artist/7n2Ycct7Beij7Dj7meI4X0",
-        "https://www.deezer.com/artist/161553",
-        "https://commons.wikimedia.org/wiki/File:160507_Twice_guerrilla_concert.jpg",
-        "https://commons.wikimedia.org/wiki/File:Twice_performing_at_SAC_2016_02_(cropped).jpg",
-        "https://commons.wikimedia.org/wiki/File:(TV10)_%EC%97%AC%EC%9E%90%EC%B9%9C%EA%B5%AC%C2%B7%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4%C2%B7%EB%B8%94%EB%9E%99%ED%95%91%ED%81%AC,_%EB%A0%88%EB%93%9C%EC%B9%B4%ED%8E%AB_%EA%B0%81%EC%96%91%EA%B0%81%EC%83%89_%ED%8C%A8%EC%85%98_%EC%97%B4%EC%A0%84_(2017_%EA%B3%A8%EB%93%A0%EB%94%94%EC%8A%A4%ED%81%AC_%EB%A0%88%EB%93%9C%EC%B9%B4%ED%8E%AB)_2m19s.jpg",
-        "https://www.imdb.com/name/nm9652049/",
-        "https://www.last.fm/music/%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4",
-        "https://www.last.fm/music/TWICE",
-        "http://twice.jype.com/",
-        "http://www.twicejapan.com/",
-        "https://imvdb.com/n/twice",
-        "https://www.generasia.com/wiki/Twice",
-        "https://mora.jp/artist/752111/all",
-        "https://music.bugs.co.kr/artist/80249916",
-        "https://vibe.naver.com/artist/460475",
-        "https://www.genie.co.kr/detail/artistInfo?xxnm=80463902",
-        "https://www.melon.com/artist/detail.htm?artistId=905701",
-        "https://twitter.com/JYPETWICE",
-        "https://twitter.com/JYPETWICE_JAPAN",
-        "https://www.facebook.com/JYPETWICE",
-        "https://www.instagram.com/jypetwice_japan/",
-        "https://www.instagram.com/twicetagram/",
-        "https://www.tiktok.com/@twice_tiktok_officialjp",
-        "https://tidal.com/artist/19844989",
-        "https://music.apple.com/gb/artist/1203816887",
-        "https://music.apple.com/jp/artist/1203816887",
-        "https://music.apple.com/us/artist/1203816887",
-        "https://music.apple.com/us/artist/1718467619",
-        "https://tidal.com/artist/3577941",
-        "https://www.music-flo.com/detail/artist/80249916/album",
-        "http://viaf.org/viaf/178150468353504172529",
-        "https://www.wikidata.org/wiki/Q20645861",
-        "https://www.youtube.com/channel/UCCRb6nYKaT8tzLA8CwDdUtw",
-        "https://www.youtube.com/channel/UCzgxx_DM2Dcb9Y1spb9mUJA",
-        "https://music.youtube.com/channel/UCAq0pFGa2w9SjxOq0ZxKVIw",
-        "twice.jype.com",
-        "www.facebook.com/JYPETWICE",
+        "www.blackpinkofficial.com",
         "1"
       ],
-      "wikipedia": null,
-      "description": "South Korean girl group",
-      "image": "https://r2.theaudiodb.com/images/media/artist/thumb/stmsh41763079518.jpg",
-      "source": "musicbrainz+theaudiodb",
-      "lastUpdated": 1767465258858
+      "source": "theaudiodb",
+      "lastUpdated": 1767548882934
     },
-    "lastUpdated": 1767465258858
+    "lastUpdated": 1767548882934
+  },
+  "enrich:mbid:7878696b-4e0e-4340-9f93-0e86749963e6": {
+    "payload": {
+      "albums": [],
+      "songs": [],
+      "description": "Hearts2Hearts (also known as H2H) is a 8-member girl group formed by SM Entertainment. They debuted on February 24, 2025 with their first single album \"The Chase\".\n\nThe group was first hinted at in September 2022 through leaked schedules referencing an unnamed girl group. SM Entertainment's 'Training Unit' later shared silhouette images of eight trainees, sparking speculation. In March 2023, a showcase featuring potential members was held, followed by posts of obscured trainee images. Four trainees, symbolized by heart emojis, attended a Japan workshop in April.\n\nInitially planned for late 2023, the debut faced multiple delays and was eventually rescheduled to early 2025. On January 12, 2025, during SM Entertainment's 30th anniversary concert, the group's name and February debut were officially confirmed, along with the launch of their social media",
+      "image": "https://r2.theaudiodb.com/images/media/artist/thumb/64xyxl1751191723.jpg",
+      "urls": [],
+      "source": "theaudiodb",
+      "lastUpdated": 1767548884988
+    },
+    "lastUpdated": 1767548884988
   }
 }

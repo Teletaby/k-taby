@@ -46,9 +46,7 @@ export default function SpotifyAlbum({ albumId, noImage = false }) {
                   </div>
                 ) : t.preview_url ? (
                   <SpotifyPlayer src={t.preview_url} title={t.name} />
-                ) : (
-                  <div className="text-sm text-gray-400">Preview not available</div>
-                )}
+                ) : null}
               </div>
             ))}
           </div>
@@ -75,9 +73,7 @@ export default function SpotifyAlbum({ albumId, noImage = false }) {
                             <a href={'https://open.spotify.com/track/' + t.id} target="_blank" rel="noreferrer" className="text-sm text-ktaby-500 underline">Open in Spotify</a>
                           </div>
                         </div>
-                      ) : (
-                        <div className="text-sm text-gray-400">Preview not available</div>
-                      ))}
+                      ) : null)}
                     </div>
                   </div>
                 </div>

@@ -56,15 +56,16 @@ export default async function handler(req, res) {
     if (!artist) artist = await findArtistByName(group.name)
     if (!artist) return res.status(404).json({ ok: false, error: 'artist not found' })
 
+    // Fetch new albums
     const rawAlbums = await fetchAllAlbumsForArtist(artist.id)
-    const albums = []
+    const newAlbums = []
     let i = 0
     for (const a of rawAlbums) {
       if (i++ >= limitAlbums) break
       try {
         const full = await getAlbumFn(a.id)
         const tracksArray = Array.isArray(full.tracks) ? full.tracks : (full.tracks?.items || [])
-        albums.push({ 
+        newAlbums.push({ 
           id: full.id, 
           name: full.name, 
           images: full.images || [], 
@@ -76,13 +77,33 @@ export default async function handler(req, res) {
       }
     }
 
-    group.spotify = { artistId: artist.id, artistName: artist.name, genres: artist.genres || [], albums }
+    // Merge: keep old albums, add new ones that don't already exist
+    const existingAlbumIds = new Set((group.spotify?.albums || []).map(a => a.id))
+    const mergedAlbums = [...(group.spotify?.albums || [])]
+    
+    for (const newAlbum of newAlbums) {
+      if (!existingAlbumIds.has(newAlbum.id)) {
+        mergedAlbums.push(newAlbum)
+      }
+    }
+
+    // Update group spotify data
+    group.spotify = { 
+      artistId: artist.id, 
+      artistName: artist.name, 
+      genres: artist.genres || [], 
+      albums: mergedAlbums 
+    }
 
     // backup and write
     fs.writeFileSync(filePath + `.bak.${Date.now()}`, JSON.stringify(groups, null, 2), 'utf8')
     fs.writeFileSync(filePath, JSON.stringify(groups, null, 2), 'utf8')
 
-    return res.status(200).json({ ok: true, group: { id: group.id, spotify: group.spotify } })
+    return res.status(200).json({ 
+      ok: true, 
+      group: { id: group.id, spotify: group.spotify },
+      addedCount: newAlbums.filter(a => !existingAlbumIds.has(a.id)).length
+    })
   } catch (e) {
     console.error(e)
     return res.status(500).json({ ok: false, error: e.message })

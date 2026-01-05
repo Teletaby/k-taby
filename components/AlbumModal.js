@@ -3,7 +3,7 @@ import SpotifyPlayer from './SpotifyPlayer'
 import SpotifyAlbum from './SpotifyAlbum'
 import ModalPortal from './ModalPortal'
 
-export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
+export default function AlbumModal({ album, spotifyAlbums = [], groupName = '', groupMembers = [], onClose }) {
   const [details, setDetails] = useState(album)
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState(null)
@@ -16,16 +16,22 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
   }, [])
 
   // animation / visibility state
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
   const elRef = useRef(null)
+
+  // Check if this album belongs to the group based on spotifyAlbums
+  const isGroupAlbum = album && spotifyAlbums && spotifyAlbums.length > 0 && 
+    spotifyAlbums.some(sa => (sa.id === album.id) || (sa.name === album.name))
+
+  console.log('AlbumModal rendering with album:', album?.name || album?.title, 'visible:', visible)
 
   // ModalPortal now handles body scroll lock and ensures a single modal root; no local duplicate removal required
   useEffect(() => { return () => {} }, [])
 
   useEffect(() => {
     // start show animation
-    const t = setTimeout(() => setVisible(true), 10)
-    return () => clearTimeout(t)
+    // const t = setTimeout(() => setVisible(true), 10)
+    // return () => clearTimeout(t)
   }, [])
 
   useEffect(() => {
@@ -80,6 +86,8 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
         if (!r.ok) throw new Error('album fetch failed')
         const j = await r.json()
         if (!mounted) return
+        console.log('Fetched album details:', j)
+        console.log('First track:', j.tracks && j.tracks[0])
         setDetails(prev => ({ ...(prev || {}), ...j }))
       } catch (e) {
         if (!mounted) return
@@ -93,6 +101,80 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
     fetchDetails()
     return () => { mounted = false }
   }, [album, spotifyAlbums, details])
+
+  function isGroupTrack(track) {
+    if (!track) return false
+    
+    const trackArtists = track.artists || []
+    const trackArtistNames = trackArtists.map(a => (a.name || a || '').toLowerCase().trim()).filter(Boolean)
+    
+    // If no artists found on track, don't show it
+    if (trackArtistNames.length === 0) {
+      return false
+    }
+    
+    // Check if group name is in any artist (more flexible matching)
+    const groupNameLower = (groupName || '').toLowerCase().trim()
+    const groupNameNormalized = groupNameLower.replace(/[^a-z0-9]/g, '')
+    
+    if (groupNameLower && trackArtistNames.some(name => {
+      const artistLower = name.toLowerCase()
+      const artistNormalized = artistLower.replace(/[^a-z0-9]/g, '')
+      
+      // Exact match
+      if (artistLower === groupNameLower) return true
+      
+      // Contains match (either direction)
+      if (artistLower.includes(groupNameLower) || groupNameLower.includes(artistLower)) return true
+      
+      // Normalized match (remove special chars)
+      if (artistNormalized === groupNameNormalized) return true
+      
+      // Common variations (e.g., NewJeans vs New Jeans)
+      const variations = [
+        groupNameNormalized,
+        groupNameNormalized.replace(/newjeans/, 'new jeans'),
+        groupNameNormalized.replace(/new jeans/, 'newjeans'),
+        groupNameNormalized.replace(/bts/, 'bangtan sonyeondan'),
+        groupNameNormalized.replace(/bangtan sonyeondan/, 'bts'),
+        groupNameNormalized.replace(/blackpink/, 'black pink'),
+        groupNameNormalized.replace(/black pink/, 'blackpink'),
+      ]
+      
+      return variations.some(variation => artistNormalized.includes(variation) || variation.includes(artistNormalized))
+    })) {
+      return true
+    }
+    
+    // Check if any member name is in any artist
+    if (groupMembers && groupMembers.length > 0) {
+      const hasMember = groupMembers.some(member => {
+        const memberName = (member.name || '').toLowerCase().trim()
+        const memberNormalized = memberName.replace(/[^a-z0-9]/g, '')
+        if (!memberName) return false
+        
+        return trackArtistNames.some(artistName => {
+          const artistLower = artistName.toLowerCase()
+          const artistNormalized = artistLower.replace(/[^a-z0-9]/g, '')
+          
+          // Exact match
+          if (artistLower === memberName) return true
+          
+          // Contains match
+          if (artistLower.includes(memberName) || memberName.includes(artistLower)) return true
+          
+          // Normalized match
+          if (artistNormalized === memberNormalized) return true
+          
+          return false
+        })
+      })
+      if (hasMember) return true
+    }
+    
+    // Track doesn't have group name or any member
+    return false
+  }
 
   function renderTrack(t) {
     if (!t) return null
@@ -109,7 +191,7 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
     // fallback to preview_url player when no spotify id available
     if (t.preview_url) return <SpotifyPlayer src={t.preview_url} title={t.name} />
 
-    return <div className="text-sm text-gray-400">Preview not available</div>
+    return null
   }
 
   if (!album) return null
@@ -122,11 +204,11 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
         <div className={'absolute inset-0 bg-black transition-opacity duration-200 ease-out ' + (visible ? 'opacity-50' : 'opacity-0')} onClick={handleClose} />
 
         <div id="album-modal" ref={(el)=>{ elRef.current = el; if (el && visible) { el.focus() } }} tabIndex={-1} className={
-          'relative bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 text-gray-900 dark:text-white z-10 transform-gpu ' +
+          'relative bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 text-gray-900 dark:text-white z-50 transform-gpu ' +
           'border-2 border-pink-200 dark:border-gray-600 rounded-2xl overflow-y-auto album-modal-scroll ' +
           (visible 
-            ? 'opacity-100 scale-100 translate-y-0 animate-modal-open' 
-            : 'opacity-0 scale-95 translate-y-8 animate-modal-close'
+            ? 'opacity-100 scale-100 translate-y-0' 
+            : 'opacity-0 scale-95 translate-y-8'
           ) +
           ' w-[95vw] max-w-sm h-[80vh] sm:w-[85vw] sm:max-w-2xl sm:h-[85vh] md:max-w-4xl transition-all duration-300 ease-out'
         }>
@@ -220,7 +302,7 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
 
                 {!loading && details && details.tracks && details.tracks.length > 0 && (
                   <div className="space-y-2">
-                    {details.tracks.map((t, idx) => {
+                    {details.tracks.filter(t => isGroupTrack(t)).map((t, idx) => {
                       const trackNumber = (t.track_number && Number(t.track_number)) || (idx + 1)
                       return (
                         <div
@@ -233,7 +315,7 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
                                 {trackNumber}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="text-sm font-semibold text-gray-800 dark:text-gray-200 break-words group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                                <div className="text-sm font-semibold break-words text-gray-800 dark:text-gray-200 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
                                   {t.name}
                                 </div>
                                 {t.duration_ms ? (
@@ -252,6 +334,19 @@ export default function AlbumModal({ album, spotifyAlbums = [], onClose }) {
                     })}
                   </div>
                 )}
+
+                {!loading && details && details.tracks && details.tracks.length > 0 && (() => {
+                  const totalTracks = details.tracks.length
+                  const groupTracks = details.tracks.filter(t => isGroupTrack(t)).length
+                  const nonGroupTracks = totalTracks - groupTracks
+                  return nonGroupTracks > 0 ? (
+                    <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                      <p className="text-sm text-blue-800 dark:text-blue-200">
+                        {nonGroupTracks} song{nonGroupTracks !== 1 ? 's' : ''} {nonGroupTracks === 1 ? 'is' : 'are'} not {groupName} related
+                      </p>
+                    </div>
+                  ) : null
+                })()}
 
               {!loading && (!details || !details.tracks || details.tracks.length === 0) && (
                 <div className="text-center py-8 text-gray-500 dark:text-gray-400">

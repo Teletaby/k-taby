@@ -78,7 +78,7 @@ export default function SpotifyPlayer({ src, title }) {
     return () => subscribers.delete(p)
   }, [src])
 
-  if (!src) return <div className="text-sm text-gray-400">Preview not available</div>
+  if (!src) return null
 
   const pct = Math.min(1, progress / 30 || 0)
 

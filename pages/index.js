@@ -3,19 +3,23 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { fetchFeed } from '../lib/rss'
 import { fetchNewsForGroups } from '../lib/news'
+import MonthlyBirthdaysModal from '../components/MonthlyBirthdaysModal'
 const HeroCarousel = dynamic(() => import('../components/HeroCarousel'), { ssr: false })
 const LatestNews = dynamic(() => import('../components/LatestNews'), { ssr: false })
 const BirthdayBanner = dynamic(() => import('../components/BirthdayBanner'), { ssr: false })
 const MemberModal = dynamic(() => import('../components/MemberModal'), { ssr: false })
+const BirthdayCorner = dynamic(() => import('../components/BirthdayCorner'), { ssr: false })
 
 import { useState, useEffect } from 'react'
 const groups = require('../data/groups.json')
+const birthdays = require('../data/birthdays.json')
 
 export default function Home({ items = [], mentionedGroupNames = [], siteSocial = undefined }) {
   const mentionedLabel = mentionedGroupNames.length > 0 ? `${mentionedGroupNames.length} groups mentioned` : null
   const [carouselIndex, setCarouselIndex] = useState(0)
   const [carouselPaused, setCarouselPaused] = useState(false)
   const [selectedMember, setSelectedMember] = useState(null)
+  const [showMonthlyBirthdays, setShowMonthlyBirthdays] = useState(false)
 
   return (
     <Layout>
@@ -48,30 +52,46 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-6 border rounded flex items-center gap-4 bg-white dark:bg-gray-800 dark:border-gray-700">
-          <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden flex items-center justify-center">
-            <img src={(typeof siteSocial !== 'undefined' && siteSocial.youtube && siteSocial.youtube.image) ? siteSocial.youtube.image : '/placeholder.svg'} alt="@taby_edits YouTube" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1">
-            <h2 className="text-xl font-semibold dark:text-white">Visit @taby_edits on YouTube</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300">Click below to open my YouTube channel.</p>
-            <div className="mt-3">
-              <a href={(typeof siteSocial !== 'undefined' && siteSocial.youtube && siteSocial.youtube.url) ? siteSocial.youtube.url : 'https://www.youtube.com/@taby_edits'} target="_blank" rel="noreferrer" className="btn btn-yt md:w-auto">Open on YouTube →</a>
+        <div className="p-6 border rounded bg-white dark:bg-gray-800 dark:border-gray-700">
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden flex items-center justify-center flex-shrink-0">
+                <img src={(typeof siteSocial !== 'undefined' && siteSocial.youtube && siteSocial.youtube.image) ? siteSocial.youtube.image : '/placeholder.svg'} alt="@taby_edits YouTube" className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-xl font-semibold dark:text-white">Visit @taby_edits on YouTube</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Click below to open my YouTube channel.</p>
+                <div className="mt-3">
+                  <a href={(typeof siteSocial !== 'undefined' && siteSocial.youtube && siteSocial.youtube.url) ? siteSocial.youtube.url : 'https://www.youtube.com/@taby_edits'} target="_blank" rel="noreferrer" className="btn btn-yt md:w-auto">Open on YouTube →</a>
+                </div>
+              </div>
+            </div>
+            
+            <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden flex items-center justify-center flex-shrink-0">
+                  <img src={(typeof siteSocial !== 'undefined' && siteSocial.tiktok && siteSocial.tiktok.image) ? siteSocial.tiktok.image : '/placeholder.svg'} alt="@tabby_edits TikTok" className="w-full h-full object-cover" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold dark:text-white">Visit @tabby_edits on TikTok</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">All my edits in one place.</p>
+                  <div className="mt-3">
+                    <a href={(typeof siteSocial !== 'undefined' && siteSocial.tiktok && siteSocial.tiktok.url) ? siteSocial.tiktok.url : 'https://www.tiktok.com/@tabby_edits'} target="_blank" rel="noreferrer" className="btn btn-ktaby md:w-auto">Open TikTok →</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="p-6 border rounded flex items-center gap-4 bg-white dark:bg-gray-800 dark:border-gray-700">
-          <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden flex items-center justify-center">
-            <img src={(typeof siteSocial !== 'undefined' && siteSocial.tiktok && siteSocial.tiktok.image) ? siteSocial.tiktok.image : '/placeholder.svg'} alt="@tabby_edits logo" className="w-full h-full object-cover" />
+        <div className="p-6 border rounded bg-white dark:bg-gray-800 dark:border-gray-700">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold dark:text-white">Birthday Corner</h2>
+            <button onClick={() => { console.log('Button clicked'); setShowMonthlyBirthdays(true); }} className="text-sm bg-cyan-500 hover:bg-cyan-600 dark:bg-cyan-600 dark:hover:bg-cyan-700 text-white px-3 py-1 rounded transition-colors">
+              Click to Check Birthday for {new Date().toLocaleDateString('en-US', { month: 'long' })}
+            </button>
           </div>
-          <div className="flex-1">
-            <h2 className="text-xl font-semibold dark:text-white">Visit @tabby_edits</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300">All my TikTok edits in one place.</p>
-            <div className="mt-3">
-              <a href={(typeof siteSocial !== 'undefined' && siteSocial.tiktok && siteSocial.tiktok.url) ? siteSocial.tiktok.url : 'https://www.tiktok.com/@tabby_edits'} target="_blank" rel="noreferrer" className="btn btn-ktaby md:w-auto">Open on TikTok →</a>
-            </div>
-          </div>
+          <BirthdayCorner birthdays={birthdays} groups={groups} />
         </div>
       </section>
 
@@ -89,6 +109,7 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
         </div>
       </section>
       {selectedMember && <MemberModal member={selectedMember} onClose={() => setSelectedMember(null)} />}
+      {showMonthlyBirthdays && <MonthlyBirthdaysModal birthdays={birthdays} groups={groups} onClose={() => setShowMonthlyBirthdays(false)} />}
     </Layout>
   )
 }

@@ -10,6 +10,7 @@ import SpotifyAlbum from '../../components/SpotifyAlbum'
 import AlbumGrid from '../../components/AlbumGrid'
 import AdminRefresh from '../../components/AdminRefresh'
 import SongGame from '../../components/SongGame'
+import SongSearch from '../../components/SongSearch'
 import { getArtistEnrichment } from '../../lib/musicbrainz'
 import { getEnrichment } from '../../lib/enrichment'
 import fs from 'fs'
@@ -77,6 +78,39 @@ export default function Group({ group, initialEnrichment = null }) {
 
     return () => { mounted = false; mountedAdmin = false }
   }, [group.name, remote])
+
+  // Prevent background scrolling when song game modal is open
+  useEffect(() => {
+    if (showSongGameModal) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+      document.body.style.top = `-${window.scrollY}px`
+      document.body.style.touchAction = 'none' // Prevent touch scrolling
+      document.documentElement.style.overflow = 'hidden' // Also prevent html element scrolling
+    } else {
+      const scrollY = document.body.style.top
+      document.body.style.overflow = 'auto'
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+      document.body.style.touchAction = ''
+      document.documentElement.style.overflow = ''
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'auto'
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+      document.body.style.touchAction = ''
+      document.documentElement.style.overflow = ''
+    }
+  }, [showSongGameModal])
 
   function normalizeTitle(t) {
     if (!t) return ''
@@ -348,39 +382,47 @@ export default function Group({ group, initialEnrichment = null }) {
 
       <div className="max-w-5xl mx-auto px-4 pt-6 pb-8 relative">
         {/* Tabs (placed below hero) */}
-        <div className="flex gap-3 mb-6 relative z-40 p-2 rounded items-center justify-between">
-          <div className="flex items-center">
-            <div className="tab-bar">
-              <div className={`tab-indicator ${tab === 'Members' ? 'move-right' : ''}`} />
-              <div className="relative z-10 flex">
-                {['Albums','Members'].map((t, i) => (
-                  <button
-                    key={t}
-                    onClick={() => setTab(t)}
-                    className={`tab-btn ${tab === t ? 'active' : ''}`}
-                    aria-pressed={tab === t}
-                    aria-label={`Show ${t}`}
-                  >
-                    {t}
-                  </button>
-                ))}
-              </div>
+        {(() => {
+          const hasFormerMembers = group.formerMembers && group.formerMembers.length > 0
+          const tabs = hasFormerMembers ? ['Albums', 'Members', 'Former'] : ['Albums', 'Members']
+          const indicatorClass = tabs.length === 2
+            ? (tab === 'Members' ? 'move-right' : '')
+            : (tab === 'Members' ? 'move-right' : tab === 'Former' ? 'move-far-right' : '')
+          return (
+        <div className="flex flex-col sm:flex-row gap-3 mb-6 relative z-40 p-2 rounded items-center sm:justify-between">
+          <div className="flex items-center w-full sm:w-auto">
+            <div className={`tab-bar ${tabs.length === 2 ? 'tab-bar-2' : ''}`}>
+              <div className={`tab-indicator ${indicatorClass}`} />
+              {tabs.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTab(t)}
+                  className={`tab-btn ${tab === t ? 'active' : ''}`}
+                  aria-pressed={tab === t}
+                  aria-label={`Show ${t === 'Former' ? 'Former Members' : t}`}
+                >
+                  <span className="hidden sm:inline">{t === 'Former' ? 'Former Members' : t}</span>
+                  <span className="sm:hidden">{t === 'Former' ? 'Former' : t}</span>
+                </button>
+              ))}
             </div>
           </div>
           {/* Song Game Button */}
           <button
             onClick={() => setShowSongGameModal(true)}
             className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 
-                     text-white font-bold py-2 px-4 rounded-full shadow-lg 
+                     text-white font-bold py-2 px-3 sm:px-4 rounded-full shadow-lg 
                      transform hover:scale-105 transition-all duration-200 
-                     flex items-center text-sm"
+                     flex items-center text-xs sm:text-sm whitespace-nowrap"
           >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
             </svg>
             Song Game
           </button>
         </div>
+          )
+        })()}
 
 
 
@@ -392,12 +434,7 @@ export default function Group({ group, initialEnrichment = null }) {
             </div>
 
             <div className="mb-4">
-              <input
-                type="text"
-                placeholder="Song search coming soon..."
-                disabled
-                className="w-full p-2 border border-gray-300 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 cursor-not-allowed"
-              />
+              <SongSearch groupName={group.name} groupMembers={group.members || []} />
             </div>
 
             {merged.albums && merged.albums.length > 0 ? (
@@ -461,17 +498,37 @@ export default function Group({ group, initialEnrichment = null }) {
           </section>
         )}
 
+        {tab === 'Former' && group.formerMembers && group.formerMembers.length > 0 && (
+          <section className={`tab-panel ${tabVisible ? 'enter' : 'leave'}`}>
+            <h2 className="text-xl font-semibold mb-4">Former Members</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {group.formerMembers.map(m => (
+                <div key={m.id || m.name} className="card-surface p-3 transform-gpu transition-all duration-300 ease-out card-press cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-ktaby-500/30 dark:bg-gray-800 dark:border-gray-700" role="button" tabIndex={0} onClick={() => setSelectedMember(m)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedMember(m) } }}>
+                  <a href={`/groups/${group.id}/${m.id || encodeURIComponent(m.name)}`} onClick={(e) => { e.preventDefault(); setSelectedMember(m) }} className="block w-full relative rounded mb-2 overflow-hidden pb-[100%] group cursor-pointer" aria-label={`Open profile for ${m.name}`}>
+                    <Image src={(() => { try { const { normalizeImage } = require('../../lib/images'); return normalizeImage?(normalizeImage(m.image)||'/placeholder.svg'):'/placeholder.svg' } catch(e){ return '/placeholder.svg' } })()} alt={m.name} fill className="object-cover object-top transition-transform duration-200 group-hover:scale-105" />
+                  </a>
+
+                  <h4 className="font-semibold mt-2 dark:text-white">{m.name}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{m.role || ''}</p>
+                  {m.departureDate && <p className="text-xs text-gray-500 dark:text-gray-400">Left: {m.departureDate}</p>}
+                  <button type="button" onClick={() => setSelectedMember(m)} className="btn btn-ktaby btn-sm btn-pill btn-animated mt-3 w-full sm:w-auto">Profile →</button>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
       </div>
       {selectedMember && <MemberModal member={selectedMember} groupId={group.id} onClose={() => setSelectedMember(null)} />}
-      {selectedAlbum && <AlbumModal album={selectedAlbum} spotifyAlbums={(liveGroup && liveGroup.spotify && liveGroup.spotify.albums) || (group.spotify && group.spotify.albums) || []} onClose={() => setSelectedAlbum(null)} />}
+      {selectedAlbum && <AlbumModal album={selectedAlbum} spotifyAlbums={(liveGroup && liveGroup.spotify && liveGroup.spotify.albums) || (group.spotify && group.spotify.albums) || []} groupName={group.name} groupMembers={group.members || []} onClose={() => setSelectedAlbum(null)} />}
       
       {/* Song Game Modal */}
       {showSongGameModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full h-[85vh] sm:h-[90vh] md:h-[95vh] flex flex-col">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4 overflow-hidden" style={{touchAction: 'none'}}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[95vh] flex flex-col relative" style={{touchAction: 'auto'}}>
             <div className="flex items-center justify-between p-3 md:p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
               <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100 pr-2">
-                🎵 {group.name} - Song Game
+                {group.name} - Song Game
               </h2>
               <button
                 onClick={() => setShowSongGameModal(false)}
@@ -483,10 +540,8 @@ export default function Group({ group, initialEnrichment = null }) {
                 </svg>
               </button>
             </div>
-            <div className="flex-1 overflow-hidden flex flex-col">
-              <div className="flex-1 overflow-y-auto">
-                <SongGame albums={merged.albums} groupName={group.name} isAdmin={isAdmin} />
-              </div>
+            <div className="flex-1 min-h-0">
+              <SongGame albums={merged.albums} groupName={group.name} groupMembers={group.members || []} isAdmin={isAdmin} />
             </div>
           </div>
         </div>

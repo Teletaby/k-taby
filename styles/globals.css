@@ -240,15 +240,15 @@ body {
 
 /* K-pop themed Spotify button */
 .btn-spotify-kpop {
-  background: linear-gradient(135deg, var(--kpop-pink), var(--kpop-purple));
+  background: #1DB954;
   color: white;
-  box-shadow: 0 8px 24px rgba(255,77,166,0.3);
+  box-shadow: 0 8px 24px rgba(29, 185, 84, 0.3);
   border: 2px solid rgba(255,255,255,0.3);
 }
 .btn-spotify-kpop:hover {
   filter: brightness(1.1);
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(255,77,166,0.4);
+  box-shadow: 0 12px 32px rgba(29, 185, 84, 0.4);
 }
 
 /* K-pop themed scrollbar for album modal */
@@ -355,7 +355,7 @@ body {
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
   overflow: hidden;
 }
-..album-track-row:hover { background: rgba(0,0,0,0.02); }
+.album-track-row:hover { background: rgba(0,0,0,0.02); }
 
 /* Album modal content */
 .album-modal-content { border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,250,1)); border: 1px solid rgba(0,0,0,0.04); }
@@ -427,18 +427,60 @@ body {
 /* Tabs: redesigned buttons and indicator */
 .tab-bar {
   position: relative;
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background: rgba(255,255,255,0.04);
-  padding: 6px; /* slightly more padding so border surrounds neatly */
+  padding: 6px;
   border-radius: 9999px;
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(0,0,0,0.6); /* dark pill outline */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.22); /* subtle depth to emphasize outline */
+  border: 1px solid rgba(0,0,0,0.6);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .tab-bar {
+    width: auto;
+  }
+}
+@media (max-width: 640px) {
+  .tab-bar {
+    padding: 4px;
+  }
+}
+.tab-bar.tab-bar-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.tab-bar.tab-bar-2 .tab-indicator {
+  width: calc(50% - 4px);
+}
+.tab-bar.tab-bar-2 .tab-indicator.move-right {
+  left: calc(50% + 2px);
+}
+@media (max-width: 640px) {
+  .tab-bar.tab-bar-2 .tab-indicator {
+    width: calc(50% - 2px);
+  }
+  .tab-bar.tab-bar-2 .tab-indicator.move-right {
+    left: calc(50% + 1px);
+  }
 }
 .tab-btn {
-  @apply px-4 py-2 rounded-full text-sm font-medium bg-transparent transition-all duration-300 ease-out;
+  @apply py-2 rounded-full text-sm font-medium bg-transparent transition-all duration-300 ease-out;
   position: relative;
   z-index: 10;
+  text-align: center;
+  white-space: nowrap;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (max-width: 640px) {
+  .tab-btn {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.8rem;
+  }
 }
 .tab-btn:hover { 
   color: #0f62fe; 
@@ -453,16 +495,25 @@ body {
   position: absolute;
   top: 6px;
   left: 6px;
-  width: calc(50% - 6px);
+  width: calc(33.333% - 4px);
   height: calc(100% - 12px);
   border-radius: 9999px;
   background: linear-gradient(90deg, var(--kpop-cyan), var(--kpop-purple));
   box-shadow: 0 8px 30px rgba(122,92,255,0.16);
-  transition: transform 260ms cubic-bezier(.22,.9,.32,1), width 260ms ease;
-  transform: translateX(0%);
+  transition: left 260ms cubic-bezier(.22,.9,.32,1), width 260ms ease;
 }
-.tab-indicator.move-right { transform: translateX(100%); }
-.tab-indicator.move-far-right { transform: translateX(200%); }
+.tab-indicator.move-right { left: calc(33.333% + 2px); }
+.tab-indicator.move-far-right { left: calc(66.666% - 2px); }
+@media (max-width: 640px) {
+  .tab-indicator {
+    left: 4px;
+    width: calc(33.333% - 2.67px);
+    height: calc(100% - 8px);
+    top: 4px;
+  }
+  .tab-indicator.move-right { left: calc(33.333% + 1.33px); }
+  .tab-indicator.move-far-right { left: calc(66.666% - 1.33px); }
+}
 
 /* Tab panel transition */
 .tab-panel { transition: transform 260ms cubic-bezier(.22,.9,.32,1), opacity 220ms ease; }

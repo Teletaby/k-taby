@@ -5,6 +5,7 @@ import Link from 'next/link'
 export default function AdminPage() {
   const [admin, setAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [currentTime, setCurrentTime] = useState(new Date())
   const [maintenance, setMaintenance] = useState({ enabled: false, message: '' })
   const [songGameMaintenance, setSongGameMaintenance] = useState({ enabled: false, message: '' })
   const [songGameMessage, setSongGameMessage] = useState('')
@@ -23,9 +24,15 @@ export default function AdminPage() {
     fetchGroups()
     fetchMessages()
 
+    // Update time every second
+    const timeInterval = setInterval(() => setCurrentTime(new Date()), 1000)
+
     // Auto-refresh messages every 10 seconds
     const messageInterval = setInterval(fetchMessages, 10000)
-    return () => clearInterval(messageInterval)
+    return () => {
+      clearInterval(timeInterval)
+      clearInterval(messageInterval)
+    }
   }, [])
 
   async function checkAdminStatus() {
@@ -223,6 +230,25 @@ export default function AdminPage() {
     }
   }
 
+  async function updateSpotifyAlbums(groupId) {
+    try {
+      const r = await fetch('/api/admin/update-spotify-albums', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ groupId })
+      })
+      const j = await r.json()
+      if (j.ok) {
+        alert(`Albums updated! Added ${j.addedCount} new album(s).`)
+        fetchGroups()
+      } else {
+        alert('Error: ' + j.error)
+      }
+    } catch (e) {
+      alert('Error: ' + e.message)
+    }
+  }
+
   async function logout() {
     try {
       await fetch('/api/admin/logout', { method: 'POST' })
@@ -287,7 +313,23 @@ export default function AdminPage() {
       <div className="max-w-6xl mx-auto p-6">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Admin Panel</h1>
-          <p className="text-cyan-700">Manage site settings, refresh data, and monitor visitors.</p>
+          <div className="flex items-center justify-between">
+            <p className="text-cyan-700">Manage site settings, refresh data, and monitor visitors.</p>
+            <div className="bg-gradient-to-r from-cyan-100 to-blue-100 rounded-lg px-4 py-2 border border-cyan-300">
+              <p className="text-sm font-semibold text-cyan-900">
+                {currentTime.toLocaleString('en-US', {
+                  weekday: 'long',
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
+                  hour12: true
+                })}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -389,12 +431,21 @@ export default function AdminPage() {
                     <img src={group.logo || group.image || '/placeholder.svg'} alt={group.name} className="w-8 h-8 rounded-full object-cover" />
                     <span className="font-medium text-cyan-800">{group.name}</span>
                   </div>
-                  <button
-                    onClick={() => refreshSpotify(group.id)}
-                    className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-3 py-1 rounded text-sm font-medium shadow hover:shadow-md transform hover:scale-105 transition-all duration-200"
-                  >
-                    Refresh
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => updateSpotifyAlbums(group.id)}
+                      className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-3 py-1 rounded text-sm font-medium shadow hover:shadow-md transform hover:scale-105 transition-all duration-200"
+                      title="Update albums only (merge with existing)"
+                    >
+                      Update Albums
+                    </button>
+                    <button
+                      onClick={() => refreshSpotify(group.id)}
+                      className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-3 py-1 rounded text-sm font-medium shadow hover:shadow-md transform hover:scale-105 transition-all duration-200"
+                    >
+                      Refresh
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -484,7 +535,7 @@ export default function AdminPage() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                 </svg>
-                Recent Visitors ({visitors.length})
+                Recent Visitors ({visitors.filter(v => v.ip !== '::1').length})
               </h2>
               <button
                 onClick={clearVisitors}
@@ -511,7 +562,7 @@ export default function AdminPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {visitors.slice(0, 50).map((visitor, index) => (
+                  {visitors.filter(v => v.ip !== '::1').slice(0, 50).map((visitor, index) => (
                     <tr key={index} className="border-b border-cyan-100/30 hover:bg-white/30">
                       <td className="py-2 px-3 text-cyan-700">{new Date(visitor.timestamp).toLocaleString()}</td>
                       <td className="py-2 px-3 text-cyan-700 font-mono">{visitor.ip}</td>
@@ -529,7 +580,7 @@ export default function AdminPage() {
                   ))}
                 </tbody>
               </table>
-              {visitors.length === 0 && (
+              {visitors.filter(v => v.ip !== '::1').length === 0 && (
                 <div className="text-center py-8 text-cyan-600">
                   No visitor data available yet.
                 </div>
