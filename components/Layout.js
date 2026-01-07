@@ -44,7 +44,7 @@ export default function Layout({ children, title = 'k-taby' }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-color)' }}>
+    <div className="min-h-screen flex flex-col overflow-hidden w-full" style={{ background: 'var(--bg-color)' }}>
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -148,7 +148,7 @@ export default function Layout({ children, title = 'k-taby' }) {
         </div>
       )}
 
-      <main className="container mx-auto p-4 flex-1 pt-14 md:pt-14">{children}</main>
+      <main className="flex-1 w-full overflow-x-hidden">{children}</main>
 
       <footer className="border-t border-cyan-200/30 dark:border-slate-700 p-4 text-center text-sm" style={{ background: 'var(--footer-bg)', color: 'var(--footer-text)' }}>
         © {new Date().getFullYear()} taby — K-pop news & profiles

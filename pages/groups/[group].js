@@ -369,16 +369,16 @@ export default function Group({ group, initialEnrichment = null }) {
   if (!group) return <Layout><p>Group not found</p></Layout>
   return (
     <Layout title={`${group.name} - k-taby`}>
-      <GroupHero
-        title={merged.name}
-        description={merged.description || ''}
-        image={merged.image}
-        logo={merged.logo || merged.image}
-        youtubeChannel={group.youtube_channel}
-        youtubeVideoId={group.youtube_video_id}
-      />
-
-
+      <div className="mt-20">
+        <GroupHero
+          title={merged.name}
+          description={merged.description || ''}
+          image={merged.image}
+          logo={merged.logo || merged.image}
+          youtubeChannel={group.youtube_channel}
+          youtubeVideoId={group.youtube_video_id}
+        />
+      </div>
 
       <div className="max-w-5xl mx-auto px-4 pt-6 pb-8 relative">
         {/* Tabs (placed below hero) */}
@@ -501,17 +501,20 @@ export default function Group({ group, initialEnrichment = null }) {
         {tab === 'Former' && group.formerMembers && group.formerMembers.length > 0 && (
           <section className={`tab-panel ${tabVisible ? 'enter' : 'leave'}`}>
             <h2 className="text-xl font-semibold mb-4">Former Members</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="space-y-4">
               {group.formerMembers.map(m => (
-                <div key={m.id || m.name} className="card-surface p-3 transform-gpu transition-all duration-300 ease-out card-press cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-ktaby-500/30 dark:bg-gray-800 dark:border-gray-700" role="button" tabIndex={0} onClick={() => setSelectedMember(m)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedMember(m) } }}>
-                  <a href={`/groups/${group.id}/${m.id || encodeURIComponent(m.name)}`} onClick={(e) => { e.preventDefault(); setSelectedMember(m) }} className="block w-full relative rounded mb-2 overflow-hidden pb-[100%] group cursor-pointer" aria-label={`Open profile for ${m.name}`}>
+                <div key={m.id || m.name} className="card-surface p-6 transform-gpu transition-all duration-300 ease-out card-press cursor-pointer animate-card-in focus:outline-none focus-visible:ring-2 focus-visible:ring-ktaby-500/30 dark:bg-gray-800 dark:border-gray-700 flex flex-col sm:flex-row gap-6" role="button" tabIndex={0} onClick={() => setSelectedMember(m)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedMember(m) } }}>
+                  <a href={`/groups/${group.id}/${m.id || encodeURIComponent(m.name)}`} onClick={(e) => { e.preventDefault(); setSelectedMember(m) }} className="flex-shrink-0 w-full sm:w-48 relative rounded overflow-hidden pb-[100%] sm:pb-0 h-48 sm:h-48 group cursor-pointer" aria-label={`Open profile for ${m.name}`}>
                     <Image src={(() => { try { const { normalizeImage } = require('../../lib/images'); return normalizeImage?(normalizeImage(m.image)||'/placeholder.svg'):'/placeholder.svg' } catch(e){ return '/placeholder.svg' } })()} alt={m.name} fill className="object-cover object-top transition-transform duration-200 group-hover:scale-105" />
                   </a>
 
-                  <h4 className="font-semibold mt-2 dark:text-white">{m.name}</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">{m.role || ''}</p>
-                  {m.departureDate && <p className="text-xs text-gray-500 dark:text-gray-400">Left: {m.departureDate}</p>}
-                  <button type="button" onClick={() => setSelectedMember(m)} className="btn btn-ktaby btn-sm btn-pill btn-animated mt-3 w-full sm:w-auto">Profile →</button>
+                  <div className="flex-1">
+                    <h4 className="text-2xl font-semibold mb-2 dark:text-white">{m.name}</h4>
+                    <p className="text-base text-gray-600 dark:text-gray-300 mb-2">{m.role || ''}</p>
+                    {m.departureDate && <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Left: {m.departureDate}</p>}
+                    {m.description && <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{m.description}</p>}
+                    <button type="button" onClick={() => setSelectedMember(m)} className="btn btn-ktaby btn-sm btn-pill btn-animated">Profile →</button>
+                  </div>
                 </div>
               ))}
             </div>

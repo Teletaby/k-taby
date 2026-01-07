@@ -1,7 +1,147 @@
 {
   "enrich:aespa": {
     "payload": {
+      "mbid": "b51c672b-85e0-48fe-8648-470a2422229f",
+      "name": "aespa",
+      "disambiguation": null,
+      "country": "KR",
       "albums": [
+        {
+          "title": "Armageddon",
+          "id": "3f5eba8d-4dc1-4599-a936-21f501787f8e",
+          "first_release_date": "2024-05-27",
+          "songs": [
+            "Supernova",
+            "Armageddon",
+            "Set the Tone",
+            "Mine",
+            "Licorice",
+            "BAHAMA",
+            "Long Chat (#♥︎)",
+            "Prologue",
+            "Live My Life",
+            "Melody"
+          ]
+        },
+        {
+          "title": "K‐POP ScreaM 2",
+          "id": "e071e30d-de8b-4d27-a756-2dc0694232b3",
+          "first_release_date": "2025-04-11",
+          "songs": [
+            "Licorice (LOOZBONE remix)",
+            "Armageddon (Sixthema & Epiik remix)",
+            "Walk (Arkins remix)",
+            "Fact Check (Ezra Hazard remix)",
+            "Supernova (Fahjah remix)",
+            "Lemonade (Rayray remix)",
+            "Whiplash (DJ long Nhat remix)",
+            "Love on the Floor (Aurede remix)",
+            "Breakfast (ASHID & 9INE6IX remix)"
+          ]
+        },
+        {
+          "title": "Savage",
+          "id": "d35ed94d-8134-40b3-989a-6d1c5af9657b",
+          "first_release_date": "2021-10-05",
+          "songs": [
+            "ænergy",
+            "Savage",
+            "I’ll Make You Cry",
+            "YEPPI YEPPI",
+            "ICONIC",
+            "자각몽 (Lucid Dream)"
+          ]
+        },
+        {
+          "title": "Girls",
+          "id": "13307860-652b-446a-82b7-326f7f31c9be",
+          "first_release_date": "2022-07-08",
+          "songs": [
+            "Girls",
+            "도깨비불 (Illusion)",
+            "Lingo",
+            "Life’s Too Short",
+            "ICU (쉬어가도 돼)",
+            "Life′s Too Short (English ver.)"
+          ]
+        },
+        {
+          "title": "MY WORLD",
+          "id": "36f4c763-a09f-4527-9bb3-ae425f8ee0aa",
+          "first_release_date": "2023-05-08",
+          "songs": [
+            "Welcome to MY World",
+            "Spicy",
+            "Salty & Sweet",
+            "Thirsty",
+            "I’m Unhappy",
+            "’Til We Meet Again"
+          ]
+        },
+        {
+          "title": "Drama",
+          "id": "c4a4e428-e0f8-46d1-85c8-6ff5d7233781",
+          "first_release_date": "2023-11-10",
+          "songs": [
+            "Drama",
+            "Trick or Trick",
+            "Don't Blink",
+            "Hot Air Balloon",
+            "YOLO",
+            "You"
+          ]
+        },
+        {
+          "title": "Whiplash",
+          "id": "2608483d-0c8e-48a7-a42f-139944fbfd8f",
+          "first_release_date": "2024-10-21",
+          "songs": [
+            "Whiplash",
+            "Kill It",
+            "Flights, Not Feelings",
+            "Pink Hoodie",
+            "Flowers",
+            "Just Another Girl"
+          ]
+        },
+        {
+          "title": "Rich Man",
+          "id": "f014b273-c609-4f05-9c72-f3ff93a4c25b",
+          "first_release_date": "2025-09-05",
+          "songs": [
+            "Rich Man",
+            "Drift",
+            "Bubble",
+            "Count on Me",
+            "Angel #48",
+            "To the Girls"
+          ]
+        },
+        {
+          "title": "포켓몬스터 (2023)",
+          "id": "852e4f9b-d9eb-4e43-b657-3409b7612352",
+          "first_release_date": "2023-08-23",
+          "songs": [
+            "We Go",
+            "너와 함께라면",
+            "We Go (inst.)",
+            "너와 함께라면 (inst.)"
+          ]
+        },
+        {
+          "title": "Track by Track Commentary: aespa on Rich Man",
+          "id": "6b46612f-02a6-47de-8952-d263e2bca080",
+          "first_release_date": "2025-09-12",
+          "songs": [
+            "aespa on Rich Man – Introduction",
+            "aespa on Rich Man",
+            "aespa on Drift",
+            "aespa on Bubble",
+            "aespa on Count on Me",
+            "aespa on Angel #48",
+            "aespa on To the Girls"
+          ]
+        },
         {
           "title": "Whiplash",
           "id": null,
@@ -15,20 +155,136 @@
           "songs": []
         }
       ],
-      "songs": [],
-      "description": "Aespa is a South Korean girl group formed by SM Entertainment. The group consists of Karina, Giselle, Winter and Ningning. The group debuted on November 17, 2020 with the release of their debut single, \"Black Mamba\".\nThe group's name, Aespa, combines the English initials of \"avatar\" and \"experience\" (Avatar X Experience) with the English word \"aspect\", meaning \"two sides\", to symbolize the idea of \"meeting another self and experiencing the new world\"",
-      "image": "https://r2.theaudiodb.com/images/media/artist/thumb/nc6m8s1634232193.jpg",
+      "songs": [
+        "Supernova",
+        "Armageddon",
+        "Set the Tone",
+        "Mine",
+        "Licorice",
+        "BAHAMA",
+        "Long Chat (#♥︎)",
+        "Prologue",
+        "Live My Life",
+        "Melody",
+        "Licorice (LOOZBONE remix)",
+        "Armageddon (Sixthema & Epiik remix)",
+        "Walk (Arkins remix)",
+        "Fact Check (Ezra Hazard remix)",
+        "Supernova (Fahjah remix)",
+        "Lemonade (Rayray remix)",
+        "Whiplash (DJ long Nhat remix)",
+        "Love on the Floor (Aurede remix)",
+        "Breakfast (ASHID & 9INE6IX remix)",
+        "ænergy",
+        "Savage",
+        "I’ll Make You Cry",
+        "YEPPI YEPPI",
+        "ICONIC",
+        "자각몽 (Lucid Dream)",
+        "Girls",
+        "도깨비불 (Illusion)",
+        "Lingo",
+        "Life’s Too Short",
+        "ICU (쉬어가도 돼)",
+        "Life′s Too Short (English ver.)",
+        "Welcome to MY World",
+        "Spicy",
+        "Salty & Sweet",
+        "Thirsty",
+        "I’m Unhappy",
+        "’Til We Meet Again",
+        "Drama",
+        "Trick or Trick",
+        "Don't Blink",
+        "Hot Air Balloon",
+        "YOLO",
+        "You",
+        "Whiplash",
+        "Kill It",
+        "Flights, Not Feelings",
+        "Pink Hoodie",
+        "Flowers",
+        "Just Another Girl",
+        "Rich Man",
+        "Drift",
+        "Bubble",
+        "Count on Me",
+        "Angel #48",
+        "To the Girls",
+        "We Go",
+        "너와 함께라면",
+        "We Go (inst.)",
+        "너와 함께라면 (inst.)",
+        "aespa on Rich Man – Introduction",
+        "aespa on Rich Man",
+        "aespa on Drift",
+        "aespa on Bubble",
+        "aespa on Count on Me",
+        "aespa on Angel #48",
+        "aespa on To the Girls"
+      ],
       "urls": [
+        "https://www.allmusic.com/artist/mn0003996763",
+        "https://www.bandsintown.com/a/15514763",
+        "https://www.discogs.com/artist/8724412",
+        "https://open.spotify.com/artist/6YVMFz59CuY7ngCxTxjpxE",
+        "https://vk.com/artist/aespa",
+        "https://www.deezer.com/artist/113547672",
+        "https://i.scdn.co/image/ab6761610000e5ebf7a1090ad3a35a34fc0ecb57",
+        "https://www.last.fm/music/aespa",
+        "https://genius.com/artists/Aespa",
+        "https://j-lyric.net/artist/a0658fc/",
+        "https://utaten.com/artist/40974",
+        "https://www.joysound.com/web/search/artist/421111",
+        "https://www.musixmatch.com/artist/aespa",
+        "https://www.uta-net.com/artist/35152/",
+        "https://imvdb.com/n/aespa",
+        "https://rateyourmusic.com/artist/aespa",
+        "https://www.generasia.com/wiki/aespa",
+        "https://www.whosampled.com/Aespa/",
+        "https://itunes.apple.com/us/artist/id1540251304",
+        "https://mora.jp/artist/1326284/",
+        "https://music.bugs.co.kr/artist/80347326",
+        "https://ototoy.jp/_/default/a/827310",
+        "https://pc.dwango.jp/portals/artist/311701/music",
+        "https://recochoku.jp/artist/2001380745/",
+        "https://vibe.naver.com/artist/3980296",
+        "https://www.genie.co.kr/detail/artistInfo?xxnm=80957377",
+        "https://www.melon.com/artist/detail.htm?artistId=2899555",
+        "https://tower.jp/artist/4591652",
+        "https://www.hmv.co.jp/artist_aespa_000000000880369/",
+        "https://www.setlist.fm/setlists/wd-13f431f9.html",
+        "https://twitter.com/aespa_Official",
+        "https://www.facebook.com/aespa.official",
+        "https://www.instagram.com/aespa_official/",
+        "https://www.tiktok.com/@aespa_official",
+        "https://www.weibo.com/aespa",
+        "https://www.songkick.com/artists/10157778",
+        "https://music.amazon.com/artists/B08NJFPZGY",
+        "https://music.apple.com/us/artist/1540251304",
+        "https://music.line.me/artist/mi000000001d2ef052",
+        "https://music.line.me/webapp/artist/mi000000001d2ef052",
+        "https://music.rakuten.co.jp/link/artist/8999408",
+        "https://s.awa.fm/artist/32aec82fce20638caa11",
+        "https://tidal.com/artist/22211784",
+        "https://www.kkbox.com/tw/en/artist/9-icI58ApgvpPEhWSV",
+        "https://www.music-flo.com/detail/artist/404372458/album",
+        "http://viaf.org/viaf/13163874337345722384",
+        "https://www.wikidata.org/wiki/Q100877982",
+        "https://www.youtube.com/channel/UC9GtSLeksfK4yuJ_g1lgQbg",
         "1"
       ],
-      "source": "theaudiodb",
-      "lastUpdated": 1767548839062
+      "wikipedia": null,
+      "description": "Aespa is a South Korean girl group formed by SM Entertainment. The group consists of Karina, Giselle, Winter and Ningning. The group debuted on November 17, 2020 with the release of their debut single, \"Black Mamba\".\nThe group's name, Aespa, combines the English initials of \"avatar\" and \"experience\" (Avatar X Experience) with the English word \"aspect\", meaning \"two sides\", to symbolize the idea of \"meeting another self and experiencing the new world\"",
+      "image": "https://r2.theaudiodb.com/images/media/artist/thumb/nc6m8s1634232193.jpg",
+      "source": "musicbrainz+theaudiodb",
+      "lastUpdated": 1767775653839
     },
-    "lastUpdated": 1767548839062
+    "lastUpdated": 1767775653839
   },
   "enrich:mbid:ddea2b8e-f772-4c39-ab90-e1983b74a149": {
     "payload": null,
-    "lastUpdated": 1767548832755
+    "lastUpdated": 1767775679689
   },
   "enrich:itzy": {
     "payload": {
@@ -55,9 +311,9 @@
         "1"
       ],
       "source": "theaudiodb",
-      "lastUpdated": 1767548869403
+      "lastUpdated": 1767776540583
     },
-    "lastUpdated": 1767548869403
+    "lastUpdated": 1767776540583
   },
   "enrich:mbid:4b3b8c5a-7b8d-4a5e-9c0d-7e9b8a5d4c3b": {
     "payload": {
@@ -80,9 +336,9 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/a4cofm1700478265.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767548876711
+      "lastUpdated": 1767775257541
     },
-    "lastUpdated": 1767548876711
+    "lastUpdated": 1767775257541
   },
   "enrich:mbid:f8e7d5c3-b9a2-4a6d-8c1e-3d2f1a7b6c5d": {
     "payload": {
@@ -105,21 +361,65 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/j497n71752508562.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767548878783
+      "lastUpdated": 1767776537871
     },
-    "lastUpdated": 1767548878783
+    "lastUpdated": 1767776537871
   },
   "enrich:meovv": {
     "payload": {
-      "albums": [],
-      "songs": [],
+      "mbid": "f2435d8b-8a29-453d-9d7e-03c61c4b6fc4",
+      "name": "MEOVV",
+      "disambiguation": null,
+      "country": "KR",
+      "albums": [
+        {
+          "title": "MY EYES OPEN VVIDE",
+          "id": "5ad72bb4-353d-4cfe-8cc8-9cd17973d21a",
+          "first_release_date": "2025-05-12",
+          "songs": [
+            "HANDS UP",
+            "DROP TOP",
+            "MEOW",
+            "BODY",
+            "TOXIC",
+            "LIT RIGHT NOW"
+          ]
+        }
+      ],
+      "songs": [
+        "HANDS UP",
+        "DROP TOP",
+        "MEOW",
+        "BODY",
+        "TOXIC",
+        "LIT RIGHT NOW"
+      ],
+      "urls": [
+        "https://open.spotify.com/artist/08hHTBHlv0WRXWlyrsb6Kv",
+        "https://www.deezer.com/artist/280528471",
+        "https://www.last.fm/music/MEOVV",
+        "https://music.bugs.co.kr/artist/80398939",
+        "https://vibe.naver.com/artist/8876957",
+        "https://www.genie.co.kr/detail/artistInfo?xxnm=82619556",
+        "https://www.melon.com/artist/detail.htm?artistId=3893541",
+        "https://twitter.com/OFFICIAL_MEOVV",
+        "https://www.facebook.com/MEOVV.OFFICIAL",
+        "https://www.instagram.com/meovv_official_/",
+        "https://www.threads.com/@meovv_official_",
+        "https://www.tiktok.com/@meovv_official",
+        "https://www.weibo.com/u/7941496139",
+        "https://music.apple.com/us/artist/1765256889",
+        "https://www.music-flo.com/detail/artist/410249321/album",
+        "https://www.wikidata.org/wiki/Q130084175",
+        "https://www.youtube.com/channel/UCowiwt93gqGlNG4k5VDxO-w"
+      ],
+      "wikipedia": null,
       "description": "MEOVV (pronunced as \"meow\") is a five-member South Korean girl group under The Black Label.\n\nFirst announced on February 6, 2024, MEOVV, then known as \"The Black Label New Girl Group\", gained a lot of interest among netizens for being the first ever group of the agency, as well as previous photos of potential trainees spread online, including some already known faces in the industry.\n\nThough it was announced by The Black Label that the group would debut in the first half of 2024, news about them only started coming on August 16 with the opening of differents SNS accounts, revealing the group name to be MEOVV.\n\nMEOVV announced the members one by one from August 21 to August 29, 2024, starting with Ella on August 21, followed by Gawon on August 23, Sooin on August 25, Anna on August 27, and lastly Narin on August 29.\n\nPrior to their debut, Ella was already known for being a child model and actress, and Gawon and Anna for being models.\n\nOn August 28, 2024, it was announced that MEOVV signed an exclusive contract with Capitol Records for global activities.\n\nA day before their debut, on September 5, 2024, The Black Label launched a new app called \"Churrrr\", exclusively for the group. It was described as an official fan platform, which would allow the girls and fans to interact.\n\nMEOVV finally made their awaited debut on September 6, 2024, with the single \"MEOW\".",
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/m2wf001728197681.jpg",
-      "urls": [],
-      "source": "theaudiodb",
-      "lastUpdated": 1767548859461
+      "source": "musicbrainz+theaudiodb",
+      "lastUpdated": 1767776259456
     },
-    "lastUpdated": 1767548859461
+    "lastUpdated": 1767776259456
   },
   "enrich:illit": {
     "payload": {
@@ -129,13 +429,99 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/kf0ln21714206858.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767548874606
+      "lastUpdated": 1767776540687
     },
-    "lastUpdated": 1767548874606
+    "lastUpdated": 1767776540687
   },
   "enrich:nmixx": {
     "payload": {
+      "mbid": "2d623e82-73e2-4179-9c44-e963980f2d58",
+      "name": "NMIXX",
+      "disambiguation": null,
+      "country": "KR",
       "albums": [
+        {
+          "title": "Blue Valentine",
+          "id": "fbdd1a42-b8fe-47a6-8bf4-927b61e567f0",
+          "first_release_date": "2025-10-13",
+          "songs": [
+            "Blue Valentine",
+            "SPINNIN’ ON IT",
+            "Phoenix",
+            "Reality Hurts",
+            "RICO",
+            "Game Face",
+            "PODIUM",
+            "Crush on You",
+            "ADORE U",
+            "Shape of Love",
+            "O.O, Part 1 (Baila)",
+            "O.O, Part 2 (Superhero)"
+          ]
+        },
+        {
+          "title": "expérgo",
+          "id": "3faa1f5b-13f1-4dc2-95c9-f7a6c9faec05",
+          "first_release_date": "2023-03-20",
+          "songs": [
+            "Young, Dumb, Stupid",
+            "Love Me Like This",
+            "PAXXWORD",
+            "Just Did It",
+            "My Gosh",
+            "HOME"
+          ]
+        },
+        {
+          "title": "Fe3O4: BREAK",
+          "id": "48e4a94a-7fe5-4764-8880-b23a91bd7ee3",
+          "first_release_date": "2024-01-15",
+          "songs": [
+            "DASH",
+            "Soñar (Breaker)",
+            "Run for Roses",
+            "BOOM",
+            "Passionfruit",
+            "XOXO",
+            "Break the Wall"
+          ]
+        },
+        {
+          "title": "Fe3O4: STICK OUT",
+          "id": "dacd77f2-0e4d-4551-a13d-70824d18030f",
+          "first_release_date": "2024-08-19",
+          "songs": [
+            "별별별",
+            "SICKUHH",
+            "Red light sign, but we go",
+            "BEAT BEAT",
+            "Moving On",
+            "LOVE IS LONELY"
+          ]
+        },
+        {
+          "title": "Fe3O4: FORWARD",
+          "id": "4d566dec-e72a-49b2-a48e-28ded2832fc1",
+          "first_release_date": "2025-03-17",
+          "songs": [
+            "High Horse",
+            "KNOW ABOUT ME",
+            "Slingshot (＜★)",
+            "Golden Recipe",
+            "Papillon",
+            "Ocean"
+          ]
+        },
+        {
+          "title": "MEXE (remix)",
+          "id": "9e9106b4-340a-419e-a38c-18da10b936cd",
+          "first_release_date": "2025-10-21",
+          "songs": [
+            "MEXE (remix)",
+            "MEXE (Miss Tacacá & LOFIHOUSEBOY remix)",
+            "MEXE"
+          ]
+        },
         {
           "title": "Fe3O4: FORWARD",
           "id": null,
@@ -149,14 +535,83 @@
           "songs": []
         }
       ],
-      "songs": [],
+      "songs": [
+        "Blue Valentine",
+        "SPINNIN’ ON IT",
+        "Phoenix",
+        "Reality Hurts",
+        "RICO",
+        "Game Face",
+        "PODIUM",
+        "Crush on You",
+        "ADORE U",
+        "Shape of Love",
+        "O.O, Part 1 (Baila)",
+        "O.O, Part 2 (Superhero)",
+        "Young, Dumb, Stupid",
+        "Love Me Like This",
+        "PAXXWORD",
+        "Just Did It",
+        "My Gosh",
+        "HOME",
+        "DASH",
+        "Soñar (Breaker)",
+        "Run for Roses",
+        "BOOM",
+        "Passionfruit",
+        "XOXO",
+        "Break the Wall",
+        "별별별",
+        "SICKUHH",
+        "Red light sign, but we go",
+        "BEAT BEAT",
+        "Moving On",
+        "LOVE IS LONELY",
+        "High Horse",
+        "KNOW ABOUT ME",
+        "Slingshot (＜★)",
+        "Golden Recipe",
+        "Papillon",
+        "Ocean",
+        "MEXE (remix)",
+        "MEXE (Miss Tacacá & LOFIHOUSEBOY remix)",
+        "MEXE"
+      ],
+      "urls": [
+        "https://www.allmusic.com/artist/mn0004272257",
+        "https://www.discogs.com/artist/10946579",
+        "https://open.spotify.com/artist/28ot3wh4oNmoFOdVajibBl",
+        "https://www.deezer.com/artist/160138282",
+        "https://www.imdb.com/name/nm13426477/",
+        "https://www.last.fm/music/NMIXX",
+        "https://genius.com/artists/Nmixx",
+        "https://nmixx.jype.com/",
+        "https://rateyourmusic.com/artist/nmixx",
+        "https://music.bugs.co.kr/artist/80365655",
+        "https://vibe.naver.com/artist/5176052",
+        "https://www.genie.co.kr/detail/artistInfo?xxnm=81326040",
+        "https://www.melon.com/artist/detail.htm?artistId=3070786",
+        "https://nmixxshopus.com/",
+        "https://twitter.com/NMIXX_official",
+        "https://www.facebook.com/NMIXXOfficial",
+        "https://www.instagram.com/nmixx_official/",
+        "https://www.tiktok.com/@nmixx_official",
+        "https://www.weibo.com/NMIXXOfficial",
+        "https://www.instagram.com/jypn_official/",
+        "https://music.apple.com/kr/artist/1600411676",
+        "https://tidal.com/artist/30611962",
+        "https://www.music-flo.com/detail/artist/405210146/album",
+        "https://www.eventim.com/artist/nmixx/",
+        "https://www.wikidata.org/wiki/Q109307762",
+        "https://www.youtube.com/channel/UCnUAyD4t2LkvW68YrDh7fDg"
+      ],
+      "wikipedia": null,
       "description": "NMIXX는 JYP엔터테인먼트에 소속된 대한민국의 걸그룹이다. 2022년 가요계에 출격을 알린 그룹은 데뷔 싱글 'AD MARE'를 통해 새로운 장르인 \"MIXX POP\"을 선보이며 준비된 신인의 당찬 패기와 자신감을 보여줬다. 타이틀곡 'O.O'는 한국에서 다소 생소할 수 있는 Baile Funk 장르를 NMIXX만의 스타일로 소화했고 시시각각 변하는 곡의 전개에 맞춰 다채로운 퍼포먼스를 구성, 전 세계 K-POP 팬들의 뜨거운 관심을 받았다.\n \n2023년 3월에는 첫 번째 미니 앨범 를 공개해 두 번째 시리즈 \"Docking Station\"의 서막을 열었고, 유수의 프로듀싱 팀이 참여한 싱글 앨범 으로 매력을 더했다.",
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/cn3aht1730000168.jpg",
-      "urls": [],
-      "source": "theaudiodb",
-      "lastUpdated": 1767548864435
+      "source": "musicbrainz+theaudiodb",
+      "lastUpdated": 1767775175400
     },
-    "lastUpdated": 1767548864435
+    "lastUpdated": 1767775175400
   },
   "enrich:le sserafim": {
     "payload": {
@@ -179,9 +634,9 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/8do6fc1728197599.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767548844400
+      "lastUpdated": 1767775443580
     },
-    "lastUpdated": 1767548844400
+    "lastUpdated": 1767775443580
   },
   "enrich:ive": {
     "payload": {
@@ -204,17 +659,42 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/8w23691683951412.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767548854493
+      "lastUpdated": 1767776207766
     },
-    "lastUpdated": 1767548854493
+    "lastUpdated": 1767776207766
   },
   "enrich:twice": {
-    "payload": null,
-    "lastUpdated": 1767548849485
+    "payload": {
+      "albums": [
+        {
+          "title": "ENEMY",
+          "id": null,
+          "first_release_date": "2025",
+          "songs": []
+        },
+        {
+          "title": "THIS IS FOR",
+          "id": null,
+          "first_release_date": "2025",
+          "songs": []
+        }
+      ],
+      "songs": [],
+      "description": "TWICE is a South Korean girl group formed by JYP Entertainment through a reality show \"Sixteen\" in 2015.\nNayeon, Jeongyeon, Momo, Sana, Jihyo, Mina, Dahyun, Chaeyoung, and Tzuyu.",
+      "image": "https://r2.theaudiodb.com/images/media/artist/thumb/stmsh41763079518.jpg",
+      "urls": [
+        "twice.jype.com",
+        "www.facebook.com/JYPETWICE",
+        "1"
+      ],
+      "source": "theaudiodb",
+      "lastUpdated": 1767776540597
+    },
+    "lastUpdated": 1767776540597
   },
   "enrich:mbid:6d9e030e-1f8d-4f24-9b2e-0a0e9c3c0a4e": {
     "payload": null,
-    "lastUpdated": 1767548880844
+    "lastUpdated": 1767776132154
   },
   "enrich:mbid:29437494-0130-4e53-a550-930f14d93021": {
     "payload": {
@@ -240,9 +720,9 @@
         "1"
       ],
       "source": "theaudiodb",
-      "lastUpdated": 1767548882934
+      "lastUpdated": 1767776537918
     },
-    "lastUpdated": 1767548882934
+    "lastUpdated": 1767776537918
   },
   "enrich:mbid:7878696b-4e0e-4340-9f93-0e86749963e6": {
     "payload": {
@@ -252,8 +732,8 @@
       "image": "https://r2.theaudiodb.com/images/media/artist/thumb/64xyxl1751191723.jpg",
       "urls": [],
       "source": "theaudiodb",
-      "lastUpdated": 1767548884988
+      "lastUpdated": 1767775959442
     },
-    "lastUpdated": 1767548884988
+    "lastUpdated": 1767775959442
   }
 }

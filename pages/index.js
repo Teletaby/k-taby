@@ -23,13 +23,16 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
 
   return (
     <Layout>
-      <HeroCarousel externalIndex={carouselIndex} onIndexChange={setCarouselIndex} externalPaused={carouselPaused} onPause={setCarouselPaused} />
-      <BirthdayBanner onOpenProfile={setSelectedMember} />
+      <div className="mt-20">
+        <HeroCarousel externalIndex={carouselIndex} onIndexChange={setCarouselIndex} externalPaused={carouselPaused} onPause={setCarouselPaused} />
+        <BirthdayBanner onOpenProfile={setSelectedMember} />
+      </div>
 
+      <div className="container mx-auto p-4 pt-6">
       {/* Group quick-jump buttons */}
-      <section className="mb-4">
+      <section className="mb-4 -mx-4 px-4">
         <div className="relative py-2">
-          <div className="flex flex-wrap gap-2 sm:gap-3 px-2 sm:px-4 justify-center">
+          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
             {groups.map((g, idx) => (
               <button
                 key={g.id}
@@ -110,6 +113,7 @@ export default function Home({ items = [], mentionedGroupNames = [], siteSocial 
       </section>
       {selectedMember && <MemberModal member={selectedMember} onClose={() => setSelectedMember(null)} />}
       {showMonthlyBirthdays && <MonthlyBirthdaysModal birthdays={birthdays} groups={groups} onClose={() => setShowMonthlyBirthdays(false)} />}
+      </div>
     </Layout>
   )
 }
